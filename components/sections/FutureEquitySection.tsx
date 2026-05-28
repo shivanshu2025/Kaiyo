@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function FutureEquitySection() {
   return (
-    <section className="bg-[#E9E9E7] px-4 py-12 sm:px-6 sm:py-16 md:px-12 md:py-20 lg:px-24 lg:py-20 text-[#1a1612] relative overflow-hidden">
+    <section className="bg-[#E9E9E7] px-4 sm:px-6 md:px-12 lg:px-24  text-[#1a1612] relative overflow-hidden">
 
       {/* Header */}
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:gap-10">

@@ -47,7 +47,7 @@ export default function PortfolioPage() {
       <ScrollingText />
 
       {/* Hero Section */}
-      <section className="relative p-4 sm:p-8 md:p-12 lg:p-16 py-12 sm:py-16 md:py-20 z-10">
+      <section className="relative p-4 sm:p-8 md:p-12 lg:p-16 flex items-center justify-center py-16 sm:py-24 md:py-32 z-10">
         <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
 
           <motion.div

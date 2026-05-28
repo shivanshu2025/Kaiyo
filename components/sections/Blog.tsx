@@ -13,7 +13,7 @@ const fadeInUp = {
 
 export default function InvestmentSection() {
   return (
-    <section className="relative w-full bg-[#E9E9E7] font-sans overflow-x-hidden py-12 sm:py-16">
+    <section className="relative w-full bg-[#E9E9E7] font-sans overflow-x-hidden">
 
       {/* Background Animated Text */}
       <div className="pointer-events-none absolute left-0 top-10 w-full overflow-hidden select-none opacity-[0.03]">
@@ -32,7 +32,7 @@ export default function InvestmentSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="relative flex w-full bg-[#1a1612] shadow-2xl overflow-hidden"
+        className="relative flex w-full min-h-[280px] sm:min-h-[350px] md:min-h-[450px] bg-[#1a1612] shadow-2xl overflow-hidden"
       >
 
         {/* LEFT SIDE (FULL WIDTH FLEX) */}

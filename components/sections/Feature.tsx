@@ -7,7 +7,7 @@ export default function OurStorySection() {
   const backgroundX = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   return (
-    <section className="relative flex w-full flex-col items-center justify-start overflow-hidden bg-[#E9E9E7] px-4 py-12 sm:py-16 md:py-20 font-serif text-[#2D3627] sm:px-6 md:px-8">
+    <section className="relative flex w-full flex-col items-center justify-start overflow-hidden bg-[#E9E9E7] px-4 py-16 sm:py-20 md:py-28 font-serif text-[#2D3627] sm:px-6 md:px-8">
       <motion.div
         style={{ x: backgroundX }}
         className="pointer-events-none absolute right-0 top-0 z-0 whitespace-nowrap p-4 opacity-5 select-none md:p-10"

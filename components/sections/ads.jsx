@@ -2,7 +2,7 @@
 
 export default function Ads() {
   return (
-    <section className="relative w-full py-16 sm:py-20 md:py-24 bg-[#E9E9E7] font-sans overflow-x-hidden">
+    <section className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] bg-[#E9E9E7] font-sans overflow-x-hidden">
       {/* 🎥 VIDEO BACKGROUND */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
@@ -13,10 +13,11 @@ export default function Ads() {
           playsInline
           preload="auto"
         >
-          <source src="/video/Vide.mp4" type="video/mp4" />
+          <source src="/video/video2.mp4" type="video/mp4" />
         </video>
 
       </div>
     </section>
   );
 }
+

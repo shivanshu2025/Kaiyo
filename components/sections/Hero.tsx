@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function FashionHero() {
   return (
-    <section className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-[#E5E5E5] px-3 sm:px-4 md:px-6 py-16 sm:py-20 md:py-24 lg:py-28 font-serif text-[#2D3627]">
+    <section className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-[#E5E5E5] px-3 sm:px-4 md:px-6 py-12 sm:py-16 md:py-20 lg:min-h-screen font-serif text-[#2D3627]">
       <div className="absolute left-4 top-4 z-30 sm:left-10 sm:top-10">
         <div className="flex flex-col items-center bg-black p-2 text-[10px] leading-none tracking-widest text-white">
           <span className="mb-1 font-mono text-lg tracking-[-1px]">
