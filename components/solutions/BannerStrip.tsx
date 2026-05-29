@@ -30,7 +30,7 @@ export default function BannerStrip({
   secondaryBtn
 }: BannerStripProps) {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center justify-center px-4 sm:px-6 md:px-10 lg:px-[7%] py-8 sm:py-10" style={{ backgroundColor: bg }}>
+    <div className="flex flex-col items-center justify-center gap-4 px-4 py-8 sm:flex-row sm:flex-wrap sm:gap-6 sm:px-6 sm:py-10 md:gap-8 md:px-10 lg:gap-12 lg:px-[7%]" style={{ backgroundColor: bg }}>
       <div className="text-center sm:text-left">
         <h1 className="text-lg sm:text-xl md:text-2xl lg:text-[28px]" style={{ color: titleColor }}>
           {title}
@@ -43,9 +43,9 @@ export default function BannerStrip({
         </p>
       </div>
 
-      <div className="flex gap-3 sm:gap-4">
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
         <button
-          className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-sm font-semibold transition-colors"
+          className="rounded-full px-4 py-2 text-sm font-semibold transition-colors sm:px-5 sm:py-2.5"
           style={{
             backgroundColor: primaryBtn.bg,
             color: primaryBtn.color,
@@ -63,7 +63,7 @@ export default function BannerStrip({
         </button>
 
         <button
-          className="px-4 sm:px-5 py-2 sm:py-2.5 border-2 rounded-full text-sm font-semibold transition-colors"
+          className="rounded-full border-2 px-4 py-2 text-sm font-semibold transition-colors sm:px-5 sm:py-2.5"
           style={{
             color: secondaryBtn.color,
             borderColor: secondaryBtn.color,

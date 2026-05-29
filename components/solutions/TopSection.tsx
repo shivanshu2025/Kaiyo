@@ -18,7 +18,7 @@ export default function TopSection({
 }: TopSectionProps) {
   return (
     <div className="w-full pb-8 sm:pb-10" style={{ background: bgColor }}>
-      <div className="px-4 sm:px-6 md:px-10 lg:px-24 pt-8 sm:pt-12 md:pt-16">
+      <div className="mx-auto max-w-[1600px] px-4 pt-8 sm:px-6 sm:pt-12 md:px-10 md:pt-16 lg:px-24">
         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3932]">
           {title}
         </h1>
@@ -28,16 +28,16 @@ export default function TopSection({
         </h3>
 
         {/* Featured Cards */}
-        <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-5 py-4 sm:py-5">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),250px))] gap-3 py-4 sm:gap-4 sm:py-5 md:gap-5">
           {featuredCards.map((item, index) => (
             <div
               key={index}
-              className="w-full sm:w-[calc(50%-12px)] md:w-[220px] lg:w-[250px]"
+              className="w-full"
             >
               <img
                 src={item.src}
                 alt="featured-design"
-                className="w-full h-auto rounded-2xl shadow-md"
+                className="h-auto w-full rounded-2xl shadow-md"
               />
             </div>
           ))}

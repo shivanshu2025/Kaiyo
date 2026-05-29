@@ -10,13 +10,13 @@ export default function Footer() {
           <h3 className="mb-3 sm:mb-4 text-xs sm:text-sm font-semibold uppercase tracking-wide">
             Subscribe for News Letters
           </h3>
-          <div className="flex w-full sm:w-[420px] max-w-full items-center overflow-hidden rounded-full border border-gray-400">
+          <div className="flex w-full max-w-full items-center overflow-hidden rounded-full border border-gray-400 sm:w-[420px]">
             <input
               type="email"
               placeholder="Your Email"
               className="min-w-0 flex-1 bg-transparent px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm outline-none truncate"
             />
-            <button className="flex-shrink-0 rounded-full bg-[#2f4f3f] px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white transition hover:bg-[#666660]">
+            <button className="shrink-0 rounded-full bg-[#2f4f3f] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#666660] sm:px-6 sm:py-3 sm:text-sm">
               Subscribe
             </button>
           </div>

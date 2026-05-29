@@ -79,7 +79,7 @@ export default function Navbar({
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex">
+          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex">
             {showSolutions && <SolutionsDropdown />}
 
             {navLinks.map((link) => (
@@ -112,7 +112,7 @@ export default function Navbar({
           </nav>
 
           {/* Desktop CTA */}
-          <div className="z-10 hidden items-center md:flex">
+          <div className="z-10 hidden items-center lg:flex">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -130,7 +130,7 @@ export default function Navbar({
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
-            className="relative z-10 p-2.5 text-stone-700 md:hidden"
+            className="relative z-10 p-2.5 text-stone-700 lg:hidden"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -153,7 +153,7 @@ export default function Navbar({
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden md:hidden"
+              className="overflow-hidden lg:hidden"
             >
               <motion.div
                 className="flex flex-col gap-2 pb-6 pt-2"

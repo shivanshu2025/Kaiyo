@@ -13,14 +13,14 @@ const fadeInUp = {
 
 export default function InvestmentSection() {
   return (
-    <section className="relative w-full bg-[#E9E9E7] font-sans overflow-x-hidden">
+    <section className="relative w-full overflow-hidden bg-[#E9E9E7] font-sans">
 
       {/* Background Animated Text */}
       <div className="pointer-events-none absolute left-0 top-10 w-full overflow-hidden select-none opacity-[0.03]">
         <motion.h1
           animate={{ x: ["0%", "-50%"] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="text-[8rem] sm:text-[12rem] md:text-[16rem] lg:text-[20rem] font-bold whitespace-nowrap"
+          className="whitespace-nowrap text-[clamp(7rem,28vw,20rem)] font-bold"
         >
           INVESTMENT RETURNS INVESTMENT RETURNS
         </motion.h1>
@@ -32,7 +32,7 @@ export default function InvestmentSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="relative flex w-full min-h-[280px] sm:min-h-[350px] md:min-h-[450px] bg-[#1a1612] shadow-2xl overflow-hidden"
+        className="relative flex w-full min-h-[280px] overflow-hidden bg-[#1a1612] shadow-2xl sm:min-h-[350px] md:min-h-[450px]"
       >
 
         {/* LEFT SIDE (FULL WIDTH FLEX) */}
@@ -55,13 +55,13 @@ export default function InvestmentSection() {
           </div>
 
           {/* DATA CARDS */}
-          <div className="relative mt-10 sm:mt-16 md:mt-20 h-48 sm:h-64">
+          <div className="relative mt-10 h-48 sm:mt-16 sm:h-64 md:mt-20">
 
             {/* WHITE CARD */}
             <motion.div
               initial={{ rotate: 0, y: 20 }}
               whileInView={{ rotate: -3, y: 0 }}
-              className="absolute bottom-0 left-0 z-20 flex h-44 w-56 sm:h-60 sm:w-72 flex-col justify-center rounded-3xl bg-[#fdfcf7] p-5 sm:p-8 text-black shadow-2xl"
+              className="absolute bottom-0 left-0 z-20 flex h-44 w-[min(14rem,100%)] flex-col justify-center rounded-3xl bg-[#fdfcf7] p-5 text-black shadow-2xl sm:h-60 sm:w-72 sm:p-8"
             >
               <div className="mb-3 sm:mb-4 flex justify-end space-x-1">
                 {[...Array(4)].map((_, i) => (

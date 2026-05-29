@@ -59,7 +59,7 @@ export default function OpportunitySection() {
   };
 
   return (
-    <div className="bg-[#E9E9E7] font-sans text-[#1a1612] overflow-x-hidden">
+    <div className="overflow-hidden bg-[#E9E9E7] font-sans text-[#1a1612]">
       
       {/* List Section */}
       <section className="px-4 py-12 sm:px-6 sm:py-16 md:px-10 md:py-20 lg:px-16 lg:py-24">
@@ -129,8 +129,8 @@ export default function OpportunitySection() {
             </h2>
           </motion.div>
 
-          <motion.div style={{ x: iconX }} className="text-[#E9E9E7]">
-            <svg width="100" height="100" viewBox="0 0 100 100" fill="currentColor">
+          <motion.div style={{ x: iconX }} className="shrink-0 text-[#E9E9E7]">
+            <svg className="h-16 w-16 sm:h-20 sm:w-20 md:h-[100px] md:w-[100px]" viewBox="0 0 100 100" fill="currentColor">
               <path d="M50 0C50 40 10 50 0 50C10 50 50 60 50 100C50 60 90 50 100 50C90 50 50 40 50 0Z" />
             </svg>
           </motion.div>

@@ -25,12 +25,12 @@ const itemVariants = {
 // --- Sub-Component: Moving Marquee ---
 function ScrollingText() {
   return (
-    <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full overflow-hidden whitespace-nowrap pointer-events-none z-0 opacity-[0.03]">
+    <div className="absolute left-0 top-1/2 z-0 w-full -translate-y-1/2 overflow-hidden whitespace-nowrap pointer-events-none opacity-[0.03]">
       <motion.div 
         initial={{ x: 0 }}
         animate={{ x: "-50%" }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="flex text-[25vw] font-black uppercase italic leading-none"
+        className="flex text-[clamp(5rem,25vw,20rem)] font-black uppercase italic leading-none"
       >
         <span className="mr-20">VISUAL DESIGN</span>
         <span className="mr-20">VISUAL DESIGN</span>
@@ -47,7 +47,7 @@ export default function PortfolioPage() {
       <ScrollingText />
 
       {/* Hero Section */}
-      <section className="relative p-4 sm:p-8 md:p-12 lg:p-16 flex items-center justify-center py-16 sm:py-24 md:py-32 z-10">
+      <section className="relative z-10 flex items-center justify-center p-4 py-16 sm:p-8 sm:py-24 md:p-12 md:py-32 lg:p-16">
         <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
 
           <motion.div
@@ -58,7 +58,7 @@ export default function PortfolioPage() {
           >
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-[7.5rem] font-black uppercase leading-[0.8] tracking-tighter"
+              className="text-[clamp(2.5rem,11vw,7.5rem)] font-black uppercase leading-[0.8] tracking-tighter"
             >
               Building The <span className="text-[#004643] italic">Future</span> of Web
             </motion.h1>
@@ -72,12 +72,12 @@ export default function PortfolioPage() {
               ].map((item, i) => (
                 <motion.div key={i} variants={itemVariants}>
                   {item.active ? (
-                    <motion.div layoutId="activeAcc" className="bg-[#1F2A1F] text-[#E9E9E7] p-5 sm:p-8 rounded-3xl shadow-2xl my-4">
+                    <motion.div layoutId="activeAcc" className="my-4 rounded-3xl bg-[#1F2A1F] p-5 text-[#E9E9E7] shadow-2xl sm:p-8">
                       <div className="flex items-center gap-4 mb-3">
                         <Minus className="w-5 h-5 text-[#004643] flex-shrink-0" />
                         <span className="text-lg sm:text-xl font-bold uppercase tracking-widest">{item.title}</span>
                       </div>
-                      <p className="text-sm text-gray-400 leading-relaxed ml-9">{item.text}</p>
+                      <p className="ml-0 text-sm leading-relaxed text-gray-400 sm:ml-9">{item.text}</p>
                     </motion.div>
                   ) : (
                     <div className="flex items-center justify-between py-4 sm:py-6 border-t border-[#1F2A1F]/10 cursor-pointer group transition-all">
@@ -106,7 +106,7 @@ export default function PortfolioPage() {
               </h3>
 
               <div className="space-y-3 z-10 relative">
-                <div className="bg-white/10 backdrop-blur-3xl p-3 sm:p-5 rounded-2xl flex items-center justify-between border border-white/20">
+                <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur-3xl sm:p-5">
                   <span className="text-[#E9E9E7] text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em]">Excellence Rate</span>
                   <span className="bg-[#E9E9E7] text-[#004643] px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-black italic">TOP TIER</span>
                 </div>

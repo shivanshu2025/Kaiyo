@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function FashionHero() {
   return (
-    <section className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-[#E5E5E5] px-3 sm:px-4 md:px-6 py-12 sm:py-16 md:py-20 lg:min-h-screen font-serif text-[#2D3627]">
+    <section className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-[#E5E5E5] px-3 pb-12 pt-24 font-serif text-[#2D3627] sm:px-4 sm:pb-16 sm:pt-28 md:px-6 md:py-20 lg:min-h-[calc(100dvh-4rem)]">
       <div className="absolute left-4 top-4 z-30 sm:left-10 sm:top-10">
         <div className="flex flex-col items-center bg-black p-2 text-[10px] leading-none tracking-widest text-white">
           <span className="mb-1 font-mono text-lg tracking-[-1px]">
@@ -18,12 +18,12 @@ export default function FashionHero() {
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center px-4">
-        <h1 className="text-center text-[8vw] sm:text-[9vw] md:text-[10vw] font-black uppercase leading-[0.85] tracking-tighter opacity-10">
+        <h1 className="text-center text-[clamp(2rem,9vw,8rem)] md:text-[10vw] font-black uppercase leading-[0.85] tracking-tighter opacity-10">
           The future of startup building {"\u2014"}Kaiy{"\u014d"}
         </h1>
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 md:grid-cols-12 md:gap-12">
         <div className="z-20 w-full md:col-span-4 space-y-6 sm:space-y-8">
           <div className="w-full max-w-[280px] sm:max-w-[320px] -rotate-1 sm:-rotate-1 border-r-4 border-[#2f4f3f] bg-black p-3 text-white shadow-2xl">
             <h2 className="mb-2 text-base sm:text-xl font-bold tracking-tight">
@@ -43,7 +43,7 @@ export default function FashionHero() {
               sizes="(min-width: 640px) 176px, 144px"
               className="object-cover grayscale transition-all duration-500 hover:grayscale-0"
             />
-            <div className="absolute bottom-4 sm:bottom-6 -left-4 bg-[#2D3627] px-3 sm:px-4 py-1 text-[9px] sm:text-[10px] font-bold uppercase text-white -rotate-12">
+            <div className="absolute bottom-4 -left-2 max-w-[calc(100%+1rem)] bg-[#2D3627] px-3 py-1 text-[9px] font-bold uppercase text-white -rotate-12 sm:bottom-6 sm:-left-4 sm:px-4 sm:text-[10px]">
               I create websites and sell them.{"\u201d"}
             </div>
           </div>
@@ -67,7 +67,7 @@ export default function FashionHero() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 15, ease: 'linear' }}
-            className="absolute right-2 top-4 z-30 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border-2 border-white/30 shadow-xl transition-transform hover:scale-110 sm:right-2 sm:top-6 sm:h-20 sm:w-20 md:right-0 md:h-24 md:w-24 lg:h-28 lg:w-28"
+            className="absolute right-1 top-2 z-30 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border-2 border-white/30 shadow-xl transition-transform hover:scale-110 sm:right-2 sm:top-6 sm:h-20 sm:w-20 md:right-0 md:h-24 md:w-24 lg:h-28 lg:w-28"
           >
             <div className="absolute inset-0 flex items-center justify-center">
               <svg viewBox="0 0 100 100" className="h-full w-full p-2">
@@ -87,7 +87,7 @@ export default function FashionHero() {
           </motion.div>
         </div>
 
-        <div className="z-20 flex w-full flex-row items-center justify-center gap-6 pb-6 md:col-span-3 md:flex-col md:items-end md:justify-start md:gap-0 md:space-y-10 md:self-stretch md:pb-0">
+        <div className="z-20 flex w-full flex-row flex-wrap items-center justify-center gap-6 pb-6 md:col-span-3 md:flex-col md:items-end md:justify-start md:gap-0 md:space-y-10 md:self-stretch md:pb-0">
           <div className="group cursor-default text-center md:text-right">
             <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-none tracking-tighter transition-colors group-hover:text-[#2f4f3f]">
               FAST

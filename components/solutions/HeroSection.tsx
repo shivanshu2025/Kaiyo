@@ -48,11 +48,11 @@ export default function HeroSection({
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#E9E9E7] px-6 py-10 sm:px-10 md:px-16 lg:px-24">
-      <div className="mx-auto flex min-h-screen max-w-[1400px] flex-col justify-between">
+    <section className="relative min-h-[calc(100svh-4rem)] overflow-hidden bg-[#E9E9E7] px-5 py-8 sm:px-10 sm:py-10 md:min-h-[calc(100dvh-4rem)] md:px-16 lg:px-24">
+      <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1400px] flex-col justify-between md:min-h-[calc(100dvh-4rem)]">
 
         {/* HERO CONTENT */}
-        <div className="flex flex-1 flex-col justify-center">
+        <div className="flex flex-1 flex-col justify-center py-8 sm:py-10">
 
           {/* BADGE */}
           <motion.div
@@ -60,7 +60,7 @@ export default function HeroSection({
             initial="hidden"
             animate="visible"
             variants={fadeIn}
-            className="mb-8 inline-flex w-fit items-center rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-900"
+            className="mb-6 inline-flex w-fit max-w-full items-center rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-900 sm:mb-8"
           >
             {badge.text}
           </motion.div>
@@ -69,13 +69,13 @@ export default function HeroSection({
           <div className="space-y-2">
 
             {/* FIRST LINE */}
-            <div className="flex flex-wrap items-center gap-4 md:gap-6">
+            <div className="flex flex-wrap items-center gap-3 md:gap-6">
               <motion.h1
                 custom={1}
                 initial="hidden"
                 animate="visible"
                 variants={fadeIn}
-                className="text-[clamp(48px,8vw,120px)] font-black leading-[0.95] tracking-[-0.04em] text-[#111]"
+                className="text-[clamp(2.75rem,12vw,7.5rem)] font-black leading-[0.95] tracking-[-0.04em] text-[#111]"
               >
                 {title.main}
               </motion.h1>
@@ -108,7 +108,7 @@ export default function HeroSection({
                 initial="hidden"
                 animate="visible"
                 variants={fadeIn}
-                className="relative inline-block text-[clamp(48px,8vw,120px)] font-black leading-[0.95] tracking-[-0.04em] text-[#111]"
+                className="relative inline-block text-[clamp(2.75rem,12vw,7.5rem)] font-black leading-[0.95] tracking-[-0.04em] text-[#111]"
               >
                 {title.highlight}
 
@@ -133,7 +133,7 @@ export default function HeroSection({
                 variants={fadeIn}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-full bg-[#111827] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#1f2937] sm:text-base"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#111827] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#1f2937] sm:px-7 sm:py-4 sm:text-base"
               >
                 Let's Talk
                 <span>→</span>
@@ -159,7 +159,7 @@ export default function HeroSection({
           initial="hidden"
           animate="visible"
           variants={fadeIn}
-          className="flex items-end justify-between pb-4"
+          className="flex items-end justify-center pb-4 sm:justify-between"
         >
 
           {/* CENTER SIDE (FIXED CENTER ALIGNMENT) */}
@@ -228,7 +228,7 @@ export default function HeroSection({
           </div>
 
           {/* RIGHT SIDE (SPACER / BALANCE) */}
-          <div className="flex flex-col gap-4 items-end">
+          <div className="hidden flex-col items-end gap-4 sm:flex">
             <div className="w-[120px]" />
           </div>
 

@@ -27,7 +27,7 @@ export default function FooterSection({
     return (
       <div style={{
         backgroundColor: bg,
-        padding: "60px 40px",
+        padding: "clamp(40px, 7vw, 60px) clamp(20px, 5vw, 40px)",
         fontFamily: "Arial, sans-serif"
       }}>
         <h3 style={{ color: single.titleColor }}>{single.title}</h3>
@@ -37,7 +37,7 @@ export default function FooterSection({
   }
 
   return (
-    <div className="py-12 px-6 sm:px-10 lg:px-20" style={{ backgroundColor: bg }}>
+    <div className="px-6 py-12 sm:px-10 lg:px-20" style={{ backgroundColor: bg }}>
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 md:gap-20">
         {/* Left */}
         {left && (

@@ -44,7 +44,7 @@ export default function SolutionsDropdown() {
     <>
       {/* Desktop Dropdown */}
       <div
-        className="relative hidden md:block"
+        className="relative hidden lg:block"
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
       >
@@ -72,7 +72,7 @@ export default function SolutionsDropdown() {
               variants={containerVariants}
               className="absolute left-0 top-full pt-3"
             >
-              <div className="w-[640px] rounded-lg border border-stone-100 bg-white p-6 shadow-lg">
+              <div className="w-[min(640px,calc(100vw-2rem))] rounded-lg border border-stone-100 bg-white p-6 shadow-lg">
                 <MegaMenu
                   categories={solutionCategories}
                   pathname={pathname}
@@ -98,7 +98,7 @@ export default function SolutionsDropdown() {
       </div>
 
       {/* Mobile Accordion */}
-      <div className="flex h-full flex-col md:hidden">
+      <div className="flex h-full flex-col lg:hidden">
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className={`flex w-full items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-stone-800 hover:bg-stone-50 ${

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function FutureEquitySection() {
   return (
-    <section className="bg-[#E9E9E7] px-4 sm:px-6 md:px-12 lg:px-24  text-[#1a1612] relative overflow-hidden">
+    <section className="relative overflow-hidden bg-[#E9E9E7] px-4 py-12 text-[#1a1612] sm:px-6 sm:py-16 md:px-12 lg:px-24">
 
       {/* Header */}
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:gap-10">
@@ -13,7 +13,7 @@ export default function FutureEquitySection() {
           <span className="text-[#004643]">by the numbers.</span>
         </h1>
 
-        <div className="flex max-w-xs items-start gap-3 md:flex-shrink-0">
+        <div className="flex max-w-xs shrink-0 items-start gap-3">
           <span className="text-xl sm:text-2xl font-light text-[#004643]">+</span>
           <p className="text-sm leading-relaxed text-stone-600 sm:text-base">
             Private equity is rapidly evolving, and understanding the key figures behind this growth is essential.
