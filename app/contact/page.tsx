@@ -37,7 +37,7 @@ export default function ContactPage() {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
   return (
-    <main className="min-h-screen bg-[#E5E5E5] text-[#32483e]">
+    <main className="min-h-screen bg-[#E9E9E7] text-[#32483e]">
       <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
 
         <motion.h1

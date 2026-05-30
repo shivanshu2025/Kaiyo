@@ -53,7 +53,7 @@ const pricingPackages = [
 
 export default function PricingPage() {
   return (
-    <main className="bg-[#E5E5E5] min-h-screen font-sans">
+    <main className="bg-[#E9E9E7] min-h-screen font-sans">
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
 
