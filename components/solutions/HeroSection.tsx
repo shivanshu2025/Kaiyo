@@ -234,11 +234,6 @@ export default function HeroSection({
             </div>
           </div>
 
-          {/* RIGHT SIDE */}
-          <div className="hidden flex-col items-end gap-4 sm:flex">
-            <div className="w-[120px]" />
-          </div>
-
         </motion.div>
       </div>
     </section>
