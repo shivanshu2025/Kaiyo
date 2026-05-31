@@ -48,7 +48,7 @@ export default function HeroSection({
   };
 
   return (
-    <section className="relative flex min-h-[35dvh] overflow-hidden bg-[#E9E9E7] px-5 pt-[clamp(1rem,3dvh,2rem)] pb-[clamp(4rem,8dvh,6rem)] sm:px-10 md:px-16 lg:px-24">
+    <section className="relative flex min-h-[45dvh] overflow-hidden bg-[#E9E9E7] px-5 pt-[clamp(1rem,3dvh,2rem)] pb-[clamp(4rem,8dvh,6rem)] sm:px-10 md:px-16 lg:px-24">
 
       <div className="mx-auto flex w-full max-w-[1400px] flex-col justify-start pt-8 sm:pt-10 md:pt-12">
 
