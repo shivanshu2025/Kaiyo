@@ -1,0 +1,78 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files - secrets must never be committed
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+!.env.example
+
+# vercel
+.vercel
+
+# netlify
+.netlify/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# --- obsolete / must NOT be committed ---
+# old backend
+backend/
+Kaiyo-main/
+
+# admin / auth legacy (obsolete)
+admin/
+adminpanel/
+Admin Panel/
+
+# reusable folder names that were backend-related / obsolete
+# (top-level only - do not ignore app/components)
+lib/
+api/
+ui/
+src/api/
+src/auth/
+src/user/
+
+# obsolete entry script
+start.js
+server.js
+
+# GitHub Actions / CI workflows (obsolete)
+.github/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
