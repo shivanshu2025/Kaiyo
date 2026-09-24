@@ -15,10 +15,10 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { y: 40, opacity: 0 },
-  visible: { 
-    y: 0, 
-    opacity: 1, 
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   },
 };
 
@@ -26,7 +26,7 @@ const itemVariants = {
 function ScrollingText() {
   return (
     <div className="absolute left-0 top-1/2 z-0 w-full -translate-y-1/2 overflow-hidden whitespace-nowrap pointer-events-none opacity-[0.03]">
-      <motion.div 
+      <motion.div
         initial={{ x: 0 }}
         animate={{ x: "-50%" }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
@@ -56,7 +56,7 @@ export default function PortfolioPage({ dynamicCollections }: Props) {
 
   return (
     <main className="relative bg-[#E9E9E7] text-[#1F2A1F] font-sans selection:bg-[#004643] selection:text-white overflow-hidden">
-      
+
       <ScrollingText />
 
       <section className="relative z-10 flex items-center justify-center p-4 py-16 sm:p-8 sm:py-24 md:p-12 md:py-32 lg:p-16">
@@ -128,8 +128,11 @@ export default function PortfolioPage({ dynamicCollections }: Props) {
               className="relative bg-[#004643] p-6 sm:p-10 md:p-12 rounded-[2.5rem] sm:rounded-[3.5rem] aspect-[4/5] sm:aspect-square overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,70,67,0.3)] flex flex-col justify-between"
             >
               <h3 className="text-[#E9E9E7] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-[0.85] tracking-tighter relative z-20">
-                Crafting With Purpose
+                BUILD. LAUNCH. SCALE.
+                <br />
+                WE BUILD WHAT’S NEXT.
               </h3>
+
               <div className="space-y-3 z-10 relative">
                 <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur-3xl sm:p-5">
                   <span className="text-[#E9E9E7] text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em]">Excellence Rate</span>
@@ -137,14 +140,14 @@ export default function PortfolioPage({ dynamicCollections }: Props) {
                 </div>
               </div>
               <svg className="absolute inset-0 w-full h-full opacity-30 pointer-events-none" viewBox="0 0 400 400">
-                <motion.path 
+                <motion.path
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
                   transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
-                  d="M-50 350 C 100 300, 200 100, 450 50" 
-                  stroke="white" 
-                  strokeWidth="2" 
-                  fill="transparent" 
+                  d="M-50 350 C 100 300, 200 100, 450 50"
+                  stroke="white"
+                  strokeWidth="2"
+                  fill="transparent"
                 />
               </svg>
             </motion.div>
