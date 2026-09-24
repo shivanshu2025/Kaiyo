@@ -76,3 +76,6 @@ server.js
 .vscode/
 *.swp
 *.swo
+
+.vercel
+.env*
