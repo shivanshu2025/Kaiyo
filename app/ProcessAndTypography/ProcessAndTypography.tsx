@@ -42,16 +42,7 @@ const processSteps = [
 export default function ProcessAndTypography() {
   return (
     <section
-      className="
-        group
-        relative
-        min-h-[860px]
-        overflow-hidden
-        bg-[#f7f6f5]
-        text-[#111111]
-        sm:min-h-[880px]
-        md:min-h-[900px]
-      "
+      className="group relative overflow-hidden bg-[#f7f6f5] text-[#111111] h-auto min-h-0 px-[7%] py-8 pb-8 sm:px-[6%] sm:py-8 sm:pb-8 lg:min-h-[900px] lg:px-0 lg:py-0"
       aria-labelledby="process-title"
     >
       <style jsx>{`
@@ -99,7 +90,6 @@ export default function ProcessAndTypography() {
         .animate-marquee {
           display: flex;
           width: max-content;
-          /* Slower duration (55s instead of 25s) for a smoother, unhurried background flow */
           animation: marquee 55s linear infinite;
         }
 
@@ -123,224 +113,113 @@ export default function ProcessAndTypography() {
         Project process and typography
       </h2>
 
-      {/* PROCESS CARDS */}
-      <div
-        className="
-          absolute
-          top-[3%]
-          left-[7%]
-          z-[5]
-          grid
-          w-[86%]
-          grid-cols-2
-          gap-3
-          sm:left-[7%]
-          sm:w-[86%]
-          sm:gap-4
-          md:left-[10.4%]
-          md:w-[78%]
-          md:grid-cols-3
-          md:gap-[22px]
-          lg:gap-[28px]
-        "
-      >
-        {processSteps.map((step) => (
-          <article
-            key={step.number}
-            className={`
-              process-card
-              relative
-              aspect-square
-              overflow-hidden
-              rounded-[12px]
-              border
-              border-solid
-              border-[rgba(17,17,17,0.2)]
-              bg-[rgba(255,255,255,0.4)]
-              backdrop-blur-[2px]
-              transition-all
-              duration-500
-              ease-out
-              hover:-translate-y-[6px]
-              hover:scale-[1.012]
-              hover:border-[rgba(17,17,17,0.5)]
-              hover:bg-[#ffffff]
-              hover:shadow-[0_20px_45px_rgba(17,17,17,0.08)]
-              sm:rounded-[13px]
-              md:rounded-[14px]
-              ${step.placement}
-            `}
-          >
-            {/* NUMBER */}
-            <span
-              className={`
-                absolute
-                right-[10%]
-                font-mono
-                text-[10px]
-                font-bold
-                leading-none
-                text-[rgba(17,17,17,0.4)]
-                transition-all
-                duration-300
-                sm:text-[11px]
-                md:text-[12px]
-                ${
-                  step.top
-                    ? "bottom-[10%]"
-                    : "top-[10%]"
-                }
-              `}
+      {/* MOBILE + TABLET flow (< lg) */}
+      <div className="relative z-[5] flex flex-col gap-6 lg:hidden">
+        <div className="grid w-full grid-cols-2 gap-3 sm:gap-4">
+          {processSteps.map((step) => (
+            <article
+              key={step.number}
+              className="process-card relative flex aspect-square flex-col justify-between overflow-hidden rounded-[12px] border border-solid border-[rgba(17,17,17,0.2)] bg-[rgba(255,255,255,0.4)] p-[10%] backdrop-blur-[2px] transition-all duration-500 ease-out hover:-translate-y-[6px] hover:scale-[1.012] hover:border-[rgba(17,17,17,0.5)] hover:bg-[#ffffff] hover:shadow-[0_20px_45px_rgba(17,17,17,0.08)] sm:rounded-[13px]"
             >
-              {step.number}
+              {step.top ? (
+                <>
+                  <span className="absolute bottom-[10%] right-[10%] font-mono text-[10px] font-bold leading-none text-[rgba(17,17,17,0.4)] sm:text-[11px]">
+                    {step.number}
+                  </span>
+                  <div className="absolute left-[10%] right-[10%] top-[10%]">
+                    <h3 className="m-0 mb-[8px] font-display font-black uppercase text-[13px] leading-[0.95] tracking-[-0.03em] text-[#111111] sm:mb-[10px] sm:text-[14px]">
+                      {step.title}
+                    </h3>
+                    <p className="m-0 font-mono text-[9px] font-bold uppercase leading-[1.4] text-[rgba(17,17,17,0.55)] sm:text-[10px]">
+                      {step.description}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <span className="absolute right-[10%] top-[10%] font-mono text-[10px] font-bold leading-none text-[rgba(17,17,17,0.4)] sm:text-[11px]">
+                    {step.number}
+                  </span>
+                  <div className="absolute bottom-[10%] left-[10%] right-[10%]">
+                    <h3 className="m-0 mb-[8px] font-display font-black uppercase text-[13px] leading-[0.95] tracking-[-0.03em] text-[#111111] sm:mb-[10px] sm:text-[14px]">
+                      {step.title}
+                    </h3>
+                    <p className="m-0 font-mono text-[9px] font-bold uppercase leading-[1.4] text-[rgba(17,17,17,0.55)] sm:text-[10px]">
+                      {step.description}
+                    </p>
+                  </div>
+                </>
+              )}
+            </article>
+          ))}
+        </div>
+
+        {/* Marquee - natural flow, not absolute */}
+        <div className="pointer-events-none -mx-[7%] overflow-hidden py-2 sm:-mx-[6%] sm:py-4" aria-hidden="true">
+          <div className="animate-marquee whitespace-nowrap">
+            <span className="inline-block px-6 font-display font-black uppercase leading-[0.8] tracking-[0.05em] text-[#ecebea] text-[clamp(5rem,22vw,10rem)] transition-colors duration-1000 group-hover:text-[#e4e3e1]">
+              shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
             </span>
+            <span className="inline-block px-6 font-display font-black uppercase leading-[0.8] tracking-[0.05em] text-[#ecebea] text-[clamp(5rem,22vw,10rem)] transition-colors duration-1000 group-hover:text-[#e4e3e1]">
+              shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
+            </span>
+          </div>
+        </div>
 
-            {/* CONTENT */}
-            <div
-              className={`
-                absolute
-                right-[10%]
-                left-[10%]
-                ${
-                  step.top
-                    ? "top-[10%]"
-                    : "bottom-[10%]"
-                }
-              `}
-            >
-              {/* TITLE */}
-              <h3
-                className="
-                  m-0
-                  mb-[8px]
-                  font-display
-                  font-black
-                  uppercase
-                  text-[13px]
-                  leading-[0.95]
-                  tracking-[-0.03em]
-                  text-[#111111]
-                  transition-all
-                  duration-300
-                  hover:translate-x-[3px]
-                  hover:tracking-[-0.01em]
-                  sm:mb-[10px]
-                  sm:text-[14px]
-                  md:mb-[16px]
-                  md:text-[17px]
-                "
-              >
-                {step.title}
-              </h3>
-
-              {/* DESCRIPTION */}
-              <p
-                className="
-                  m-0
-                  max-w-full
-                  font-mono
-                  text-[9px]
-                  font-bold
-                  uppercase
-                  leading-[1.4]
-                  text-[rgba(17,17,17,0.55)]
-                  transition-colors
-                  duration-300
-                  hover:text-[#111111]
-                  sm:text-[10px]
-                  md:max-w-[94%]
-                  md:text-[11px]
-                "
-              >
-                {step.description}
-              </p>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      {/* LARGE BACKGROUND MOVING MARQUEE TEXT (CENTERED) */}
-      <div
-        className="
-          absolute
-          top-[50%]
-          left-0
-          w-full
-          -translate-y-1/2
-          z-[1]
-          overflow-hidden
-          pointer-events-none
-        "
-        aria-hidden="true"
-      >
-        <div className="animate-marquee whitespace-nowrap">
-          <span
-            className="
-              inline-block
-              font-display
-              font-black
-              uppercase
-              text-[#ecebea]
-              text-[clamp(10rem,35vw,26rem)]
-              leading-[0.8]
-              tracking-[0.05em]
-              px-6
-              transition-colors
-              duration-1000
-              group-hover:text-[#e4e3e1]
-            "
-          >
-            shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
-          </span>
-          <span
-            className="
-              inline-block
-              font-display
-              font-black
-              uppercase
-              text-[#ecebea]
-              text-[clamp(10rem,35vw,26rem)]
-              leading-[0.8]
-              tracking-[0.05em]
-              px-6
-              transition-colors
-              duration-1000
-              group-hover:text-[#e4e3e1]
-            "
-          >
-            shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
-          </span>
+        <div className="text-right font-mono text-[8px] font-bold uppercase tracking-[0.08em] text-[rgba(17,17,17,0.5)] sm:text-[9px] sm:tracking-[0.1em]">
+          System Font Stack / UI Mono
         </div>
       </div>
 
+      {/* DESKTOP (lg+) - preserve original absolute composition */}
+      <div className="hidden lg:contents">
+        {/* PROCESS CARDS */}
+        <div className="absolute left-[10.4%] top-[3%] z-[5] hidden w-[78%] grid-cols-3 gap-[22px] lg:grid lg:gap-[28px]">
+          {processSteps.map((step) => (
+            <article
+              key={step.number + "-desktop"}
+              className={`process-card relative aspect-square overflow-hidden rounded-[14px] border border-solid border-[rgba(17,17,17,0.2)] bg-[rgba(255,255,255,0.4)] backdrop-blur-[2px] transition-all duration-500 ease-out hover:-translate-y-[6px] hover:scale-[1.012] hover:border-[rgba(17,17,17,0.5)] hover:bg-[#ffffff] hover:shadow-[0_20px_45px_rgba(17,17,17,0.08)] ${step.placement}`}
+            >
+              <span
+                className={`absolute right-[10%] font-mono text-[12px] font-bold leading-none text-[rgba(17,17,17,0.4)] transition-all duration-300 ${
+                  step.top ? "bottom-[10%]" : "top-[10%]"
+                }`}
+              >
+                {step.number}
+              </span>
+              <div
+                className={`absolute left-[10%] right-[10%] ${step.top ? "top-[10%]" : "bottom-[10%]"}`}
+              >
+                <h3 className="m-0 mb-[16px] font-display font-black uppercase text-[17px] leading-[0.95] tracking-[-0.03em] text-[#111111] transition-all duration-300 hover:translate-x-[3px] hover:tracking-[-0.01em]">
+                  {step.title}
+                </h3>
+                <p className="m-0 max-w-[94%] font-mono text-[11px] font-bold uppercase leading-[1.4] text-[rgba(17,17,17,0.55)] transition-colors duration-300 hover:text-[#111111]">
+                  {step.description}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
 
-      {/* TYPOGRAPHY META INFO */}
-      <div
-        className="
-          absolute
-          bottom-[6%]
-          right-[7%]
-          z-[3]
-          font-mono
-          text-[8px]
-          font-bold
-          uppercase
-          tracking-[0.08em]
-          text-[rgba(17,17,17,0.5)]
-          text-right
-          transition-all
-          duration-300
-          hover:translate-x-[4px]
-          hover:tracking-[0.12em]
-          hover:text-[#111111]
-          sm:text-[9px]
-          sm:tracking-[0.1em]
-          md:right-[11%]
-          md:text-[11px]
-          md:tracking-[0.12em]
-        "
-      >
-        System Font Stack / UI Mono
+        {/* LARGE BACKGROUND MOVING MARQUEE TEXT (CENTERED) */}
+        <div
+          className="absolute left-0 top-[50%] z-[1] hidden w-full -translate-y-1/2 overflow-hidden pointer-events-none lg:block"
+          aria-hidden="true"
+        >
+          <div className="animate-marquee whitespace-nowrap">
+            <span className="inline-block px-6 font-display font-black uppercase leading-[0.8] tracking-[0.05em] text-[#ecebea] text-[clamp(10rem,35vw,26rem)] transition-colors duration-1000 group-hover:text-[#e4e3e1]">
+              shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
+            </span>
+            <span className="inline-block px-6 font-display font-black uppercase leading-[0.8] tracking-[0.05em] text-[#ecebea] text-[clamp(10rem,35vw,26rem)] transition-colors duration-1000 group-hover:text-[#e4e3e1]">
+              shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
+            </span>
+          </div>
+        </div>
+
+        {/* TYPOGRAPHY META INFO */}
+        <div className="absolute bottom-[6%] right-[11%] z-[3] hidden text-right font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[rgba(17,17,17,0.5)] transition-all duration-300 hover:translate-x-[4px] hover:tracking-[0.12em] hover:text-[#111111] lg:block">
+          System Font Stack / UI Mono
+        </div>
       </div>
     </section>
   );

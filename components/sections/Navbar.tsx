@@ -45,9 +45,9 @@ export default function Navbar({
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-100 bg-[#E9E9E7] backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-stone-100 bg-[#E9E9E7] backdrop-blur-xl pt-[env(safe-area-inset-top)]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
+        <div className="relative flex h-16 min-h-[4rem] items-center justify-between">
           
           {/* Logo */}
           <Link

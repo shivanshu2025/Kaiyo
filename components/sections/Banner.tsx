@@ -75,7 +75,7 @@ export default function OpportunitySection({ dynamicContent }: Props) {
     <div className="overflow-hidden bg-[#E9E9E7] font-sans text-[#1a1612]">
       
       {/* List Section */}
-      <section className="px-4 py-12 sm:px-6 sm:py-16 md:px-10 md:py-20 lg:px-16 lg:py-24">
+      <section className="px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12 lg:px-12 lg:py-16 xl:px-16 xl:py-20">
         <div className="mx-auto max-w-6xl border-t border-stone-300">
           {items.map((item, idx) => {
             const isActive = idx === activeIndex;
