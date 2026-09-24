@@ -45,11 +45,12 @@ export default function ProcessAndTypography() {
       className="
         group
         relative
-        min-h-[900px]
+        min-h-[860px]
         overflow-hidden
         bg-[#f7f6f5]
         text-[#111111]
-        max-[767px]:min-h-[900px]
+        sm:min-h-[880px]
+        md:min-h-[900px]
       "
       aria-labelledby="process-title"
     >
@@ -127,17 +128,20 @@ export default function ProcessAndTypography() {
         className="
           absolute
           top-[3%]
-          left-[10.4%]
+          left-[7%]
           z-[5]
           grid
-          w-[78%]
-          grid-cols-3
-          gap-[28px]
-          max-[767px]:top-[4%]
-          max-[767px]:left-[7%]
-          max-[767px]:w-[86%]
-          max-[767px]:grid-cols-2
-          max-[767px]:gap-[12px]
+          w-[86%]
+          grid-cols-2
+          gap-3
+          sm:left-[7%]
+          sm:w-[86%]
+          sm:gap-4
+          md:left-[10.4%]
+          md:w-[78%]
+          md:grid-cols-3
+          md:gap-[22px]
+          lg:gap-[28px]
         "
       >
         {processSteps.map((step) => (
@@ -148,7 +152,7 @@ export default function ProcessAndTypography() {
               relative
               aspect-square
               overflow-hidden
-              rounded-[14px]
+              rounded-[12px]
               border
               border-solid
               border-[rgba(17,17,17,0.2)]
@@ -162,8 +166,9 @@ export default function ProcessAndTypography() {
               hover:border-[rgba(17,17,17,0.5)]
               hover:bg-[#ffffff]
               hover:shadow-[0_20px_45px_rgba(17,17,17,0.08)]
+              sm:rounded-[13px]
+              md:rounded-[14px]
               ${step.placement}
-              max-[767px]:rounded-[10px]
             `}
           >
             {/* NUMBER */}
@@ -172,18 +177,18 @@ export default function ProcessAndTypography() {
                 absolute
                 right-[10%]
                 font-mono
-                text-[12px]
+                text-[10px]
                 font-bold
                 leading-none
                 text-[rgba(17,17,17,0.4)]
                 transition-all
                 duration-300
-                max-[767px]:right-[10%]
-                max-[767px]:text-[8px]
+                sm:text-[11px]
+                md:text-[12px]
                 ${
                   step.top
-                    ? "bottom-[10%] max-[767px]:bottom-[10%]"
-                    : "top-[10%] max-[767px]:top-[10%]"
+                    ? "bottom-[10%]"
+                    : "top-[10%]"
                 }
               `}
             >
@@ -196,12 +201,10 @@ export default function ProcessAndTypography() {
                 absolute
                 right-[10%]
                 left-[10%]
-                max-[767px]:right-[10%]
-                max-[767px]:left-[10%]
                 ${
                   step.top
-                    ? "top-[10%] max-[767px]:top-[10%]"
-                    : "bottom-[10%] max-[767px]:bottom-[10%]"
+                    ? "top-[10%]"
+                    : "bottom-[10%]"
                 }
               `}
             >
@@ -209,11 +212,11 @@ export default function ProcessAndTypography() {
               <h3
                 className="
                   m-0
-                  mb-[16px]
+                  mb-[8px]
                   font-display
                   font-black
                   uppercase
-                  text-[17px]
+                  text-[13px]
                   leading-[0.95]
                   tracking-[-0.03em]
                   text-[#111111]
@@ -221,8 +224,10 @@ export default function ProcessAndTypography() {
                   duration-300
                   hover:translate-x-[3px]
                   hover:tracking-[-0.01em]
-                  max-[767px]:mb-[8px]
-                  max-[767px]:text-[11px]
+                  sm:mb-[10px]
+                  sm:text-[14px]
+                  md:mb-[16px]
+                  md:text-[17px]
                 "
               >
                 {step.title}
@@ -232,9 +237,9 @@ export default function ProcessAndTypography() {
               <p
                 className="
                   m-0
-                  max-w-[94%]
+                  max-w-full
                   font-mono
-                  text-[11px]
+                  text-[9px]
                   font-bold
                   uppercase
                   leading-[1.4]
@@ -242,9 +247,9 @@ export default function ProcessAndTypography() {
                   transition-colors
                   duration-300
                   hover:text-[#111111]
-                  max-[767px]:max-w-full
-                  max-[767px]:text-[7px]
-                  max-[767px]:leading-[1.4]
+                  sm:text-[10px]
+                  md:max-w-[94%]
+                  md:text-[11px]
                 "
               >
                 {step.description}
@@ -312,27 +317,29 @@ export default function ProcessAndTypography() {
       <div
         className="
           absolute
-          top-[57%]
-          left-[10.4%]
+          top-[54%]
+          left-[7%]
           z-[3]
           font-display
           font-black
           uppercase
-          text-[clamp(2.8rem,7vw,5.5rem)]
+          text-[clamp(2rem,9vw,4rem)]
           leading-[0.85]
-          tracking-[0.03em]
+          tracking-[0.02em]
           scale-x-[0.8]
           origin-top-left
           transition-all
           duration-500
           hover:translate-x-[5px]
           hover:scale-x-[0.83]
-          hover:tracking-[0.05em]
+          hover:tracking-[0.04em]
           hover:text-[#222222]
-          max-[767px]:top-[53%]
-          max-[767px]:left-[7%]
-          max-[767px]:text-[clamp(2rem,10vw,4rem)]
-          max-[767px]:tracking-[0.02em]
+          sm:top-[55%]
+          sm:text-[clamp(2.4rem,7vw,4.5rem)]
+          md:left-[10.4%]
+          md:top-[57%]
+          md:text-[clamp(2.8rem,7vw,5.5rem)]
+          md:tracking-[0.03em]
         "
       >
         Bebas Neue
@@ -342,24 +349,26 @@ export default function ProcessAndTypography() {
       <div
         className="
           absolute
-          top-[65%]
-          left-[10.4%]
+          top-[61%]
+          left-[7%]
           z-[3]
           font-mono
-          text-[11px]
+          text-[8px]
           font-bold
           uppercase
-          tracking-[0.12em]
+          tracking-[0.08em]
           text-[rgba(17,17,17,0.5)]
           transition-all
           duration-300
           hover:translate-x-[4px]
-          hover:tracking-[0.16em]
+          hover:tracking-[0.12em]
           hover:text-[#111111]
-          max-[767px]:top-[60%]
-          max-[767px]:left-[7%]
-          max-[767px]:text-[8px]
-          max-[767px]:tracking-[0.08em]
+          sm:text-[9px]
+          sm:tracking-[0.1em]
+          md:left-[10.4%]
+          md:top-[65%]
+          md:text-[11px]
+          md:tracking-[0.12em]
         "
       >
         Display Typeface / Primary Accent
@@ -370,12 +379,12 @@ export default function ProcessAndTypography() {
         className="
           absolute
           bottom-[6%]
-          left-[10.4%]
+          left-[7%]
           z-[3]
           font-sans
           font-black
           uppercase
-          text-[clamp(2.5rem,4.5vw,4.5rem)]
+          text-[clamp(1.9rem,8.5vw,3rem)]
           leading-[0.85]
           tracking-[-0.02em]
           transition-all
@@ -383,9 +392,9 @@ export default function ProcessAndTypography() {
           hover:translate-x-[5px]
           hover:tracking-[0.01em]
           hover:text-[#222222]
-          max-[767px]:bottom-[6%]
-          max-[767px]:left-[7%]
-          max-[767px]:text-[clamp(2rem,9vw,3.5rem)]
+          sm:text-[clamp(2.2rem,6vw,3.5rem)]
+          md:left-[10.4%]
+          md:text-[clamp(2.5rem,4.5vw,4.5rem)]
         "
       >
         JetBrains
@@ -398,24 +407,25 @@ export default function ProcessAndTypography() {
         className="
           absolute
           bottom-[6%]
-          right-[11%]
+          right-[7%]
           z-[3]
           font-mono
-          text-[11px]
+          text-[8px]
           font-bold
           uppercase
-          tracking-[0.12em]
+          tracking-[0.08em]
           text-[rgba(17,17,17,0.5)]
           text-right
           transition-all
           duration-300
           hover:translate-x-[4px]
-          hover:tracking-[0.16em]
+          hover:tracking-[0.12em]
           hover:text-[#111111]
-          max-[767px]:right-[7%]
-          max-[767px]:bottom-[6%]
-          max-[767px]:text-[8px]
-          max-[767px]:tracking-[0.08em]
+          sm:text-[9px]
+          sm:tracking-[0.1em]
+          md:right-[11%]
+          md:text-[11px]
+          md:tracking-[0.12em]
         "
       >
         System Font Stack / UI Mono

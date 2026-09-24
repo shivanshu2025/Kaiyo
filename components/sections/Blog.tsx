@@ -62,13 +62,13 @@ export default function InvestmentSection({ dynamicPosts }: Props) {
           </div>
 
           {/* DATA CARDS */}
-          <div className="relative mt-10 h-48 sm:mt-16 sm:h-64 md:mt-20">
+          <div className="relative mt-8 h-[180px] sm:mt-12 sm:h-[220px] md:mt-16 md:h-64">
 
             {/* WHITE CARD */}
             <motion.div
               initial={{ rotate: 0, y: 20 }}
               whileInView={{ rotate: -3, y: 0 }}
-              className="absolute bottom-0 left-0 z-20 flex h-44 w-auto max-w-[14rem] flex-col justify-center rounded-3xl bg-[#fdfcf7] p-5 text-black shadow-2xl sm:h-60 sm:w-72 sm:max-w-none sm:p-8"
+              className="absolute bottom-0 left-0 z-20 flex h-40 w-auto max-w-[13rem] flex-col justify-center rounded-3xl bg-[#fdfcf7] p-4 text-black shadow-2xl sm:h-52 sm:w-64 sm:max-w-none sm:p-6 md:h-60 md:w-72 md:p-8"
             >
               <div className="mb-3 sm:mb-4 flex justify-end space-x-1">
                 {[...Array(4)].map((_, i) => (
@@ -77,41 +77,41 @@ export default function InvestmentSection({ dynamicPosts }: Props) {
               </div>
 
               <div className="flex items-baseline">
-                <span className="text-6xl sm:text-8xl font-black italic">60</span>
-                <span className="text-2xl sm:text-3xl font-bold">%</span>
-                <span className="ml-2 sm:ml-3 text-[9px] sm:text-[10px] uppercase text-stone-500">
+                <span className="text-5xl font-black italic sm:text-6xl md:text-7xl lg:text-8xl">60</span>
+                <span className="text-xl font-bold sm:text-2xl md:text-3xl">%</span>
+                <span className="ml-2 text-[8px] uppercase text-stone-500 sm:ml-3 sm:text-[9px] md:text-[10px]">
                   of investors
                 </span>
               </div>
 
-              <div className="mt-3 sm:mt-4 flex items-baseline">
-                <span className="text-4xl sm:text-5xl font-black italic">15</span>
-                <span className="text-xl sm:text-2xl font-bold">.8%</span>
-                <span className="ml-2 sm:ml-3 text-[9px] sm:text-[10px] uppercase text-stone-500">
+              <div className="mt-2 flex items-baseline sm:mt-3 md:mt-4">
+                <span className="text-3xl font-black italic sm:text-4xl md:text-5xl">15</span>
+                <span className="text-lg font-bold sm:text-xl md:text-2xl">.8%</span>
+                <span className="ml-2 text-[8px] uppercase text-stone-500 sm:ml-3 sm:text-[9px] md:text-[10px]">
                   Avg Returns
                 </span>
               </div>
             </motion.div>
 
-            {/* TEAL CARD - hidden on very small screens */}
+            {/* TEAL CARD - visible on all sizes, scales proportionally */}
             <motion.div
               initial={{ rotate: 0, y: 20 }}
               whileInView={{ rotate: 2, y: 0 }}
-              className="hidden sm:flex absolute bottom-[-20px] left-16 sm:left-48 md:left-64 lg:left-80 z-10 h-36 sm:h-40 w-52 sm:w-64 flex-col justify-center rounded-3xl bg-[#004643] p-5 sm:p-8 text-white shadow-xl"
+              className="absolute bottom-[-8px] left-[46%] z-10 flex h-32 w-[46%] max-w-[200px] flex-col justify-center rounded-2xl bg-[#004643] p-4 text-white shadow-xl sm:bottom-[-16px] sm:left-44 sm:h-36 sm:w-56 sm:max-w-none sm:rounded-3xl sm:p-5 md:left-56 md:h-40 md:w-64 md:p-6 lg:left-72 lg:p-8"
             >
-              <div className="mb-3 sm:mb-4 flex space-x-1 opacity-20">
+              <div className="mb-2 flex space-x-1 opacity-20 sm:mb-3">
                 {[...Array(5)].map((_, i) => (
-                  <div key={i} className="h-1.5 w-4 sm:w-5 bg-white" />
+                  <div key={i} className="h-1 w-3 bg-white sm:h-1.5 sm:w-4 md:w-5" />
                 ))}
               </div>
 
               <div className="flex items-end">
-                <span className="mb-2 text-xs font-black">USD</span>
-                <span className="mx-1 text-6xl sm:text-7xl font-black">4</span>
-                <span className="text-xl sm:text-2xl font-bold">b</span>
+                <span className="mb-1 text-[10px] font-black sm:mb-2 sm:text-xs">USD</span>
+                <span className="mx-1 text-4xl font-black sm:text-5xl md:text-6xl lg:text-7xl">4</span>
+                <span className="text-lg font-bold sm:text-xl md:text-2xl">b</span>
               </div>
 
-              <span className="mt-2 text-[10px] uppercase text-white/60">
+              <span className="mt-1 text-[9px] uppercase text-white/60 sm:mt-2 sm:text-[10px]">
                 Amount Invested
               </span>
             </motion.div>

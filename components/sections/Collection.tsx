@@ -59,8 +59,8 @@ export default function PortfolioPage({ dynamicCollections }: Props) {
 
       <ScrollingText />
 
-      <section className="relative z-10 flex items-center justify-center p-4 py-16 sm:p-8 sm:py-24 md:p-12 md:py-32 lg:p-16">
-        <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
+      <section className="relative z-10 flex items-center justify-center px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:p-16 lg:py-32">
+        <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center">
 
           <motion.div
             initial="hidden"
@@ -119,35 +119,36 @@ export default function PortfolioPage({ dynamicCollections }: Props) {
             </div>
           </motion.div>
 
-          <div className="relative">
+          <div className="relative w-full flex justify-center md:justify-end">
             <motion.div
               initial={{ opacity: 0, rotate: 10, y: 100 }}
               animate={{ opacity: 1, rotate: 0, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ scale: 1.05, rotate: -2 }}
-              className="relative bg-[#004643] p-6 sm:p-10 md:p-12 rounded-[2.5rem] sm:rounded-[3.5rem] aspect-[4/5] sm:aspect-square overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,70,67,0.3)] flex flex-col justify-between"
+              whileHover={{ scale: 1.02, rotate: -1 }}
+              className="relative flex w-full max-w-[420px] sm:max-w-[440px] md:max-w-none aspect-square flex-col justify-between overflow-hidden rounded-[2rem] bg-[#004643] p-6 sm:p-8 md:p-10 lg:p-12 shadow-[0_50px_100px_-20px_rgba(0,70,67,0.3)] sm:rounded-[2.5rem] lg:rounded-[3.5rem]"
             >
-              <h3 className="text-[#E9E9E7] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-[0.85] tracking-tighter relative z-20">
+              <h3 className="relative z-20 font-black uppercase leading-[0.85] tracking-tighter text-[#E9E9E7] text-[clamp(1.75rem,8vw,2.25rem)] sm:text-[2.1rem] md:text-[2.5rem] lg:text-5xl xl:text-6xl">
                 BUILD. LAUNCH. SCALE.
                 <br />
                 WE BUILD WHAT’S NEXT.
               </h3>
 
-              <div className="space-y-3 z-10 relative">
-                <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur-3xl sm:p-5">
-                  <span className="text-[#E9E9E7] text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em]">Excellence Rate</span>
-                  <span className="bg-[#E9E9E7] text-[#004643] px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-black italic">TOP TIER</span>
+              <div className="relative z-10 space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur-3xl sm:p-4 md:p-5">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E9E9E7] sm:text-[11px] sm:tracking-[0.3em] md:text-xs">Excellence Rate</span>
+                  <span className="rounded-full bg-[#E9E9E7] px-3 py-1.5 text-[10px] font-black italic text-[#004643] sm:px-4 sm:py-2 sm:text-xs md:px-5">TOP TIER</span>
                 </div>
               </div>
-              <svg className="absolute inset-0 w-full h-full opacity-30 pointer-events-none" viewBox="0 0 400 400">
+              <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-30" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                 <motion.path
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
                   transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
                   d="M-50 350 C 100 300, 200 100, 450 50"
                   stroke="white"
-                  strokeWidth="2"
+                  strokeWidth="1.8"
                   fill="transparent"
+                  strokeLinecap="round"
                 />
               </svg>
             </motion.div>
