@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Star, X } from 'lucide-react';
 import './SupportWidget.css';
 
-const FULL_TEXT = 'Hi! I’m building something of my own. Support my journey with a coffee ☕';
+const FULL_TEXT = '__Codeno.in\nHi! I’m building something of my own. Support my journey with a coffee ☕';
 const TYPING_SPEED = 40;
 
 export default function SupportWidget() {
