@@ -16,6 +16,7 @@ export default function Home() {
       <ProjectShowcase/>
       <ProcessAndTypography/>
       <Banner />
+ 
     </main>
   );
 }

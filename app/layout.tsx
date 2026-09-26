@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Caveat } from 'next/font/google';
 import FooterWrapper from '@/components/sections/FooterWrapper';
 import NavbarWrapper from '@/components/sections/NavbarWrapper';
+import SupportWidget from '@/components/sections/SupportWidget/SupportWidget';
 import '@/styles/globals.css';
 
 function cn(...inputs: (string | undefined | null | false)[]) {
@@ -83,6 +84,7 @@ export default function RootLayout({
         )}
       >
         <NavbarWrapper />
+        <SupportWidget />
         <div className="flex-1">
           {children}
         </div>
