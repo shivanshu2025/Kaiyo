@@ -41,10 +41,11 @@ function ScrollingText() {
 
 type CollectionData = {
   title: string;
-  description: string;
-  image: string;
-  link: string;
-  order: number;
+  description?: string;
+  text?: string;
+  image?: string;
+  link?: string;
+  order?: number;
 };
 
 interface Props {
