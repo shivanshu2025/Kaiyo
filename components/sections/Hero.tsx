@@ -26,32 +26,32 @@ export default function FashionHero({ dynamicContent }: Props) {
             |||| || | |||| || ||| | ||
           </span>
           <span className="font-mono uppercase opacity-70">
-            Project Kaiy{"\u014d"} Access: 898 12 7
+            PROJECT WEB / ACCESS: 24 7
           </span>
         </div>
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center px-4">
-        <h1 className="text-center text-[clamp(2rem,9vw,8rem)] md:text-[10vw] font-black uppercase leading-[0.85] tracking-tighter opacity-10">
-          {hero?.title || 'The future of startup building \u2014Kaiy\u014d'}
-        </h1>
+<h1 className="text-center text-[clamp(2rem,9vw,8rem)] md:text-[10vw] font-black uppercase leading-[0.85] tracking-tighter opacity-10">
+            {hero?.title || 'The future of startup building \u2014Kaiy\u014d'}
+          </h1>
       </div>
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 md:grid-cols-12 md:gap-12">
         <div className="z-20 w-full md:col-span-4 space-y-6 sm:space-y-8">
           <div className="w-full max-w-[280px] sm:max-w-[320px] -rotate-1 sm:-rotate-1 border-r-4 border-[#2f4f3f] bg-black p-3 text-white shadow-2xl">
             <h2 className="mb-2 text-base sm:text-xl font-bold tracking-tight">
-              {hero?.subtitle || 'Venture Capital Reimagined.'}
+              {hero?.subtitle || 'YOUR WEBSITE, REIMAGINED.'}
             </h2>
             <p className="text-xs sm:text-sm font-medium uppercase leading-relaxed tracking-tight opacity-80">
-              {hero?.description || "Building a startup is chaotic. Kaiy\u014d provides the structure, style, and scale to turn vision into market dominance."}
+              {hero?.description || "Building an online presence doesn't have to be complicated. We create clean, modern websites that turn your business idea into a professional digital presence."}
             </p>
           </div>
 
           <div className="group relative aspect-[4/5] w-36 sm:w-44 rotate-2 overflow-hidden rounded-2xl border-4 border-white shadow-2xl">
             <Image
               src="/images/kk.png"
-              alt="Yellow Jacket"
+              alt="WEB STUDIO"
               fill
               sizes="(min-width: 640px) 176px, 144px"
               className="object-cover grayscale transition-all duration-500 hover:grayscale-0"
@@ -68,7 +68,7 @@ export default function FashionHero({ dynamicContent }: Props) {
 
             <Image
               src="/images/Kaiyologo.png"
-              alt="Kaiyo Logo"
+              alt="WEB STUDIO"
               width={550}
               height={550}
               sizes="(min-width: 1024px) 550px, (min-width: 768px) 420px, (min-width: 640px) 320px, 240px"
@@ -91,7 +91,7 @@ export default function FashionHero({ dynamicContent }: Props) {
                 />
                 <text className="fill-white text-[8px] sm:text-[9px] font-bold uppercase tracking-[3px]">
                   <textPath xlinkHref="#circlePath">
-                    {"\u201c"}I build websites for clients and sell them.{"\u201d"}
+                    {"\u201c"}I build modern websites for businesses and sell them.{"\u201d"}
                   </textPath>
                 </text>
               </svg>
@@ -106,7 +106,7 @@ export default function FashionHero({ dynamicContent }: Props) {
               FAST
             </h3>
             <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-60">
-              Delivery
+              DELIVERY
             </p>
           </div>
           <div className="group cursor-default text-center md:text-right">
@@ -114,7 +114,7 @@ export default function FashionHero({ dynamicContent }: Props) {
               MODERN
             </h3>
             <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-60">
-              Design
+              DESIGN
             </p>
           </div>
         </div>

@@ -100,8 +100,8 @@ export default function SubmitTestimonialPage() {
       <Toaster />
       <div className="max-w-3xl mx-auto px-6 lg:px-12 py-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Share Your <span className="text-[#2f4f3f]">Experience</span></h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-xl mx-auto">We value your feedback. Tell us about your experience working with us.</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900">SHARE YOUR <span className="text-[#2f4f3f]">FEEDBACK</span></h1>
+          <p className="mt-4 text-lg text-gray-600 max-w-xl mx-auto">Tell us what you think about the website we created for you.</p>
         </div>
 
         <form onSubmit={onSubmit} className="bg-white rounded-[30px] shadow-md p-8 md:p-10 space-y-6">
@@ -119,7 +119,7 @@ export default function SubmitTestimonialPage() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="avatar" className="text-sm font-semibold text-gray-700">Profile Image</label>
+              <label htmlFor="avatar" className="text-sm font-semibold text-gray-700">Profile Photo</label>
               <div className="flex items-center gap-3">
                 {imagePreview ? (
                   <div className="relative">
@@ -138,13 +138,13 @@ export default function SubmitTestimonialPage() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="designation" className="text-sm font-semibold text-gray-700">Designation</label>
-              <input id="designation" value={form.designation} onChange={(e) => setForm((p) => ({ ...p, designation: e.target.value }))} placeholder="e.g. CEO, Founder" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none" />
+              <label htmlFor="designation" className="text-sm font-semibold text-gray-700">Your Role</label>
+              <input id="designation" value={form.designation} onChange={(e) => setForm((p) => ({ ...p, designation: e.target.value }))} placeholder="e.g. Founder, Owner" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none" />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="company" className="text-sm font-semibold text-gray-700">Company</label>
-              <input id="company" value={form.company} onChange={(e) => setForm((p) => ({ ...p, company: e.target.value }))} placeholder="Your company name" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none" />
+              <label htmlFor="company" className="text-sm font-semibold text-gray-700">Business Name</label>
+              <input id="company" value={form.company} onChange={(e) => setForm((p) => ({ ...p, company: e.target.value }))} placeholder="Your business name" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none" />
             </div>
           </div>
 
@@ -161,8 +161,8 @@ export default function SubmitTestimonialPage() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="message" className="text-sm font-semibold text-gray-700">Your Testimonial <span className="text-red-500">*</span></label>
-            <textarea id="message" value={form.message} onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))} placeholder="Share your experience working with us..." rows={5} className={`w-full rounded-lg border px-3 py-2 text-sm outline-none ${errors.message ? 'border-red-500' : 'border-gray-300'}`} />
+            <label htmlFor="message" className="text-sm font-semibold text-gray-700">Your Feedback <span className="text-red-500">*</span></label>
+            <textarea id="message" value={form.message} onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))} placeholder="Tell us what you think about your website..." rows={5} className={`w-full rounded-lg border px-3 py-2 text-sm outline-none ${errors.message ? 'border-red-500' : 'border-gray-300'}`} />
             <div className="flex justify-between items-center">
               {errors.message && <p className="text-red-500 text-xs">{errors.message}</p>}
               <p className={`text-xs ml-auto ${messageLength > CHARACTER_LIMIT ? 'text-red-500' : 'text-gray-400'}`}>{messageLength}/{CHARACTER_LIMIT}</p>
@@ -178,7 +178,7 @@ export default function SubmitTestimonialPage() {
             ) : (
               <>
                 <Send className="w-5 h-5" />
-                Submit Testimonial
+                SUBMIT FEEDBACK
               </>
             )}
           </button>

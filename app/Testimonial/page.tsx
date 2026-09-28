@@ -70,22 +70,17 @@ export default function TestimonialsPage() {
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
           <div>
             <h1 className="text-5xl md:text-6xl font-bold leading-tight text-gray-900">
-              <span className="text-[#2f4f3f]">See Why</span> Clients Love
-              <br />
-              Kaiyo.
+WHAT OUR CLIENTS SAY
             </h1>
             <p className="mt-8 text-lg text-gray-600 max-w-xl leading-relaxed">
-              Check out what others are saying about us or leave your
-              feedback. Your reviews help us grow and improve every step
-              of the way. Join thousands of happy clients who trust us.
-              Don&rsquo;t just take our word for it&mdash;read their reviews now.
+See what our clients have to say about their website projects and experiences working with us.
             </p>
             <Link
               href="/Testimonial/submit"
               className="mt-6 inline-flex items-center gap-2 bg-[#2f4f3f] hover:bg-[#63776d] text-white px-8 py-4 rounded-full font-semibold transition"
             >
               <Send className="w-5 h-5" />
-              Leave Your Feedback
+              SHARE YOUR FEEDBACK
             </Link>
           </div>
           <div className="flex justify-center">
@@ -205,11 +200,10 @@ export default function TestimonialsPage() {
 
         <div className="text-center mt-20">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Trusted by Thousands of Happy Clients
+            WHAT OUR CLIENTS SAY
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            We value every review and continuously strive to provide
-            exceptional service and support for our community.
+            Your feedback helps us understand what works and how we can make every website project better.
           </p>
         </div>
       </div>

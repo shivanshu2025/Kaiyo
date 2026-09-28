@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 type PricingPlanData = { _id: string; title: string; description: string; price: string; color: string; features: string[] };
 
 const fallbackPlans = [
-    { _id: '1', title: 'Starter Website', description: 'Ideal for personal brands or small businesses starting online.', price: '₹15,000', color: 'bg-orange-500', features: ['Up to 5-7 Pages', 'Responsive Design', 'Basic UI/UX Layout', 'Contact Form', 'Basic SEO Setup', 'Delivery: 7-10 working Days'] },
-    { _id: '2', title: 'Business Website', description: 'Perfect for growing businesses that need a strong online presence.', price: '₹25,000', color: 'bg-green-500', features: ['Up to 7-12 Pages', 'Custom UI/UX Design', 'Fully Responsive Design', 'CMS Integration', 'On-page SEO Optimization', 'Contact & Inquiry Forms', 'Delivery: 14-18 Working Days'] },
-    { _id: '3', title: 'Custom Website', description: 'Advanced solution for brands that want impact and performance.', price: 'Depends on Complexity', color: 'bg-orange-600', features: ['Pages According to Need / Admin Dashboard', 'Custom Premium Design', 'Advanced UI/UX & Animations', 'E-commerce or Booking Integration', 'Speed & Performance Optimization', 'SEO & Analytics Setup', 'Priority Support', 'Delivery: According to Project'] },
+    { _id: '1', title: 'Starter Website', description: 'Ideal for personal brands, portfolios, and small businesses starting online.', price: '₹15,000', color: 'bg-orange-500', features: ['Up to 5-7 Pages', 'Responsive Design', 'Basic UI/UX Layout', 'Contact Form', 'Basic SEO Setup', 'Delivery: 7-10 working Days'] },
+    { _id: '2', title: 'Business Website', description: 'Perfect for growing businesses that need a professional and complete online presence.', price: '₹25,000', color: 'bg-green-500', features: ['Up to 7-12 Pages', 'Custom UI/UX Design', 'Fully Responsive Design', 'CMS Integration', 'On-page SEO Optimization', 'Contact & Inquiry Forms', 'Delivery: 14-18 Working Days'] },
+    { _id: '3', title: 'Custom Website', description: 'For businesses that need a website built around their specific requirements.', price: 'Depends on Complexity', color: 'bg-orange-600', features: ['Pages According to Need / Admin Dashboard', 'Custom Premium Design', 'Advanced UI/UX & Animations', 'E-commerce or Booking Integration', 'Speed & Performance Optimization', 'SEO & Analytics Setup', 'Priority Support', 'Delivery: According to Project'] },
   ];
 
 export default function PricingPage() {
@@ -19,14 +19,10 @@ export default function PricingPage() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
         <div className="text-center mb-10 sm:mb-14 md:mb-20">
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#1f2937] leading-tight font-caveat">
-            You are not{" "}
-            <span className="relative inline-block">
-              <span className="relative z-10">dreaming!</span>
-              <span className="absolute left-0 bottom-1 sm:bottom-2 w-full h-4 sm:h-6 bg-[#2f4f3f] -z-0 rotate-[-2deg] rounded-md"></span>
-            </span>
+            YOUR WEBSITE STARTS HERE.
           </h1>
           <p className="mt-4 sm:mt-6 text-lg sm:text-xl md:text-2xl text-gray-600 font-caveat">
-            Build your website simple, fast & affordable.
+            Choose the right website package for your business.
           </p>
         </div>
 

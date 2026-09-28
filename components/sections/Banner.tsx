@@ -6,18 +6,18 @@ import { useRef, useState, type MouseEvent } from 'react';
 
 const items = [
   {
-    title: 'NETWORKING OPPORTUNITIES',
-    desc: 'Connect with industry peers and experts.',
+    title: 'DIGITAL, BUT DIFFERENT',
+    desc: 'We create websites that give your business a strong identity online.',
     active: false,
   },
   {
-    title: 'WEBINARS AND EVENTS',
-    desc: 'Participate in exclusive events and live discussions.',
+    title: 'YOUR IDEA. OUR CRAFT.',
+    desc: 'You bring the vision, we turn it into a website people remember.',
     active: true,
   },
   {
-    title: 'NEWSLETTER',
-    desc: 'Subscribe to receive the latest insights and updates directly to your inbox.',
+    title: 'BUILT FOR THE FIRST IMPRESSION',
+    desc: 'Because your website is often the first thing your customers see.',
     active: false,
   },
 ];

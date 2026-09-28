@@ -2,37 +2,37 @@
 
 const processSteps = [
   {
-    number: "/1",
-    title: "Research & Analysis",
+    number: "01",
+    title: "UNDERSTAND",
     description:
-      "Analyzed client needs and explored industry references to define UX structure and visual direction.",
+      "We understand your business idea and what you need from your website.",
     placement:
       "max-[767px]:col-start-1 max-[767px]:row-start-1 md:col-start-2 md:row-start-1",
     top: false,
   },
   {
-    number: "/2",
-    title: "Wireframing",
+    number: "02",
+    title: "DESIGN",
     description:
-      "Defined the website structure and created low-fidelity wireframes.",
+      "We create a clean and modern website design based on your requirements.",
     placement:
       "max-[767px]:col-start-2 max-[767px]:row-start-1 md:col-start-3 md:row-start-1",
     top: true,
   },
   {
-    number: "/3",
-    title: "UI Design",
+    number: "03",
+    title: "BUILD",
     description:
-      "Designed UI screens and applied appropriate animations to enhance key interactions.",
+      "We turn the design into a functional website that is easy to use.",
     placement:
       "max-[767px]:col-start-1 max-[767px]:row-start-2 md:col-start-1 md:row-start-2",
     top: true,
   },
   {
-    number: "/4",
-    title: "Responsive Design",
+    number: "04",
+    title: "DELIVER",
     description:
-      "Adapted the desktop design for mobile, maintaining usability and visual consistency.",
+      "We make sure your website is ready to use on desktop and mobile devices.",
     placement:
       "max-[767px]:col-start-2 max-[767px]:row-start-2 md:col-start-2 md:row-start-2",
     top: false,
@@ -158,17 +158,17 @@ export default function ProcessAndTypography() {
         <div className="pointer-events-none -mx-[7%] overflow-hidden py-2 sm:-mx-[6%] sm:py-4" aria-hidden="true">
           <div className="animate-marquee whitespace-nowrap">
             <span className="inline-block px-6 font-display font-black uppercase leading-[0.8] tracking-[0.05em] text-[#ecebea] text-[clamp(5rem,22vw,10rem)] transition-colors duration-1000 group-hover:text-[#e4e3e1]">
-              shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
+              YOUR BRAND  •  YOUR WEBSITE  •
             </span>
             <span className="inline-block px-6 font-display font-black uppercase leading-[0.8] tracking-[0.05em] text-[#ecebea] text-[clamp(5rem,22vw,10rem)] transition-colors duration-1000 group-hover:text-[#e4e3e1]">
-              shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
+              YOUR BRAND  •  YOUR WEBSITE  •
             </span>
           </div>
         </div>
 
-        <div className="text-right font-mono text-[8px] font-bold uppercase tracking-[0.08em] text-[rgba(17,17,17,0.5)] sm:text-[9px] sm:tracking-[0.1em]">
-          System Font Stack / UI Mono
-        </div>
+<div className="text-right font-mono text-[8px] font-bold uppercase tracking-[0.08em] text-[rgba(17,17,17,0.5)] sm:text-[9px] sm:tracking-[0.1em]">
+           MODERN WEB DESIGN / DIGITAL PRESENCE
+         </div>
       </div>
 
       {/* DESKTOP (lg+) - preserve original absolute composition */}
@@ -208,17 +208,17 @@ export default function ProcessAndTypography() {
         >
           <div className="animate-marquee whitespace-nowrap">
             <span className="inline-block px-6 font-display font-black uppercase leading-[0.8] tracking-[0.05em] text-[#ecebea] text-[clamp(10rem,35vw,26rem)] transition-colors duration-1000 group-hover:text-[#e4e3e1]">
-              shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
+              YOUR BRAND  •  YOUR WEBSITE  •
             </span>
             <span className="inline-block px-6 font-display font-black uppercase leading-[0.8] tracking-[0.05em] text-[#ecebea] text-[clamp(10rem,35vw,26rem)] transition-colors duration-1000 group-hover:text-[#e4e3e1]">
-              shivanshu singh &nbsp;&bull;&nbsp; shivanshu singh &nbsp;&bull;&nbsp;
+              YOUR BRAND  •  YOUR WEBSITE  •
             </span>
           </div>
         </div>
 
         {/* TYPOGRAPHY META INFO */}
         <div className="absolute bottom-[6%] right-[11%] z-[3] hidden text-right font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[rgba(17,17,17,0.5)] transition-all duration-300 hover:translate-x-[4px] hover:tracking-[0.12em] hover:text-[#111111] lg:block">
-          System Font Stack / UI Mono
+          MODERN WEB DESIGN / DIGITAL PRESENCE
         </div>
       </div>
     </section>

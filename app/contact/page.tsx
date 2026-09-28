@@ -60,11 +60,11 @@ export default function ContactPage() {
           transition={{ duration: 0.5 }}
           className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight text-center mb-4 ${caveat.className}`}
         >
-          Get in touch
+          LET'S BUILD YOUR WEBSITE
         </motion.h1>
 
         <p className="text-center text-sm sm:text-base text-gray-600 mb-8 sm:mb-10 md:mb-12 max-w-xl mx-auto">
-          Tell us about your idea — we&rsquo;ll handle the design, development, and everything in between.
+          Tell us about your business or idea. We'll turn it into a clean, modern website.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 border-t border-[#32483e]/10 pt-8 sm:pt-10">
@@ -74,9 +74,9 @@ export default function ContactPage() {
             viewport={{ once: true }}
           >
             <div className="mb-8">
-              <h3 className="font-semibold mb-2">Send a Message</h3>
+              <h3 className="font-semibold mb-2">START YOUR PROJECT</h3>
               <p className="text-sm text-gray-600">
-                Fill out the form and we&rsquo;ll respond within 24 hours.
+                Fill out the form and tell us what you need. We'll get back to you soon.
               </p>
             </div>
 
@@ -99,7 +99,7 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full border-b border-[#32483e]/80 bg-transparent outline-none py-2 resize-none focus:border-[#32483e]"
-                  placeholder="Tell us a bit about your project…"
+                  placeholder="Tell us about your website requirements…"
                 />
               </div>
 
@@ -122,10 +122,10 @@ export default function ContactPage() {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h1>Direct Contacts</h1>
+            <h1>GET IN TOUCH</h1>
 
-            <InfoBlock title="Call Us" action="(235) 125-115" icon={<FiPhone />} />
-            <InfoBlock title="WhatsApp" action="+91 98765 43210" icon={<FiMessageCircle />} />
+            <InfoBlock title="Call Us" action="9760926681" icon={<FiPhone />} />
+            <InfoBlock title="WhatsApp" action="9760926681" icon={<FiMessageCircle />} />
           </motion.div>
         </div>
       </section>

@@ -64,7 +64,7 @@ export default function Navbar({
               >
                 <Image
                   src="/images/Kaiyologo.png"
-                  alt="Kaiyo Logo"
+                  alt="WEB STUDIO"
                   width={48}
                   height={48}
                   sizes="48px"

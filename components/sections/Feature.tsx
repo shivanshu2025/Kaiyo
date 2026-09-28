@@ -65,7 +65,7 @@ export default function OurStorySection({ dynamicFeatures }: Props) {
               |||| || | |||| || ||| | ||
             </span>
             <span className="mt-1 font-mono text-[7px] uppercase tracking-widest opacity-70 md:text-[10px]">
-              Project Kaiy{"\u014d"} Access
+              PROJECT WEB / ACCESS
             </span>
           </motion.div>
         </div>

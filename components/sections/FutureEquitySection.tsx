@@ -6,17 +6,17 @@ export default function FutureEquitySection() {
 
       {/* Header */}
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:gap-10">
-        <h1 className="max-w-4xl text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black uppercase leading-[1.0] tracking-tighter">
-          Future of Private Equity{" "}
-          <span className="text-[#004643]">by the numbers.</span>
-        </h1>
+<h1 className="max-w-4xl text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black uppercase leading-[1.0] tracking-tighter">
+Your Business, Online{" "}
+            <span className="text-[#004643]">by Design.</span>
+         </h1>
 
-        <div className="flex max-w-xs shrink-0 items-start gap-3">
-          <span className="text-xl sm:text-2xl font-light text-[#004643]">+</span>
-          <p className="text-sm leading-relaxed text-stone-600 sm:text-base">
-            Private equity is rapidly evolving, and understanding the key figures behind this growth is essential.
-          </p>
-        </div>
+         <div className="flex max-w-xs shrink-0 items-start gap-3">
+           <span className="text-xl sm:text-2xl font-light text-[#004643]">+</span>
+           <p className="text-sm leading-relaxed text-stone-600 sm:text-base">
+             A professional website helps your business build a strong online presence and gives your customers a clear way to discover what you offer.
+           </p>
+         </div>
       </div>
 
       {/* Grid */}
@@ -30,13 +30,13 @@ export default function FutureEquitySection() {
             </svg>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-[1.2]">
-            Streamlining Investments with Cutting-Edge Technology
-          </h2>
+<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-[1.2]">
+             Turning Ideas Into Websites
+           </h2>
 
-          <p className="mt-4 sm:mt-6 max-w-md text-sm leading-relaxed text-stone-600 sm:text-base">
-            In the evolving world of private equity, technology is key to speeding up investment processes.
-          </p>
+           <p className="mt-4 sm:mt-6 max-w-md text-sm leading-relaxed text-stone-600 sm:text-base">
+             We turn your business ideas into clean, modern, and responsive websites designed to present your brand clearly online.
+           </p>
         </div>
 
         {/* Right Image */}

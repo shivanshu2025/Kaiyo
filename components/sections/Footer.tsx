@@ -22,21 +22,21 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div>
           <h3 className="mb-3 sm:mb-4 text-xs sm:text-sm font-semibold uppercase tracking-wide">
-            Subscribe for News Letters
+            LET'S BUILD SOMETHING
           </h3>
           <div className="flex w-full max-w-full items-center overflow-hidden rounded-full border border-gray-400 sm:w-[420px] md:w-[500px] lg:w-[560px]">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your Email"
+              placeholder="GET IN TOUCH"
               className="min-w-0 flex-1 bg-transparent px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm outline-none truncate"
             />
             <button
               onClick={handleSubscribe}
               className="shrink-0 rounded-full bg-[#2f4f3f] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#666660] sm:px-6 sm:py-3 sm:text-sm"
             >
-              Subscribe
+START A PROJECT
             </button>
           </div>
           {status === 'success' && <p className="mt-2 text-xs font-semibold text-[#16A34A]">{message}</p>}
