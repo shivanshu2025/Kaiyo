@@ -19,7 +19,7 @@ export default function HeroSection({
     main: "Predict your ",
     highlight: "success",
   },
-  description = "Use our interactive simulator to explore earnings across different partnership tiers.",
+  description = "Use our interactive calculator to calculate your earnings and partner share.",
 }: HeroSectionProps) {
   const fadeIn: Variants = {
     hidden: { opacity: 0, y: 30 },

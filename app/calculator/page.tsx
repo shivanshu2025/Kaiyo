@@ -50,14 +50,14 @@ const defaultConfig: CalculatorData = {
     badgeText: 'Partner Revenue v2.0',
     heading: 'Predict your',
     highlightText: 'success',
-    description: 'Use our interactive simulator to explore earnings across different partnership tiers.',
+    description: '',
   },
   projectValue: {
     minValue: 1,
     maxValue: 2500000,
     defaultValue: 0,
     currency: '₹',
-    capLabel: 'Cap: ₹25L',
+    capLabel: 'No cap • Any amount',
   },
   calculatorLogic: {
     maxEarning: 9999999,
@@ -67,7 +67,7 @@ const defaultConfig: CalculatorData = {
   resultCard: {
     heading: 'Tier Earnings',
     label: 'Your Share',
-    emptyStateMessage: 'Enter amount to see breakdown',
+    emptyStateMessage: 'Enter amount to see 20% / 25% / 30% breakdown',
     currency: '₹',
     resultFormatting: 'en-IN',
   },
@@ -90,9 +90,16 @@ const defaultConfig: CalculatorData = {
     calculationDelay: 600,
   },
   tiers: [
-    { title: 'Referral Partner', percentage: 30, description: 'Connect us with leads. We handle everything else.', icon: 'FiShare2', accentColor: '#32483e', displayOrder: 0, isEnabled: true },
-    { title: 'Closing Expert', percentage: 50, description: 'Negotiate and finalize contracts with hot leads.', icon: 'FiTarget', accentColor: '#32483e', displayOrder: 1, isEnabled: true },
+    { title: 'Partner at 20%', percentage: 20, description: '20% → Project amount ka 20%', icon: 'FiShare2', accentColor: '#32483e', displayOrder: 0, isEnabled: true },
+    { title: 'Partner at 25%', percentage: 25, description: '25% → Project amount ka 25% — balanced starting point', icon: 'FiTarget', accentColor: '#32483e', displayOrder: 1, isEnabled: true },
+    { title: 'Partner at 30%', percentage: 30, description: '30% → Project amount ka 30% — qualified leads + follow-up + client relationship', icon: 'FiAward', accentColor: '#32483e', displayOrder: 2, isEnabled: true },
   ],
+};
+
+const formatINR = (value: number, locale = 'en-IN') => {
+  if (!isFinite(value)) return '₹0';
+  const rounded = Math.round(value * 100) / 100;
+  return `₹${rounded.toLocaleString(locale, { maximumFractionDigits: 2 })}`;
 };
 
 export default function CalculatorPage() {
@@ -134,20 +141,36 @@ export default function CalculatorPage() {
   const heroSection = config.heroSection || defaultConfig.heroSection!;
   const projectValue = config.projectValue || defaultConfig.projectValue!;
 
+  // Instant, dynamically derived project amount — supports any valid positive amount.
+  const parsedAmount = useMemo(() => {
+    const num = parseFloat(amount);
+    if (isNaN(num) || !isFinite(num) || num <= 0) return null;
+    return num;
+  }, [amount]);
+
+  // Instant result for ONLY the selected percentage: Partner = amount × pct, You = amount − Partner.
+  const selectedResult = useMemo(() => {
+    if (parsedAmount === null || !currentRole) return null;
+    const pct = currentRole.percentage;
+    const partnerShare = (parsedAmount * pct) / 100;
+    const yourShare = parsedAmount - partnerShare;
+    return { pct, partnerShare, yourShare, label: currentRole.label };
+  }, [parsedAmount, currentRole]);
+
   const handleCalculate = async () => {
     const numAmount = parseFloat(amount);
-    if (isNaN(numAmount) || numAmount <= 0) return;
+    if (isNaN(numAmount) || !isFinite(numAmount) || numAmount <= 0) return;
 
     setIsCalculating(true);
     setCalculatedEarnings(null);
-    
+
     await new Promise(resolve => setTimeout(resolve, globalSettings.calculationDelay ?? 600));
-    
-    const earnings = (numAmount * currentRole.percentage) / 100;
+
+    const earnings = (numAmount * (currentRole?.percentage ?? 0)) / 100;
     const rounded = Math.round(earnings * Math.pow(10, calcLogic.rounding ?? 0)) / Math.pow(10, calcLogic.rounding ?? 0);
     setCalculatedEarnings(rounded);
     setIsCalculating(false);
-    
+
     if (globalSettings.animationToggle ?? true) {
       controls.start({
         scale: [1, 1.02, 1],
@@ -160,6 +183,12 @@ export default function CalculatorPage() {
     const value = e.target.value.replace(/[^0-9.]/g, '');
     setAmount(value);
     if (calculatedEarnings) setCalculatedEarnings(null);
+    if (globalSettings.animationToggle ?? true) {
+      controls.start({
+        scale: [1, 1.01, 1],
+        transition: { duration: 0.25 }
+      });
+    }
   };
 
   if (isLoading) {
@@ -265,9 +294,9 @@ export default function CalculatorPage() {
 
               <button
                 onClick={handleCalculate}
-                disabled={!amount || isCalculating}
+                disabled={parsedAmount === null || isCalculating}
                 className={`w-full py-4 sm:py-6 rounded-xl sm:rounded-[1.5rem] font-black text-base sm:text-xl tracking-wide transition-all flex items-center justify-center gap-3 ${
-                  !amount ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-[#32483e] text-white hover:opacity-90 shadow-lg shadow-[#32483e]/10'
+                  parsedAmount === null ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-[#32483e] text-white hover:opacity-90 shadow-lg shadow-[#32483e]/10'
                 }`}
               >
                 {isCalculating ? globalSettings.buttonLabels?.processing || "Processing..." : <>{globalSettings.buttonLabels?.calculate || "Calculate My Cut"} <FiArrowRight /></>}
@@ -292,28 +321,16 @@ export default function CalculatorPage() {
 
                 <div className="min-h-[120px] sm:min-h-[140px] flex flex-col justify-center">
                   <AnimatePresence mode="wait">
-                    {calculatedEarnings !== null ? (
+                    {selectedResult !== null ? (
                       <motion.div key="result" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-                        <div className="text-4xl sm:text-5xl md:text-6xl font-black text-[#32483e] tracking-tighter break-words">
-                          {resultCard.currency || globalSettings.currencySymbol}
-                          {calculatedEarnings.toLocaleString(resultCard.resultFormatting || 'en-IN')}
+                        <div className="text-lg sm:text-xl font-bold text-[#32483e]">
+                          {selectedResult.label}
                         </div>
-                        <div className="flex items-center gap-2 text-slate-400 text-sm">
-                          <FiInfo className="text-emerald-500 flex-shrink-0" />
-                          Taxes calculated at payout.
+                        <div className="text-2xl sm:text-3xl font-bold text-[#32483e] break-words">
+                          Partner: {formatINR(selectedResult.partnerShare, resultCard.resultFormatting || 'en-IN')}
                         </div>
-                        <div className="pt-4 sm:pt-6 space-y-3">
-                          <div className="flex justify-between text-xs font-bold text-slate-400 uppercase">
-                            <span>{resultCard.label}</span>
-                            <span>{currentRole.percentage}%</span>
-                          </div>
-                          <div className="h-2 w-full bg-white/50 rounded-full overflow-hidden">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: `${currentRole.percentage}%` }}
-                              className="h-full bg-emerald-500"
-                            />
-                          </div>
+                        <div className="text-2xl sm:text-3xl font-bold text-[#32483e] break-words">
+                          You: {formatINR(selectedResult.yourShare, resultCard.resultFormatting || 'en-IN')}
                         </div>
                       </motion.div>
                     ) : (

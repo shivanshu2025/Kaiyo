@@ -37,9 +37,9 @@ const defaultData: PartnerProgramData = {
   heroDescription: 'Join our partner network and earn up to 65% commission on every project. Simple, transparent, and profitable.',
   heroImage: 'https://engineersealstamps.com/cdn/shop/products/in-use-great-job-stamp-4773-photo-1_a600c697-e7ec-4ee7-89e3-f7288a7894e4.jpg?v=1683890415&width=1500',
   tiers: [
-    { name: 'Referral Partner', percentage: '30%', description: 'Simply refer clients to us', features: ['Share client leads', 'No technical work required', 'Passive income stream', 'Unlimited referrals'], color: 'bg-blue-500' },
-    { name: 'Closing Expert', percentage: '50%', description: 'Help negotiate and close deals', features: ['Manage client communication', 'Negotiate contracts', 'Higher earning potential', 'Direct client interaction'], color: 'bg-purple-500' },
-    { name: 'Full Handling', percentage: '65%', description: 'End-to-end project management', features: ['Complete project ownership', 'Maximum earnings', 'Priority project allocation', 'Dedicated support'], color: 'bg-emerald-500' },
+    { name: 'Referral Partner', percentage: '20%', description: 'Simply refer clients to us', features: ['Share client leads', 'No technical work required', 'Passive income stream', 'Unlimited referrals'], color: 'bg-blue-500' },
+    { name: 'Closing Expert', percentage: '25%', description: 'Help negotiate and close deals', features: ['Manage client communication', 'Negotiate contracts', 'Higher earning potential', 'Direct client interaction'], color: 'bg-purple-500' },
+    { name: 'Full Handling', percentage: '30%', description: 'End-to-end project management', features: ['Complete project ownership', 'Maximum earnings', 'Priority project allocation', 'Dedicated support'], color: 'bg-emerald-500' },
   ],
   workflowSteps: [
     { number: '01', title: 'Connect', description: 'Share client leads or help close deals' },
