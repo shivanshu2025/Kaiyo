@@ -31,11 +31,14 @@ export default function Footer() {
   const [message, setMessage] = useState('');
 
   const handleStartProject = () => {
-    // Aapka WhatsApp number
     const whatsappNumber = '919760926681';
+    const trimmedEmail = email.trim();
 
-    // Email empty hai
-    if (!email.trim()) {
+    // Gmail validation
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+    // Email empty
+    if (!trimmedEmail) {
       const whatsappUrl =
         `https://wa.me/${whatsappNumber}?text=` +
         encodeURIComponent(
@@ -43,12 +46,25 @@ export default function Footer() {
         );
 
       window.open(whatsappUrl, '_blank');
+
+      // Reset input + status
+      setEmail('');
+      setStatus('idle');
+      setMessage('');
+
       return;
     }
 
-    // Email ke saath WhatsApp message
+    // Only Gmail allowed
+    if (!gmailRegex.test(trimmedEmail)) {
+      setStatus('error');
+      setMessage('Please enter a valid Gmail address.');
+      return;
+    }
+
+    // WhatsApp message with Gmail
     const whatsappMessage =
-      `Hello, I want to start a project.\n\nMy email: ${email.trim()}`;
+      `Hello, I want to start a project.\n\nMy email: ${trimmedEmail}`;
 
     const whatsappUrl =
       `https://wa.me/${whatsappNumber}?text=` +
@@ -56,8 +72,10 @@ export default function Footer() {
 
     window.open(whatsappUrl, '_blank');
 
-    setStatus('success');
-    setMessage('Opening WhatsApp...');
+    // Reset input + status after click
+    setEmail('');
+    setStatus('idle');
+    setMessage('');
   };
 
   return (
@@ -75,11 +93,31 @@ export default function Footer() {
               type="email"
               value={email}
               onChange={(e) => {
-                setEmail(e.target.value);
+                const value = e.target.value;
+
+                // Only allow characters useful for Gmail
+                const gmailCharactersOnly = /^[a-zA-Z0-9._%+-@]*$/;
+
+                if (!gmailCharactersOnly.test(value)) {
+                  return;
+                }
+
+                // Only one @ allowed
+                if ((value.match(/@/g) || []).length > 1) {
+                  return;
+                }
+
+                setEmail(value);
                 setStatus('idle');
                 setMessage('');
               }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleStartProject();
+                }
+              }}
               placeholder="GET IN TOUCH"
+              autoComplete="email"
               className="min-w-0 flex-1 bg-transparent px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm outline-none truncate"
             />
 
@@ -87,17 +125,11 @@ export default function Footer() {
             <button
               type="button"
               onClick={handleStartProject}
-              className="shrink-0 rounded-full bg-[#2f4f3f] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#666660] sm:px-6 sm:py-3 sm:text-sm"
+              className="shrink-0 rounded-full bg-[#2f4f3f] px-4 py-2.5 text-xs font-semibold text-white transition-all duration-300 ease-in-out hover:bg-[#666660] hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 sm:text-sm"
             >
               START A PROJECT
             </button>
           </div>
-
-          {status === 'success' && (
-            <p className="mt-2 text-xs font-semibold text-[#16A34A]">
-              {message}
-            </p>
-          )}
 
           {status === 'error' && (
             <p className="mt-2 text-xs font-semibold text-[#DC2626]">
@@ -124,9 +156,22 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="flex h-9 w-9 sm:h-10 sm:w-10 cursor-pointer items-center justify-center rounded-full border border-gray-400 transition hover:bg-[#2f4f3f] hover:text-white"
+              className="
+                flex h-9 w-9 sm:h-10 sm:w-10
+                cursor-pointer items-center justify-center
+                rounded-full border border-gray-400
+                transition-all duration-300 ease-in-out
+                hover:bg-[#2f4f3f]
+                hover:text-white
+                hover:border-[#2f4f3f]
+                hover:-translate-y-1
+                active:scale-95
+              "
             >
-              <Icon size={13} />
+              <Icon
+                size={13}
+                className="transition-transform duration-300 ease-in-out"
+              />
             </a>
           ))}
 
