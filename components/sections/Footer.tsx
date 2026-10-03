@@ -29,15 +29,14 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
   const handleStartProject = () => {
     const whatsappNumber = '919760926681';
     const trimmedEmail = email.trim();
 
-    // Gmail validation
     const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
-    // Email empty
     if (!trimmedEmail) {
       const whatsappUrl =
         `https://wa.me/${whatsappNumber}?text=` +
@@ -47,7 +46,6 @@ export default function Footer() {
 
       window.open(whatsappUrl, '_blank');
 
-      // Reset input + status
       setEmail('');
       setStatus('idle');
       setMessage('');
@@ -55,14 +53,12 @@ export default function Footer() {
       return;
     }
 
-    // Only Gmail allowed
     if (!gmailRegex.test(trimmedEmail)) {
       setStatus('error');
       setMessage('Please enter a valid Gmail address.');
       return;
     }
 
-    // WhatsApp message with Gmail
     const whatsappMessage =
       `Hello, I want to start a project.\n\nMy email: ${trimmedEmail}`;
 
@@ -72,7 +68,6 @@ export default function Footer() {
 
     window.open(whatsappUrl, '_blank');
 
-    // Reset input + status after click
     setEmail('');
     setStatus('idle');
     setMessage('');
@@ -88,21 +83,19 @@ export default function Footer() {
 
           <div className="flex w-full max-w-full items-center overflow-hidden rounded-full border border-gray-400 sm:w-[420px] md:w-[500px] lg:w-[560px]">
 
-            {/* GET IN TOUCH INPUT */}
             <input
               type="email"
               value={email}
               onChange={(e) => {
                 const value = e.target.value;
 
-                // Only allow characters useful for Gmail
-                const gmailCharactersOnly = /^[a-zA-Z0-9._%+-@]*$/;
+                const gmailCharactersOnly =
+                  /^[a-zA-Z0-9._%+-@]*$/;
 
                 if (!gmailCharactersOnly.test(value)) {
                   return;
                 }
 
-                // Only one @ allowed
                 if ((value.match(/@/g) || []).length > 1) {
                   return;
                 }
@@ -121,11 +114,22 @@ export default function Footer() {
               className="min-w-0 flex-1 bg-transparent px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm outline-none truncate"
             />
 
-            {/* START A PROJECT */}
             <button
               type="button"
               onClick={handleStartProject}
-              className="shrink-0 rounded-full bg-[#2f4f3f] px-4 py-2.5 text-xs font-semibold text-white transition-all duration-300 ease-in-out hover:bg-[#666660] hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 sm:text-sm"
+              className="
+                shrink-0
+                rounded-full
+                bg-[#2f4f3f]
+                px-4 py-2.5
+                text-xs font-semibold
+                text-white
+                transition-all duration-300 ease-in-out
+                hover:bg-[#666660]
+                hover:scale-[1.02]
+                active:scale-[0.98]
+                sm:px-6 sm:py-3 sm:text-sm
+              "
             >
               START A PROJECT
             </button>
@@ -149,31 +153,75 @@ export default function Footer() {
 
         <div className="flex gap-3 sm:gap-4">
 
-          {socialLinks.map(({ icon: Icon, url, label }) => (
-            <a
-              key={label}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="
-                flex h-9 w-9 sm:h-10 sm:w-10
-                cursor-pointer items-center justify-center
-                rounded-full border border-gray-400
-                transition-all duration-300 ease-in-out
-                hover:bg-[#2f4f3f]
-                hover:text-white
-                hover:border-[#2f4f3f]
-                hover:-translate-y-1
-                active:scale-95
-              "
-            >
-              <Icon
-                size={13}
-                className="transition-transform duration-300 ease-in-out"
-              />
-            </a>
-          ))}
+          {socialLinks.map(({ icon: Icon, url, label }) => {
+            const isHovered = hoveredIcon === label;
+
+            return (
+              <button
+                key={label}
+                type="button"
+                aria-label={label}
+                title={label}
+                onMouseEnter={() => setHoveredIcon(label)}
+                onMouseLeave={() => setHoveredIcon(null)}
+                onClick={() => {
+                  window.open(url, '_blank', 'noopener,noreferrer');
+                }}
+                className="
+                  flex
+                  h-9 w-9
+                  sm:h-10 sm:w-10
+                  shrink-0
+                  cursor-pointer
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  outline-none
+                  select-none
+                  transition-all
+                  duration-300
+                  ease-in-out
+                  active:scale-95
+                  focus-visible:ring-2
+                  focus-visible:ring-[#2f4f3f]
+                  focus-visible:ring-offset-2
+                "
+                style={{
+                  backgroundColor: isHovered
+                    ? '#2f4f3f'
+                    : 'transparent',
+
+                  borderColor: isHovered
+                    ? '#2f4f3f'
+                    : '#9ca3af',
+
+                  color: isHovered
+                    ? '#ffffff'
+                    : '#2d2d2d',
+
+                  transform: isHovered
+                    ? 'translateY(-4px) scale(1.08)'
+                    : 'translateY(0) scale(1)',
+
+                  transition:
+                    'all 300ms ease-in-out',
+                }}
+              >
+                <Icon
+                  size={13}
+                  style={{
+                    pointerEvents: 'none',
+                    transform: isHovered
+                      ? 'scale(1.15)'
+                      : 'scale(1)',
+                    transition:
+                      'transform 300ms ease-in-out',
+                  }}
+                />
+              </button>
+            );
+          })}
 
         </div>
       </div>
