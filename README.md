@@ -33,20 +33,7 @@ kaiyo-main/
 │   └── config/             # Frontend env config
 ├── lib/                    # Utility functions, validations
 ├── styles/                 # Global CSS (Tailwind)
-├── backend/
-│   └── src/
-│       ├── controllers/    # 16 route controllers
-│       ├── models/         # 18 Mongoose models
-│       ├── routes/         # 16 route definitions
-│       ├── middleware/     # Auth, caching, error handling, uploads
-│       ├── config/         # Env, DB, Cloudinary config
-│       ├── validators/     # Express-validator chains
-│       ├── utils/          # Helpers (notifications, URL normalization)
-│       ├── seeds/          # Database seed scripts
-│       └── types/          # TypeScript interfaces
-├── .github/workflows/      # CI pipelines (GitHub Actions)
-└── netlify.toml            # Netlify deployment config
-```
+
 
 ---
 
