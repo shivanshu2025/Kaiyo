@@ -11,14 +11,19 @@ interface BannerStripProps {
     bg: string;
     color: string;
     hoverBg?: string;
+    href?: string;
   };
   secondaryBtn: {
     text: string;
     color: string;
     hoverBg?: string;
     hoverColor?: string;
+    href?: string;
   };
 }
+
+const DEFAULT_PRIMARY_HREF = '/contact';
+const DEFAULT_SECONDARY_HREF = '/how-it-works';
 
 export default function BannerStrip({
   bg,
@@ -44,7 +49,8 @@ export default function BannerStrip({
       </div>
 
       <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-        <button
+        <a
+          href={primaryBtn.href || DEFAULT_PRIMARY_HREF}
           className="rounded-full px-4 py-2 text-sm font-semibold transition-colors sm:px-5 sm:py-2.5"
           style={{
             backgroundColor: primaryBtn.bg,
@@ -52,17 +58,18 @@ export default function BannerStrip({
           }}
           onMouseEnter={(e) => {
             if (primaryBtn.hoverBg) {
-              (e.target as HTMLButtonElement).style.backgroundColor = primaryBtn.hoverBg!;
+              (e.target as HTMLAnchorElement).style.backgroundColor = primaryBtn.hoverBg!;
             }
           }}
           onMouseLeave={(e) => {
-            (e.target as HTMLButtonElement).style.backgroundColor = primaryBtn.bg;
+            (e.target as HTMLAnchorElement).style.backgroundColor = primaryBtn.bg;
           }}
         >
           {primaryBtn.text}
-        </button>
+        </a>
 
-        <button
+        <a
+          href={secondaryBtn.href || DEFAULT_SECONDARY_HREF}
           className="rounded-full border-2 px-4 py-2 text-sm font-semibold transition-colors sm:px-5 sm:py-2.5"
           style={{
             color: secondaryBtn.color,
@@ -71,19 +78,19 @@ export default function BannerStrip({
           }}
           onMouseEnter={(e) => {
             if (secondaryBtn.hoverBg) {
-              (e.target as HTMLButtonElement).style.backgroundColor = secondaryBtn.hoverBg!;
+              (e.target as HTMLAnchorElement).style.backgroundColor = secondaryBtn.hoverBg!;
               if (secondaryBtn.hoverColor) {
-                (e.target as HTMLButtonElement).style.color = secondaryBtn.hoverColor!;
+                (e.target as HTMLAnchorElement).style.color = secondaryBtn.hoverColor!;
               }
             }
           }}
           onMouseLeave={(e) => {
-            (e.target as HTMLButtonElement).style.backgroundColor = "transparent";
-            (e.target as HTMLButtonElement).style.color = secondaryBtn.color;
+            (e.target as HTMLAnchorElement).style.backgroundColor = "transparent";
+            (e.target as HTMLAnchorElement).style.color = secondaryBtn.color;
           }}
         >
           {secondaryBtn.text}
-        </button>
+        </a>
       </div>
     </div>
   );

@@ -3,11 +3,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Caveat } from 'next/font/google';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import Link from 'next/link';
 import { 
   FiShare2, FiDollarSign, 
   FiArrowRight, FiMessageCircle, FiZap, 
   FiTarget, FiAward, FiInfo 
 } from 'react-icons/fi';
+import { getWhatsAppUrl } from '@/lib/contact-info';
 
 type TierData = { title: string; percentage: number; description: string; icon: string; accentColor: string; displayOrder: number; isEnabled: boolean };
 type CalculatorData = {
@@ -76,7 +78,7 @@ const defaultConfig: CalculatorData = {
     description: 'Join our elite network of partners and get access to high-ticket projects.',
     primaryButton: 'WhatsApp',
     secondaryButton: 'Join Now',
-    whatsappLink: '#',
+    whatsappLink: getWhatsAppUrl('Hello, I want to start a project.'),
     joinButtonLink: '/contact',
     backgroundImage: '',
   },
@@ -351,12 +353,12 @@ export default function CalculatorPage() {
                   {ctaCard.description}
                 </p>
                 <div className="grid grid-cols-2 gap-3 max-sm:grid-cols-1">
-                  <a href={ctaCard.whatsappLink || '#'} className="flex items-center justify-center gap-2 bg-[#E9E9E7] text-[#32483e] py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm hover:bg-white transition-colors">
+                  <a href={ctaCard.whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-[#E9E9E7] text-[#32483e] py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm hover:bg-white transition-colors">
                     <FiMessageCircle /> {ctaCard.primaryButton}
                   </a>
-                  <a href={ctaCard.joinButtonLink || '/contact'} className="flex items-center justify-center gap-2 bg-emerald-500 text-white py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm hover:bg-emerald-400 transition-colors">
+                  <Link href={ctaCard.joinButtonLink} className="flex items-center justify-center gap-2 bg-emerald-500 text-white py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm hover:bg-emerald-400 transition-colors">
                     {ctaCard.secondaryButton} <FiArrowRight />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <FiAward className="absolute -right-8 -bottom-8 text-white/5 rotate-12" size={140} />

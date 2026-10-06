@@ -15,13 +15,15 @@ export const webAppsData = {
     },
     description: "Scalable, fast, and intelligent web applications powered by modern architecture and AI integration.",
     primaryBtn: { 
-      text: "Start Your Project →", 
+      text: "Order Now", 
       bg: "#2563eb", 
       color: "#ffffff", 
-      shadow: "rgba(37, 99, 235, 0.5)" 
+      shadow: "rgba(37, 99, 235, 0.5)",
+      href: "/contact" 
     },
     secondaryBtn: { 
-      text: "See Our Work" 
+      text: "Join & Earn",
+      href: "/how-it-works"
     },
     stats: [
       { value: "50+", label: "Apps Deployed", color: "#60a5fa" },
@@ -56,13 +58,15 @@ export const webAppsData = {
     text: "Fast, scalable and AI-powered web solutions",
     textColor: "#000000",
     primaryBtn: { 
-      text: "Start Project", 
+      text: "Order Now", 
       bg: "#2563eb", 
-      color: "white"
+      color: "white",
+      href: "/contact"
     },
     secondaryBtn: { 
-      text: "View Work", 
-      color: "#2563eb"
+      text: "Join & Earn", 
+      color: "#2563eb",
+      href: "/how-it-works"
     }
   },
   sections: [

@@ -139,7 +139,7 @@ export default function HeroSection({
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex w-fit shrink-0 items-center justify-center gap-2 rounded-full bg-[#111827] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#1f2937] sm:px-7 sm:py-4 sm:text-base"
               >
-                Let&apos;s Talk
+                Order Now
                 <span>→</span>
               </motion.a>
 

@@ -43,6 +43,15 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // Preselect the earning tier the visitor clicked on the partner page.
+  // Read from the URL in an effect (rather than useSearchParams) so this static
+  // page stays prerenderable without an extra Suspense boundary.
+  React.useEffect(() => {
+    const tier = new URLSearchParams(window.location.search).get('tier');
+    if (!tier) return;
+    setFormData((prev) => (prev.interest ? prev : { ...prev, interest: tier }));
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');

@@ -15,13 +15,15 @@ export const viralThumbnailsData = {
     },
     description: "Eye-catching YouTube thumbnails that boost CTR, increase views, and make your content impossible to ignore.",
     primaryBtn: { 
-      text: "Order Viral Thumbnail →", 
+      text: "Order Now", 
       bg: "#ff0000", 
       color: "#ffffff", 
-      shadow: "rgba(255, 0, 0, 0.4)" 
+      shadow: "rgba(255, 0, 0, 0.4)",
+      href: "/contact" 
     },
     secondaryBtn: { 
-      text: "View Samples" 
+      text: "Join & Earn",
+      href: "/how-it-works"
     },
     stats: [],
     backgroundPattern: {
@@ -54,11 +56,13 @@ export const viralThumbnailsData = {
     primaryBtn: { 
       text: "Order Now", 
       bg: "#ff0000", 
-      color: "white"
+      color: "white",
+      href: "/contact"
     },
     secondaryBtn: { 
-      text: "View Samples", 
-      color: "#ff0000"
+      text: "Join & Earn", 
+      color: "#ff0000",
+      href: "/how-it-works"
     }
   },
   sections: [

@@ -6,6 +6,7 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from 'react-icons/fa';
+import { getWhatsAppUrl } from '@/lib/contact-info';
 
 const socialLinks = [
   {
@@ -32,17 +33,14 @@ export default function Footer() {
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
   const handleStartProject = () => {
-    const whatsappNumber = '919760926681';
     const trimmedEmail = email.trim();
 
     const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
     if (!trimmedEmail) {
-      const whatsappUrl =
-        `https://wa.me/${whatsappNumber}?text=` +
-        encodeURIComponent(
-          'Hello, I want to start a project.'
-        );
+      const whatsappUrl = getWhatsAppUrl(
+        'Hello, I want to start a project.'
+      );
 
       window.open(whatsappUrl, '_blank');
 
@@ -62,9 +60,7 @@ export default function Footer() {
     const whatsappMessage =
       `Hello, I want to start a project.\n\nMy email: ${trimmedEmail}`;
 
-    const whatsappUrl =
-      `https://wa.me/${whatsappNumber}?text=` +
-      encodeURIComponent(whatsappMessage);
+    const whatsappUrl = getWhatsAppUrl(whatsappMessage);
 
     window.open(whatsappUrl, '_blank');
 

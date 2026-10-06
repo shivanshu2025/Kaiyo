@@ -15,13 +15,15 @@ export const socialBannersData = {
     },
     description: "Scroll-stopping social media creatives designed to boost engagement, clicks, and conversions across all platforms.",
     primaryBtn: { 
-      text: "Get Your Banner →", 
+      text: "Order Now", 
       bg: "#ffffff", 
       color: "#1877f2", 
-      shadow: "rgba(0, 0, 0, 0.2)" 
+      shadow: "rgba(0, 0, 0, 0.2)",
+      href: "/contact" 
     },
     secondaryBtn: { 
-      text: "View Portfolio" 
+      text: "Join & Earn",
+      href: "/how-it-works"
     },
     stats: [
       { value: "300%", label: "Avg Engagement Boost", color: "#e6f0ff" },
@@ -56,13 +58,15 @@ export const socialBannersData = {
     text: "Scroll-stopping social media creatives",
     textColor: "#000000",
     primaryBtn: { 
-      text: "Get Design", 
+      text: "Order Now", 
       bg: "#1877f2", 
-      color: "white"
+      color: "white",
+      href: "/contact"
     },
     secondaryBtn: { 
-      text: "View Samples", 
-      color: "#1877f2"
+      text: "Join & Earn", 
+      color: "#1877f2",
+      href: "/how-it-works"
     }
   },
   sections: [

@@ -15,14 +15,16 @@ export const digitalInvitesData = {
     },
     description: "Beautiful wedding invitation cards that blend tradition with modern elegance for your special day.",
     primaryBtn: { 
-      text: "Design Your Invite →", 
+      text: "Order Now", 
       bg: "#c2185b", 
       color: "#ffffff", 
-      shadow: "rgba(194, 24, 91, 0.4)" 
+      shadow: "rgba(194, 24, 91, 0.4)",
+      href: "/contact" 
     },
     secondaryBtn: { 
-      text: "View Collections",
-      bg: "rgba(255, 255, 255, 0.8)"
+      text: "Join & Earn",
+      bg: "rgba(255, 255, 255, 0.8)",
+      href: "/how-it-works"
     },
     stats: [],
     backgroundPattern: {
@@ -51,13 +53,15 @@ export const digitalInvitesData = {
     text: "Premium digital shaadi invitation cards",
     textColor: "#000000",
     primaryBtn: { 
-      text: "Order Invite", 
+      text: "Order Now", 
       bg: "#c2185b", 
-      color: "white"
+      color: "white",
+      href: "/contact"
     },
     secondaryBtn: { 
-      text: "View Designs", 
-      color: "#c2185b"
+      text: "Join & Earn", 
+      color: "#c2185b",
+      href: "/how-it-works"
     }
   },
   sections: [

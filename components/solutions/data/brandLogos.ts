@@ -15,13 +15,15 @@ export const brandLogosData = {
     },
     description: "Premium logo design, branding & creative visuals crafted for startups and modern businesses.",
     primaryBtn: { 
-      text: "Start Your Brand →", 
+      text: "Order Now", 
       bg: "#a5cdbe", 
       color: "#32483e", 
-      shadow: "rgba(165, 205, 190, 0.4)" 
+      shadow: "rgba(165, 205, 190, 0.4)",
+      href: "/contact" 
     },
     secondaryBtn: { 
-      text: "View Portfolio" 
+      text: "Join & Earn",
+      href: "/how-it-works" 
     },
     stats: [
       { value: "500+", label: "Logos Created", color: "#a5cdbe" },
@@ -56,13 +58,15 @@ export const brandLogosData = {
       text: "Order Now", 
       bg: "#00754a", 
       color: "white",
-      hoverBg: "#005a38"
+      hoverBg: "#005a38",
+      href: "/contact"
     },
     secondaryBtn: { 
-      text: "View Portfolio", 
+      text: "Join & Earn", 
       color: "#00754a",
       hoverBg: "#00754a",
-      hoverColor: "white"
+      hoverColor: "white",
+      href: "/how-it-works"
     }
   },
   sections: [

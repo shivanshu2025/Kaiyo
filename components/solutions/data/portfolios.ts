@@ -15,14 +15,16 @@ export const portfoliosData = {
     },
     description: "Clean, modern portfolio websites that impress clients and highlight your skills, projects, and experience.",
     primaryBtn: { 
-      text: "Create Portfolio →", 
+      text: "Order Now", 
       bg: "#10b981", 
       color: "#ffffff", 
-      shadow: "rgba(16, 185, 129, 0.3)" 
+      shadow: "rgba(16, 185, 129, 0.3)",
+      href: "/contact" 
     },
     secondaryBtn: { 
-      text: "View Examples",
-      bg: "#ffffff"
+      text: "Join & Earn",
+      bg: "#ffffff",
+      href: "/how-it-works"
     },
     stats: [
       { value: "300+", label: "Portfolios Built", color: "#10b981" },
@@ -55,13 +57,15 @@ export const portfoliosData = {
     text: "Impress clients with a powerful portfolio",
     textColor: "#000000",
     primaryBtn: { 
-      text: "Create Portfolio", 
+      text: "Order Now", 
       bg: "#10b981", 
-      color: "white"
+      color: "white",
+      href: "/contact"
     },
     secondaryBtn: { 
-      text: "View Templates", 
-      color: "#10b981"
+      text: "Join & Earn", 
+      color: "#10b981",
+      href: "/how-it-works"
     }
   },
   sections: [

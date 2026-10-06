@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { Caveat } from 'next/font/google';
 import { AnimatePresence, motion } from 'framer-motion';
+import { getWhatsAppUrl } from '@/lib/contact-info';
 import {
   FiArrowRight,
   FiCheckCircle,
@@ -75,12 +77,14 @@ const defaultData: PartnerProgramData = {
   },
   ctaTitle: 'Ready to Start Earning?',
   ctaDescription: 'Join hundreds of partners who are already earning with us. Start your journey today.',
-  ctaWhatsApp: 'https://wa.me/919876543210',
+  ctaWhatsApp: getWhatsAppUrl('Hello, I want to start a project.'),
   ctaPrimaryText: 'Contact on WhatsApp',
   ctaSecondaryText: 'Get Started Now',
-  ctaSecondaryLink: '/partner-signup',
+  ctaSecondaryLink: '/contact',
   ctaBackgroundImage: '',
 };
+
+const MotionLink = motion(Link);
 
 const iconMap: Record<string, React.ReactNode> = {
   FiDollarSign: <FiDollarSign size={24} />,
@@ -153,7 +157,12 @@ export default function HowItWorksPage() {
                     </li>
                   ))}
                 </ul>
-                <a href="/partner-signup" className="block w-full text-center bg-[#32483e]/10 text-[#32483e] py-2.5 sm:py-3 rounded-xl font-semibold hover:bg-[#32483e] hover:text-white transition-colors text-sm">Get Started</a>
+                <a
+                  href={`/contact?tier=${encodeURIComponent(`${tier.name} — ${tier.percentage} commission`)}`}
+                  className="block w-full text-center bg-[#32483e]/10 text-[#32483e] py-2.5 sm:py-3 rounded-xl font-semibold hover:bg-[#32483e] hover:text-white transition-colors text-sm"
+                >
+                  Get Started
+                </a>
               </motion.div>
             ))}
           </div>
@@ -302,9 +311,9 @@ export default function HowItWorksPage() {
                 <motion.a href={data.ctaWhatsApp || 'https://wa.me/919876543210'} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-flex items-center justify-center gap-2 bg-[#E9E9E7] text-[#32483e] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:bg-gray-100 transition-colors text-sm sm:text-base">
                   <FiMessageCircle size={18} /> {data.ctaPrimaryText || 'Contact on WhatsApp'}
                 </motion.a>
-                <motion.a href={data.ctaSecondaryLink || '/partner-signup'} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:bg-white/10 transition-colors text-sm sm:text-base">
+                <MotionLink href={data.ctaSecondaryLink || '/contact'} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:bg-white/10 transition-colors text-sm sm:text-base">
                   {data.ctaSecondaryText || 'Get Started Now'} <FiArrowRight size={16} />
-                </motion.a>
+                </MotionLink>
               </div>
             </div>
             <div className="absolute top-0 right-0 w-40 sm:w-64 h-40 sm:h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />

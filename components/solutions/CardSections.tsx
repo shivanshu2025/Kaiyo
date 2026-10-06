@@ -11,7 +11,7 @@ export default function CardSections({
   bgColor = "#F0F0F0"
 }: CardSectionsProps) {
   return (
-    <div className="px-4 py-8 sm:px-6 sm:py-10 md:px-10 lg:px-24" style={{ background: bgColor }}>
+    <div id="work" className="scroll-mt-20 px-4 py-8 sm:px-6 sm:py-10 md:px-10 lg:px-24" style={{ background: bgColor }}>
       {sections.map((section, sectionIdx) => (
         <div key={sectionIdx} className="mx-auto mb-6 max-w-[1600px]">
           <h3 className="text-xs sm:text-sm font-bold tracking-wider mb-4 sm:mb-5 text-[#1e1e1e]">

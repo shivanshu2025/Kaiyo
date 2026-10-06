@@ -15,14 +15,16 @@ export const landingPagesData = {
     },
     description: "Data-driven landing page designs optimized for conversions, lead generation, and business growth.",
     primaryBtn: { 
-      text: "Start Converting →", 
+      text: "Order Now", 
       bg: "#f97316", 
       color: "#ffffff", 
-      shadow: "rgba(249, 115, 22, 0.4)" 
+      shadow: "rgba(249, 115, 22, 0.4)",
+      href: "/contact" 
     },
     secondaryBtn: { 
-      text: "See Templates",
-      bg: "rgba(255, 255, 255, 0.8)"
+      text: "Join & Earn",
+      bg: "rgba(255, 255, 255, 0.8)",
+      href: "/how-it-works"
     },
     stats: [
       { value: "250%", label: "Avg Conversion Lift", color: "#ea580c" },
@@ -55,13 +57,15 @@ export const landingPagesData = {
     text: "High-performing landing page designs",
     textColor: "#000000",
     primaryBtn: { 
-      text: "Get Started", 
+      text: "Order Now", 
       bg: "#f97316", 
-      color: "white"
+      color: "white",
+      href: "/contact"
     },
     secondaryBtn: { 
-      text: "View Templates", 
-      color: "#f97316"
+      text: "Join & Earn", 
+      color: "#f97316",
+      href: "/how-it-works"
     }
   },
   sections: [
