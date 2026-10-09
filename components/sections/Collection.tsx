@@ -50,9 +50,14 @@ type CollectionData = {
 
 interface Props {
   dynamicCollections?: CollectionData[];
+  dynamicContent?: {
+    heading?: string;
+    description?: string;
+    items?: CollectionData[];
+  };
 }
 
-export default function PortfolioPage({ dynamicCollections }: Props) {
+export default function PortfolioPage({ dynamicCollections, dynamicContent }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(1);
   const collections = dynamicCollections && dynamicCollections.length > 0 ? dynamicCollections : [];
 
