@@ -5,32 +5,29 @@ import {
   FaGithub,
   FaInstagram,
   FaLinkedinIn,
+  FaLink,
 } from 'react-icons/fa';
 import { getWhatsAppUrl } from '@/lib/contact-info';
+import { useSiteSettings } from '@/lib/use-cms';
 
-const socialLinks = [
-  {
-    icon: FaLinkedinIn,
-    url: 'https://www.linkedin.com/in/jatin-singh-1033aa3b7/',
-    label: 'LinkedIn',
-  },
-  {
-    icon: FaGithub,
-    url: 'https://github.com/shivanshu2025',
-    label: 'GitHub',
-  },
-  {
-    icon: FaInstagram,
-    url: 'https://www.instagram.com/__codeno.in/',
-    label: 'Instagram',
-  },
-];
+const socialIconMap: Record<string, typeof FaLinkedinIn> = {
+  linkedin: FaLinkedinIn,
+  github: FaGithub,
+  instagram: FaInstagram,
+};
 
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
+  const { value: siteSettings } = useSiteSettings();
+
+  const socialLinks = (siteSettings?.socialLinks ?? []).map((link) => ({
+    icon: socialIconMap[link.label.trim().toLowerCase()] ?? FaLink,
+    url: link.url,
+    label: link.label,
+  }));
 
   const handleStartProject = () => {
     const trimmedEmail = email.trim();
@@ -39,7 +36,8 @@ export default function Footer() {
 
     if (!trimmedEmail) {
       const whatsappUrl = getWhatsAppUrl(
-        'Hello, I want to start a project.'
+        'Hello, I want to start a project.',
+        siteSettings?.whatsappNumber
       );
 
       window.open(whatsappUrl, '_blank');
@@ -60,7 +58,7 @@ export default function Footer() {
     const whatsappMessage =
       `Hello, I want to start a project.\n\nMy email: ${trimmedEmail}`;
 
-    const whatsappUrl = getWhatsAppUrl(whatsappMessage);
+    const whatsappUrl = getWhatsAppUrl(whatsappMessage, siteSettings?.whatsappNumber);
 
     window.open(whatsappUrl, '_blank');
 
@@ -74,7 +72,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div>
           <h3 className="mb-3 sm:mb-4 text-xs sm:text-sm font-semibold uppercase tracking-wide">
-            LET'S BUILD SOMETHING
+            LET&apos;S BUILD SOMETHING
           </h3>
 
           <div className="flex w-full max-w-full items-center overflow-hidden rounded-full border border-gray-400 sm:w-[420px] md:w-[500px] lg:w-[560px]">

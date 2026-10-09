@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useCmsData } from '@/lib/use-cms';
 
 type PricingPlanData = { _id: string; title: string; description: string; price: string; color: string; features: string[] };
 
@@ -11,18 +12,30 @@ const fallbackPlans = [
     { _id: '3', title: 'Custom Website', description: 'For businesses that need a website built around their specific requirements.', price: 'Depends on Complexity', color: 'bg-orange-600', features: ['Pages According to Need / Admin Dashboard', 'Custom Premium Design', 'Advanced UI/UX & Animations', 'E-commerce or Booking Integration', 'Speed & Performance Optimization', 'SEO & Analytics Setup', 'Priority Support', 'Delivery: According to Project'] },
   ];
 
+const fallbackHero = {
+  heading: 'YOUR WEBSITE STARTS HERE.',
+  description: 'Choose the right website package for your business.',
+};
+
 export default function PricingPage() {
-  const displayPlans = fallbackPlans as (PricingPlanData & { _id: string })[];
+  const { value: hero } = useCmsData((data) => data.pricing.hero, fallbackHero);
+  const { value: plans } = useCmsData<PricingPlanData[]>(
+    (data) =>
+      (data.pricing?.plans?.length ? data.pricing.plans : fallbackPlans) as unknown as PricingPlanData[],
+    fallbackPlans as unknown as PricingPlanData[]
+  );
+
+  const displayPlans = plans;
 
   return (
     <main className="bg-[#E9E9E7] min-h-screen font-sans">
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
         <div className="text-center mb-10 sm:mb-14 md:mb-20">
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#1f2937] leading-tight font-caveat">
-            YOUR WEBSITE STARTS HERE.
+            {hero?.heading || fallbackHero.heading}
           </h1>
           <p className="mt-4 sm:mt-6 text-lg sm:text-xl md:text-2xl text-gray-600 font-caveat">
-            Choose the right website package for your business.
+            {hero?.description || fallbackHero.description}
           </p>
         </div>
 
@@ -50,7 +63,7 @@ export default function PricingPage() {
 
               <div className="w-full md:w-1/3">
                 <ul className="text-xs sm:text-sm space-y-1 sm:space-y-1.5 text-stone-700 list-disc list-inside">
-                  {pkg.features.map((feature, i) => (
+                  {(pkg.features || []).map((feature, i) => (
                     <li key={i} className="leading-snug">{feature}</li>
                   ))}
                 </ul>

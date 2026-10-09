@@ -71,12 +71,38 @@ export default function SubmitTestimonialPage() {
     if (isSubmitting) return;
     if (!validate()) return;
     setIsSubmitting(true);
-    toast.success('Testimonial submitted successfully! It will be visible after review.');
-    setSubmitted(true);
-    setForm({ name: '', avatar: '', designation: '', company: '', rating: 0, message: '' });
-    setSelectedRating(0);
-    setImagePreview(null);
-    setIsSubmitting(false);
+
+    try {
+      const response = await fetch('/api/testimonials', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          content: form.message,
+          rating: form.rating,
+          avatar: form.avatar,
+          designation: form.designation,
+          company: form.company,
+        }),
+      });
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok || !payload?.success) {
+        toast.error(payload?.error || 'Failed to submit testimonial');
+        setIsSubmitting(false);
+        return;
+      }
+
+      toast.success('Testimonial submitted successfully! It will be visible after review.');
+      setSubmitted(true);
+      setForm({ name: '', avatar: '', designation: '', company: '', rating: 0, message: '' });
+      setSelectedRating(0);
+      setImagePreview(null);
+    } catch {
+      toast.error('Failed to submit testimonial');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {

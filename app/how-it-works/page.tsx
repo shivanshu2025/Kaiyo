@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { Caveat } from 'next/font/google';
 import { AnimatePresence, motion } from 'framer-motion';
 import { getWhatsAppUrl } from '@/lib/contact-info';
+import { useCmsData } from '@/lib/use-cms';
+import type { HowItWorksContent } from '@/lib/cms-types';
 import {
   FiArrowRight,
   FiCheckCircle,
@@ -100,7 +102,15 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function HowItWorksPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const data = defaultData;
+  const { value: cmsData } = useCmsData<HowItWorksContent>(
+    (cms) => cms.howItWorks,
+    defaultData as unknown as HowItWorksContent
+  );
+
+  const data: PartnerProgramData = {
+    ...defaultData,
+    ...(cmsData || {}),
+  } as PartnerProgramData;
 
   const tiers: TierData[] = data.tiers || [];
   const workflowSteps: WorkflowStepData[] = data.workflowSteps || [];
@@ -150,7 +160,7 @@ export default function HowItWorksPage() {
                   <p className="text-xs sm:text-sm text-gray-600">{tier.description}</p>
                 </div>
                 <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
-                  {tier.features.map((feature, i) => (
+                  {(tier.features || []).map((feature, i) => (
                     <li key={i} className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
                       <FiCheckCircle className="text-[#32483e] mt-0.5 flex-shrink-0" size={14} />
                       <span className="text-gray-700">{feature}</span>

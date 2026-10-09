@@ -51,25 +51,28 @@ backend/
 Kaiyo-main/
 
 # admin / auth legacy (obsolete)
-admin/
-adminpanel/
-Admin Panel/
+# NOTE: anchored with a leading slash on purpose. Unanchored "admin/" would
+# also match the real app/admin/ and components/admin/ dashboard sources.
+/admin/
+/adminpanel/
+/Admin Panel/
 
 # reusable folder names that were backend-related / obsolete
 # (top-level only - do not ignore app/components)
-lib/
-api/
-ui/
-src/api/
-src/auth/
-src/user/
+/api/
+/ui/
+/src/api/
+/src/auth/
+/src/user/
+# NOTE: /lib/ is NOT ignored - it holds the real CMS data layer
+# (cms-store.ts, cms-types.ts, admin-auth.ts, use-cms.ts, site-settings.ts).
 
 # obsolete entry script
-start.js
-server.js
+/start.js
+/server.js
 
 # GitHub Actions / CI workflows (obsolete)
-.github/
+/.github/
 
 # IDE
 .idea/

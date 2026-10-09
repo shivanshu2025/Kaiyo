@@ -1,1 +1,1 @@
-export { default } from '../social-banners/page';
+export { default, dynamic } from '../social-banners/page';

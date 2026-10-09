@@ -10,6 +10,8 @@ import {
   FiTarget, FiAward, FiInfo 
 } from 'react-icons/fi';
 import { getWhatsAppUrl } from '@/lib/contact-info';
+import { useCmsData } from '@/lib/use-cms';
+import type { CalculatorContent } from '@/lib/cms-types';
 
 type TierData = { title: string; percentage: number; description: string; icon: string; accentColor: string; displayOrder: number; isEnabled: boolean };
 type CalculatorData = {
@@ -105,12 +107,21 @@ const formatINR = (value: number, locale = 'en-IN') => {
 };
 
 export default function CalculatorPage() {
-  const [config] = useState<CalculatorData>(defaultConfig);
+  const { value: cmsConfig, loading: cmsLoading } = useCmsData<CalculatorContent>(
+    (cms) => cms.calculator,
+    defaultConfig as unknown as CalculatorContent
+  );
+
+  const config: CalculatorData = useMemo(
+    () => ({ ...defaultConfig, ...(cmsConfig || {}) }) as CalculatorData,
+    [cmsConfig]
+  );
+
   const [amount, setAmount] = useState('');
   const [selectedRole, setSelectedRole] = useState<Role>('');
   const [calculatedEarnings, setCalculatedEarnings] = useState<number | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
-  const [isLoading] = useState(false);
+  const isLoading = cmsLoading;
   const controls = useAnimation();
 
   const roleOptions: RoleOption[] = useMemo(() => {

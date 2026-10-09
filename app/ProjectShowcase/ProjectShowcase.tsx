@@ -1,4 +1,37 @@
-export default function ProjectShowcase() {
+import type { HomeProjectShowcase } from '@/lib/cms-types';
+
+const DEFAULT_HEADING = 'Design Clarity Function';
+const DEFAULT_DESCRIPTION =
+  'We create clean, modern, and responsive websites that help businesses build a professional presence online.';
+const DEFAULT_PROJECTS = [
+  {
+    title: 'Goal',
+    description:
+      'To create a modern and easy-to-use website with a clear structure, strong visual presentation, and a straightforward way for visitors to understand the business and take action.',
+    image: 'https://videos.pexels.com/video-files/29848605/12817762_3840_2160_30fps.mp4',
+  },
+  {
+    title: 'Solution',
+    description:
+      'A clean, modern visual style was used with clear typography and a structured layout. The content was kept simple and focused, while responsive design ensures the website works smoothly across desktop and mobile devices.',
+    image: 'https://videos.pexels.com/video-files/34128902/14471915_3840_2160_30fps.mp4',
+  },
+];
+
+export default function ProjectShowcase({
+  dynamicContent,
+}: {
+  dynamicContent?: HomeProjectShowcase;
+}) {
+  const heading = dynamicContent?.heading?.trim() || DEFAULT_HEADING;
+  const headingWords = heading.split(/\s+/);
+  const description = dynamicContent?.description || DEFAULT_DESCRIPTION;
+  const projects =
+    dynamicContent?.projects && dynamicContent.projects.length > 0
+      ? dynamicContent.projects
+      : DEFAULT_PROJECTS;
+  const [goal, solution] = projects;
+
   return (
     <section
       id="testimonial"
@@ -14,14 +47,11 @@ export default function ProjectShowcase() {
         poster="/images/projects-logo-poster.jpg"
         aria-hidden="true"
       >
-        <source
-          src="https://videos.pexels.com/video-files/29848605/12817762_3840_2160_30fps.mp4"
-          type="video/mp4"
-        />
-        <source
-          src="https://videos.pexels.com/video-files/34128902/14471915_3840_2160_30fps.mp4"
-          type="video/mp4"
-        />
+        {projects
+          .filter((project) => project?.image)
+          .map((project) => (
+            <source key={project.image} src={project.image} type="video/mp4" />
+          ))}
       </video>
 
       {/* ===================================================== */}
@@ -50,7 +80,7 @@ export default function ProjectShowcase() {
           </dl>
 
           <p className="m-0 max-w-full font-mono text-[11px] font-bold uppercase leading-[1.4] text-[rgba(245,244,242,0.98)]">
-            We create clean, modern, and responsive websites that help businesses build a professional presence online.
+            {description}
           </p>
         </div>
 
@@ -68,19 +98,19 @@ export default function ProjectShowcase() {
         <div className="grid grid-cols-1 gap-3">
           <article className="min-w-0 overflow-hidden rounded-[14px] bg-[#f5f4f2] px-[16px] pb-[14px] pt-[14px] text-[#171717] sm:px-[18px]">
 <span className="mb-[9px] block font-mono text-[11px] font-bold uppercase leading-[1]">
-               [GOAL]
+               [{goal?.title || 'GOAL'}]
              </span>
              <p className="m-0 font-mono text-[11px] font-bold uppercase leading-[1.35]">
-To create a modern and easy-to-use website with a clear structure, strong visual presentation, and a straightforward way for visitors to understand the business and take action.
+               {goal?.description}
              </p>
           </article>
 
           <article className="min-w-0 overflow-hidden rounded-[14px] bg-[#f5f4f2] px-[16px] pb-[14px] pt-[14px] text-[#171717] sm:px-[18px]">
 <span className="mb-[9px] block font-mono text-[11px] font-bold uppercase leading-[1]">
-               [SOLUTION]
+               [{solution?.title || 'SOLUTION'}]
              </span>
              <p className="m-0 font-mono text-[11px] font-bold uppercase leading-[1.35]">
-A clean, modern visual style was used with clear typography and a structured layout. The content was kept simple and focused, while responsive design ensures the website works smoothly across desktop and mobile devices.
+               {solution?.description}
              </p>
           </article>
         </div>
@@ -90,11 +120,18 @@ A clean, modern visual style was used with clear typography and a structured lay
 <h2
              id="project-title"
              className="m-0 flex max-w-[92vw] origin-top-left flex-col items-start gap-[8px] font-display font-black uppercase leading-[0.79] tracking-[0.035em] text-[#f7f6f4] [transform:scaleX(0.72)] text-[clamp(2.85rem,18vw,5rem)] sm:gap-[10px] sm:text-[clamp(3rem,17vw,6rem)]"
-             aria-label="Design, Clarity, Function"
+             aria-label={heading}
            >
-<span className="block whitespace-nowrap">Design</span>
-              <span className="ml-[10%] block whitespace-nowrap">Clarity</span>
-              <span className="block whitespace-nowrap">Function</span>
+             {headingWords.map((word, index) => (
+               <span
+                 key={word + index}
+                 className={`block whitespace-nowrap ${
+                   index > 0 && index < headingWords.length - 1 ? 'ml-[10%]' : ''
+                 }`}
+               >
+                 {word}
+               </span>
+             ))}
            </h2>
 
           {/* Decorative X - anchored to title wrapper so they move with content and never create page gap */}
@@ -142,7 +179,7 @@ A clean, modern visual style was used with clear typography and a structured lay
 
         {/* DESCRIPTION */}
 <p className="absolute right-[5.7%] top-[10.3%] z-[2] m-0 hidden w-[min(30%,310px)] font-mono text-[clamp(10px,1.15vw,15px)] font-bold uppercase leading-[1.15] text-[rgba(245,244,242,0.98)] lg:block">
-            We create clean, modern, and responsive websites that help businesses build a professional presence online.
+            {description}
           </p>
 
         {/* ABSTRACT SHAPE */}
@@ -159,18 +196,18 @@ A clean, modern visual style was used with clear typography and a structured lay
         <div className="absolute left-[5.6%] right-[5.6%] top-[42.8%] z-[3] hidden h-[10.7%] grid-cols-[0.7fr_1fr] gap-[8px] lg:grid">
           <article className="min-w-0 overflow-hidden rounded-[14px] bg-[#f5f4f2] px-[18px] pb-[13px] pt-[16px] text-[#171717]">
             <span className="mb-[9px] block font-mono text-[clamp(9px,0.95vw,12px)] font-bold uppercase leading-[1]">
-              [GOAL]
+              [{goal?.title || 'GOAL'}]
             </span>
 <p className="m-0 font-mono text-[clamp(10px,1.05vw,14px)] font-bold uppercase leading-[1.18]">
-               To create a modern and easy-to-use website with a clear structure, strong visual presentation, and a straightforward way for visitors to understand the business and take action.
+               {goal?.description}
              </p>
           </article>
           <article className="min-w-0 overflow-hidden rounded-[14px] bg-[#f5f4f2] px-[18px] pb-[13px] pt-[16px] text-[#171717]">
             <span className="mb-[9px] block font-mono text-[clamp(9px,0.95vw,12px)] font-bold uppercase leading-[1]">
-              [SOLUTION]
+              [{solution?.title || 'SOLUTION'}]
             </span>
 <p className="m-0 font-mono text-[clamp(10px,1.05vw,14px)] font-bold uppercase leading-[1.18]">
-               A clean, modern visual style was used with clear typography and a structured layout. The content was kept simple and focused, while responsive design ensures the website works smoothly across desktop and mobile devices.
+               {solution?.description}
              </p>
           </article>
         </div>
@@ -180,10 +217,17 @@ A clean, modern visual style was used with clear typography and a structured lay
            aria-hidden="true"
            className="absolute bottom-[6%] left-[11.5%] z-[3] m-0 hidden w-max origin-bottom-left flex-col items-start gap-[15px] font-display font-black uppercase leading-[0.79] tracking-[0.035em] text-[#f7f6f4] [transform:scaleX(0.74)] text-[clamp(5rem,12.8vw,9.7rem)] lg:flex"
          >
-<span className="block whitespace-nowrap">Design</span>
-            <span className="ml-[13%] block whitespace-nowrap">Clarity</span>
-            <span className="block whitespace-nowrap">Function</span>
-         </h2>
+ {headingWords.map((word, index) => (
+           <span
+             key={word + index}
+             className={`block whitespace-nowrap ${
+               index > 0 && index < headingWords.length - 1 ? 'ml-[13%]' : ''
+             }`}
+           >
+             {word}
+           </span>
+         ))}
+        </h2>
 
         {/* DECORATIVE X - desktop positions preserved */}
         <span

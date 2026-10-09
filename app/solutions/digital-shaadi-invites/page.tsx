@@ -1,1 +1,1 @@
-export { default } from '../digital-invites/page';
+export { default, dynamic } from '../digital-invites/page';

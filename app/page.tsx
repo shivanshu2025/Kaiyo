@@ -5,17 +5,25 @@ import Banner from "@/components/sections/Banner";
 import FutureEquitySection from "@/components/sections/FutureEquitySection";
 import ProjectShowcase from "./ProjectShowcase/ProjectShowcase";
 import ProcessAndTypography from "./ProcessAndTypography/ProcessAndTypography";
+import { readCmsData } from "@/lib/cms-store";
 
-export default function Home() {
+// Content comes from the CMS document on disk, so the page must be rendered
+// per request for admin edits to appear without a rebuild.
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const cms = await readCmsData();
+  const home = cms.home;
+
   return (
     <main className="bg-stone-50">
-      <Hero />
+      <Hero dynamicContent={home.hero} />
       <Marquee />
-      <Collection />
+      <Collection dynamicCollections={home.collection?.items} dynamicContent={home.collection} />
       <FutureEquitySection />
-      <ProjectShowcase/>
-      <ProcessAndTypography/>
-      <Banner />
+      <ProjectShowcase dynamicContent={home.projectShowcase} />
+      <ProcessAndTypography dynamicContent={home.process} />
+      <Banner dynamicContent={home.finalCta} />
  
     </main>
   );

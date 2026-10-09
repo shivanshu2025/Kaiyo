@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import Footer from './Footer';
 
-const hiddenFooterRoutes: string[] = [];
+const hiddenFooterRoutes: string[] = ['/admin'];
 
 export default function FooterWrapper() {
   const pathname = usePathname();

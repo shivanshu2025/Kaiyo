@@ -4,40 +4,62 @@ import * as React from 'react';
 import { Caveat } from 'next/font/google';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiPhone, FiMessageCircle } from 'react-icons/fi';
+import { useCmsData } from '@/lib/use-cms';
+import type { FaqItem } from '@/lib/cms-types';
+
+type ContactPageContent = {
+  heading: string;
+  description: string;
+  contactInfoHeading: string;
+  contactInfoDescription: string;
+  phone: string;
+  whatsapp: string;
+  faqs: FaqItem[];
+};
 
 const caveat = Caveat({
   subsets: ['latin'],
   weight: ['600'],
 });
 
-const FAQS = [
-  {
-    q: 'What services does Kaiyo offer?',
-    a: 'We offer a wide range of digital services including web design, development, branding, social media graphics, and digital invitations. Each solution is tailored to your specific needs.',
-  },
-  {
-    q: 'How long does a typical project take?',
-    a: 'Project timelines vary based on complexity. A standard website takes 7-10 days, while more complex custom solutions may take 14-18 days or longer depending on requirements.',
-  },
-  {
-    q: 'What is the pricing structure?',
-    a: 'Our pricing starts at $15,000 for starter websites and goes up based on complexity. We offer custom quotes for enterprise solutions and unique project requirements.',
-  },
-  {
-    q: 'Do you offer post-launch support?',
-    a: 'Yes, we provide ongoing support and maintenance packages to ensure your digital presence remains up-to-date and performs optimally.',
-  },
-  {
-    q: 'How do I get started?',
-    a: 'Simply fill out the contact form or reach out via WhatsApp. We will schedule a consultation to understand your vision and provide a tailored proposal.',
-  },
-];
+const CONTACT_FALLBACK: ContactPageContent = {
+  heading: "LET'S BUILD YOUR WEBSITE",
+  description: "Tell us about your business or idea. We'll turn it into a clean, modern website.",
+  contactInfoHeading: 'GET IN TOUCH',
+  contactInfoDescription: "Fill out the form and tell us what you need. We'll get back to you soon.",
+  phone: '9760926681',
+  whatsapp: '9760926681',
+  faqs: [
+    { question: 'What services does Kaiyo offer?', answer: 'We offer a wide range of digital services including web design, development, branding, social media graphics, and digital invitations. Each solution is tailored to your specific needs.' },
+    { question: 'How long does a typical project take?', answer: 'Project timelines vary based on complexity. A standard website takes 7-10 days, while more complex custom solutions may take 14-18 days or longer depending on requirements.' },
+    { question: 'What is the pricing structure?', answer: 'Our pricing starts at $15,000 for starter websites and goes up based on complexity. We offer custom quotes for enterprise solutions and unique project requirements.' },
+    { question: 'Do you offer post-launch support?', answer: 'Yes, we provide ongoing support and maintenance packages to ensure your digital presence remains up-to-date and performs optimally.' },
+    { question: 'How do I get started?', answer: 'Simply fill out the contact form or reach out via WhatsApp. We will schedule a consultation to understand your vision and provide a tailored proposal.' },
+  ],
+};
 
 export default function ContactPage() {
   const [formData, setFormData] = React.useState({ name: '', email: '', interest: '', phone: '', message: '' });
   const [success, setSuccess] = React.useState('');
   const [error, setError] = React.useState('');
+  const [submitting, setSubmitting] = React.useState(false);
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
+
+  const { value: content } = useCmsData<ContactPageContent>(
+    (cms) => ({
+      heading: cms.contact?.heading ?? CONTACT_FALLBACK.heading,
+      description: cms.contact?.description ?? CONTACT_FALLBACK.description,
+      contactInfoHeading: cms.contact?.contactInfoHeading ?? CONTACT_FALLBACK.contactInfoHeading,
+      contactInfoDescription: cms.contact?.contactInfoDescription ?? CONTACT_FALLBACK.contactInfoDescription,
+      phone: cms.contact?.phone ?? CONTACT_FALLBACK.phone,
+      whatsapp: cms.contact?.whatsapp ?? CONTACT_FALLBACK.whatsapp,
+      faqs: cms.contact?.faqs?.length ? cms.contact.faqs : CONTACT_FALLBACK.faqs,
+    }),
+    CONTACT_FALLBACK
+  );
+
+  const data = { ...CONTACT_FALLBACK, ...(content || {}) };
+  const FAQS = data.faqs;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -56,8 +78,30 @@ export default function ContactPage() {
     e.preventDefault();
     setError('');
     setSuccess('');
-    setSuccess('Message sent successfully! We\'ll get back to you soon.');
-    setFormData({ name: '', email: '', interest: '', phone: '', message: '' });
+
+    if (submitting) return;
+    setSubmitting(true);
+
+    try {
+      const response = await fetch('/api/contact-submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok || !payload?.success) {
+        setError(payload?.error || 'Something went wrong. Please try again.');
+        return;
+      }
+
+      setSuccess('Message sent successfully! We\'ll get back to you soon.');
+      setFormData({ name: '', email: '', interest: '', phone: '', message: '' });
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -69,11 +113,11 @@ export default function ContactPage() {
           transition={{ duration: 0.5 }}
           className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight text-center mb-4 ${caveat.className}`}
         >
-          LET'S BUILD YOUR WEBSITE
+          {data.heading}
         </motion.h1>
 
         <p className="text-center text-sm sm:text-base text-gray-600 mb-8 sm:mb-10 md:mb-12 max-w-xl mx-auto">
-          Tell us about your business or idea. We'll turn it into a clean, modern website.
+          {data.description}
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 border-t border-[#32483e]/10 pt-8 sm:pt-10">
@@ -85,7 +129,7 @@ export default function ContactPage() {
             <div className="mb-8">
               <h3 className="font-semibold mb-2">START YOUR PROJECT</h3>
               <p className="text-sm text-gray-600">
-                Fill out the form and tell us what you need. We'll get back to you soon.
+                {data.contactInfoDescription}
               </p>
             </div>
 
@@ -118,9 +162,10 @@ export default function ContactPage() {
               <motion.button
                 whileTap={{ scale: 0.97 }}
                 type="submit"
-                className="bg-[#32483e] text-white px-6 py-2.5 text-sm rounded-md"
+                disabled={submitting}
+                className="bg-[#32483e] text-white px-6 py-2.5 text-sm rounded-md disabled:opacity-60"
               >
-                Submit
+                {submitting ? 'Submitting...' : 'Submit'}
               </motion.button>
             </form>
           </motion.div>
@@ -131,10 +176,10 @@ export default function ContactPage() {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h1>GET IN TOUCH</h1>
+            <h1>{data.contactInfoHeading}</h1>
 
-            <InfoBlock title="Call Us" action="9760926681" icon={<FiPhone />} />
-            <InfoBlock title="WhatsApp" action="9760926681" icon={<FiMessageCircle />} />
+            <InfoBlock title="Call Us" action={data.phone} icon={<FiPhone />} />
+            <InfoBlock title="WhatsApp" action={data.whatsapp} icon={<FiMessageCircle />} />
           </motion.div>
         </div>
       </section>
@@ -148,7 +193,7 @@ export default function ContactPage() {
 
           <div className="space-y-3">
             {FAQS.map((item, i) => (
-              <FaqItem key={i} item={item} isOpen={openIndex === i} onToggle={() => setOpenIndex(openIndex === i ? null : i)} />
+              <FaqItem key={i} item={{ q: item.question, a: item.answer }} isOpen={openIndex === i} onToggle={() => setOpenIndex(openIndex === i ? null : i)} />
             ))}
           </div>
         </div>

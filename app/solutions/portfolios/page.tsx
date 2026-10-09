@@ -1,22 +1,8 @@
 import { portfoliosData } from '@/components/solutions/data/portfolios';
-import HeroSection from '@/components/solutions/HeroSection';
-import TopSection from '@/components/solutions/TopSection';
-import BannerStrip from '@/components/solutions/BannerStrip';
-import CardSections from '@/components/solutions/CardSections';
-import FooterSection from '@/components/solutions/FooterSection';
+import SolutionPage from '@/components/solutions/SolutionPage';
 
-const SUB_SLUG = 'personal-portfolios';
+export const dynamic = 'force-dynamic';
 
 export default function PersonalPortfolios() {
-  const sections = portfoliosData.sections;
-
-  return (
-    <>
-      <HeroSection {...portfoliosData.hero} />
-      <TopSection {...portfoliosData.topSection} />
-      <BannerStrip {...portfoliosData.banner} />
-      <CardSections sections={sections} />
-      <FooterSection {...portfoliosData.footer} />
-    </>
-  );
+  return <SolutionPage slug="personal-portfolios" fallback={portfoliosData} />;
 }

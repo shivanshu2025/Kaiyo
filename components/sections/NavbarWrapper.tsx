@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import Navbar from '@/components/sections/Navbar';
 
-const hiddenNavbarRoutes = ['/how-it-works', '/calculator', '/partner-signup'];
+const hiddenNavbarRoutes = ['/how-it-works', '/calculator', '/partner-signup', '/admin'];
 
 export default function NavbarWrapper() {
   const pathname = usePathname();

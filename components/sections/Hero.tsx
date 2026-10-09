@@ -8,6 +8,7 @@ type HeroData = {
   subtitle: string;
   description: string;
   image: string;
+  logoImage?: string;
   ctaText: string;
   ctaLink: string;
 };
@@ -18,6 +19,8 @@ interface Props {
 
 export default function FashionHero({ dynamicContent }: Props) {
   const hero = dynamicContent;
+  const heroImage = hero?.image?.trim() || '/images/kk.png';
+  const heroLogo = hero?.logoImage?.trim() || '/images/Kaiyologo.png';
   return (
     <section className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-[#E5E5E5] px-3 pb-12 pt-24 font-serif text-[#2D3627] sm:px-4 sm:pb-16 sm:pt-28 md:px-6 md:py-20 lg:min-h-[calc(100dvh-4rem)]">
       <div className="absolute left-4 top-4 z-30 sm:left-10 sm:top-10">
@@ -50,7 +53,7 @@ export default function FashionHero({ dynamicContent }: Props) {
 
           <div className="group relative aspect-[4/5] w-36 sm:w-44 rotate-2 overflow-hidden rounded-2xl border-4 border-white shadow-2xl">
             <Image
-              src="/images/kk.png"
+              src={heroImage}
               alt="WEB STUDIO"
               fill
               sizes="(min-width: 640px) 176px, 144px"
@@ -67,7 +70,7 @@ export default function FashionHero({ dynamicContent }: Props) {
             <div className="absolute left-1/2 top-1/2 -z-10 h-[80%] w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2f4f3f] opacity-20 blur-[100px] mix-blend-multiply" />
 
             <Image
-              src="/images/Kaiyologo.png"
+              src={heroLogo}
               alt="WEB STUDIO"
               width={550}
               height={550}

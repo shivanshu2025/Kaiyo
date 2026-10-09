@@ -2,14 +2,16 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import './SupportWidget.css';
 
 const FULL_TEXT = '__Codeno.in\nHi! I’m building something of my own. Support my journey with a coffee ☕';
 const TYPING_SPEED = 40;
 
 export default function SupportWidget() {
+  const pathname = usePathname();
   const [isHovered, setIsHovered] = useState(false);
   const [isQrOpen, setIsQrOpen] = useState(false);
   const [typedText, setTypedText] = useState('');
@@ -91,6 +93,9 @@ export default function SupportWidget() {
   }, []);
 
   const isReduced = prefersReducedMotion;
+
+  // The support widget belongs to the public site only.
+  if (pathname?.startsWith('/admin')) return null;
 
   return (
     <>

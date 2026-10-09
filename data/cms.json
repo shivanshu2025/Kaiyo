@@ -1,0 +1,1614 @@
+{
+  "siteSettings": {
+    "logo": "/images/Kaiyologo.png",
+    "whatsappNumber": "919760926681",
+    "phoneNumber": "9760926681",
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/jatin-singh-1033aa3b7/"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com/shivanshu2025"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/__codeno.in/"
+      }
+    ]
+  },
+  "home": {
+    "hero": {
+      "title": "The future of startup building -Kaiyo",
+      "subtitle": "YOUR WEBSITE, REIMAGINED.",
+      "description": "Building an online presence doesn't have to be complicated. We create clean, modern websites that turn your business idea into a professional digital presence.",
+      "image": "/images/kk.png",
+      "logoImage": "/images/Kaiyologo.png",
+      "ctaText": "I create websites and sell them.",
+      "ctaLink": "/contact"
+    },
+    "collection": {
+      "heading": "BUILDING YOUR DIGITAL PRESENCE",
+      "description": "DESIGN. BUILD. DELIVER. WE BUILD YOUR WEBSITE.",
+      "items": [
+        {
+          "title": "Design",
+          "text": "Creating thoughtful, modern, and user-focused designs that give your brand a strong visual identity and professional digital presence."
+        },
+        {
+          "title": "Development",
+          "text": "Creating clean, modern, and responsive websites that give your business a professional presence online."
+        },
+        {
+          "title": "Responsive",
+          "text": "Building responsive websites that adapt smoothly across mobile, tablet, and desktop screens for a consistent and comfortable user experience."
+        }
+      ]
+    },
+    "projectShowcase": {
+      "heading": "Design Clarity Function",
+      "description": "We create clean, modern, and responsive websites that help businesses build a professional presence online.",
+      "projects": [
+        {
+          "title": "Goal",
+          "description": "To create a modern and easy-to-use website with a clear structure, strong visual presentation, and a straightforward way for visitors to understand the business and take action.",
+          "image": "https://videos.pexels.com/video-files/29848605/12817762_3840_2160_30fps.mp4"
+        },
+        {
+          "title": "Solution",
+          "description": "A clean, modern visual style was used with clear typography and a structured layout. The content was kept simple and focused, while responsive design ensures the website works smoothly across desktop and mobile devices.",
+          "image": "https://videos.pexels.com/video-files/34128902/14471915_3840_2160_30fps.mp4"
+        }
+      ]
+    },
+    "process": {
+      "heading": "Project process and typography",
+      "description": "MODERN WEB DESIGN / DIGITAL PRESENCE",
+      "steps": [
+        {
+          "number": "01",
+          "title": "UNDERSTAND",
+          "description": "We understand your business idea and what you need from your website."
+        },
+        {
+          "number": "02",
+          "title": "DESIGN",
+          "description": "We create a clean and modern website design based on your requirements."
+        },
+        {
+          "number": "03",
+          "title": "BUILD",
+          "description": "We turn the design into a functional website that is easy to use."
+        },
+        {
+          "number": "04",
+          "title": "DELIVER",
+          "description": "We make sure your website is ready to use on desktop and mobile devices."
+        }
+      ]
+    },
+    "finalCta": {
+      "heading": "THE TIME IS NOW",
+      "description": "You bring the vision, we turn it into a website people remember.",
+      "buttonText": "THE PATH IS",
+      "buttonLink": "/contact",
+      "listItems": [
+        {
+          "title": "DIGITAL, BUT DIFFERENT",
+          "desc": "We create websites that give your business a strong identity online."
+        },
+        {
+          "title": "YOUR IDEA. OUR CRAFT.",
+          "desc": "You bring the vision, we turn it into a website people remember."
+        },
+        {
+          "title": "BUILT FOR THE FIRST IMPRESSION",
+          "desc": "Because your website is often the first thing your customers see."
+        }
+      ]
+    }
+  },
+  "solutions": [
+    {
+      "slug": "brand-logos",
+      "label": "Brand Logos",
+      "category": "Creative Studio",
+      "data": {
+        "hero": {
+          "gradient": "linear-gradient(135deg, #32483e 0%, #1e3932 100%)",
+          "badge": {
+            "text": "✨ CREATIVE DESIGN STUDIO",
+            "bg": "rgba(165, 205, 190, 0.2)",
+            "border": "rgba(165, 205, 190, 0.3)",
+            "color": "#a5cdbe"
+          },
+          "title": {
+            "main": "Build Brands That",
+            "highlight": " Stand Out",
+            "highlightColor": "#a5cdbe",
+            "textColor": "#ffffff"
+          },
+          "description": "Premium logo design, branding & creative visuals crafted for startups and modern businesses.",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#a5cdbe",
+            "color": "#32483e",
+            "shadow": "rgba(165, 205, 190, 0.4)",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "href": "/how-it-works"
+          },
+          "stats": [
+            {
+              "value": "500+",
+              "label": "Logos Created",
+              "color": "#a5cdbe"
+            },
+            {
+              "value": "98%",
+              "label": "Client Satisfaction",
+              "color": "#a5cdbe"
+            },
+            {
+              "value": "50+",
+              "label": "Industries Served",
+              "color": "#a5cdbe"
+            }
+          ],
+          "backgroundPattern": {
+            "type": "radial",
+            "position": "radial-gradient(circle at 80% 50%, rgba(165, 205, 190, 0.15) 0%, transparent 60%)",
+            "side": "right"
+          }
+        },
+        "topSection": {
+          "title": "Creative Design Studio",
+          "subtitle": "Premium Brand Collection",
+          "featuredCards": [
+            {
+              "src": "https://t4.ftcdn.net/jpg/03/02/35/93/360_F_302359342_mFJHd6kz0B5s6aV2Jf7DL0heZqR0Illv.jpg"
+            }
+          ],
+          "infoBox": {
+            "icon": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+            "text": "Professional logo, branding & creative design services for startups and modern businesses."
+          },
+          "bgColor": "#F0F0F0"
+        },
+        "banner": {
+          "bg": "#a5cdbeff",
+          "title": "Build your startup identity",
+          "titleColor": "#1e3932",
+          "text": "Premium branding & creative visuals",
+          "textColor": "#32483e",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#00754a",
+            "color": "white",
+            "hoverBg": "#005a38",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "color": "#00754a",
+            "hoverBg": "#00754a",
+            "hoverColor": "white",
+            "href": "/how-it-works"
+          }
+        },
+        "sections": [
+          {
+            "title": "MINIMAL LOGOS",
+            "cards": [
+              {
+                "src": "https://marketplace.canva.com/EAFv_yqJeek/2/0/1600w/canva-black-%26-white-minimalist-signature-personal-brand-logo-XA8Ge8-5GII.jpg"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAGUkyKNjHY/1/0/1600w/canva-white-and-black-simple-minimalist-typography-music-%26-audio-logo-hFq4GRhqckU.jpg"
+              }
+            ]
+          },
+          {
+            "title": "STARTUP BRANDING",
+            "cards": [
+              {
+                "src": "https://marketplace.canva.com/EAG2aMIdur8/1/0/1600w/canva-green-and-white-modern-simple-startup-pitch-deck-business-presentation-lsvFiYR4V6s.jpg"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAG6V7WC73Q/1/0/1600w/canva-orange-beige-dualtone-startup-pitch-deck-presentation-GMUTl_Q72pU.jpg"
+              },
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKNkXuhyhSsLQE-Top7HG6rIvMsWBFCV3qaA&s"
+              }
+            ]
+          },
+          {
+            "title": "SOCIAL MEDIA DESIGNS",
+            "cards": [
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbhlaxCTqNA4Xihp_QB8prvKMvl4OrYdKpBQ&s"
+              },
+              {
+                "src": "https://img.freepik.com/premium-psd/social-media-marketing-digital-marketing-promotion-instagram-post-banner-template_975563-53.jpg"
+              },
+              {
+                "src": "https://png.pngtree.com/template/20220219/ourmid/pngtree-social-media-marketing-image_841133.jpg"
+              }
+            ]
+          },
+          {
+            "title": "LUXURY BRAND IDENTITY",
+            "cards": [
+              {
+                "src": "https://cdn.shopify.com/s/files/1/0565/3423/7349/files/Brand-Guidelines-Template-_14_d814ca12-c090-4e38-b72b-a9c79e3c99dc_600x600.jpg?v=1687045163"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAFSS1JxLqU/1/0/1600w/canva-gold-ivory-luxury-leaf-outline-jewelry-business-card-24YieG26DEg.jpg"
+              },
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzuDWaEXARsrS3CTIMqt-YemNWK3ixu6z9Dw&s"
+              }
+            ]
+          },
+          {
+            "title": "UI/UX DESIGNS",
+            "cards": [
+              {
+                "src": "https://content-management-files.canva.com/7540fdba-ce49-4782-b2d1-70e7b220e2be/ui-design_ogimage2x.png"
+              }
+            ]
+          },
+          {
+            "title": "CREATIVE PROJECTS",
+            "cards": [
+              {
+                "src": "https://marketplace.canva.com/EAFlyjb7yU4/1/0/1600w/canva-yellow-watercolor-organic-creative-project-presentation-r03HpaQH220.jpg"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAF9e2333LI/1/0/1600w/canva-cream-blue-creative-modern-digital-marketing-presentation-ltlad-0DG3U.jpg"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAGBQ1edNk4/2/0/1131w/canva-brown-collage-personal-scrapbook-all-about-me-poster-ZAnppRKU7DA.jpg"
+              }
+            ]
+          }
+        ],
+        "footer": {
+          "bg": "#f3f1ee",
+          "left": {
+            "title": "About My Studio",
+            "titleColor": "#1e3932",
+            "text": "We create modern and premium logo designs that help brands build a strong visual identity."
+          },
+          "right": {
+            "title": "Why Choose Our Designs",
+            "titleColor": "#1e3932",
+            "text": "Unique concepts, modern aesthetics and startup-focused creative solutions designed for business growth."
+          }
+        }
+      }
+    },
+    {
+      "slug": "viral-thumbnails",
+      "label": "Viral Thumbnails",
+      "category": "Creative Studio",
+      "data": {
+        "hero": {
+          "gradient": "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)",
+          "badge": {
+            "text": "🚀 HIGH CTR DESIGNS",
+            "bg": "rgba(255, 0, 0, 0.15)",
+            "border": "rgba(255, 0, 0, 0.3)",
+            "color": "#ff6b6b"
+          },
+          "title": {
+            "main": "Thumbnails That",
+            "highlight": " Go Viral",
+            "highlightColor": "#ff0000",
+            "textColor": "#ffffff"
+          },
+          "description": "Eye-catching YouTube thumbnails that boost CTR, increase views, and make your content impossible to ignore.",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#ff0000",
+            "color": "#ffffff",
+            "shadow": "rgba(255, 0, 0, 0.4)",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "href": "/how-it-works"
+          },
+          "stats": [],
+          "backgroundPattern": {
+            "type": "dual-glow",
+            "glow1": "radial-gradient(circle, rgba(255, 0, 0, 0.2) 0%, transparent 70%)",
+            "glow1Pos": {
+              "top": "-10%",
+              "left": "10%",
+              "width": "400px",
+              "height": "400px"
+            },
+            "glow2": "radial-gradient(circle, rgba(255, 100, 100, 0.15) 0%, transparent 70%)",
+            "glow2Pos": {
+              "bottom": "-10%",
+              "right": "10%",
+              "width": "500px",
+              "height": "500px"
+            }
+          }
+        },
+        "topSection": {
+          "title": "Viral Thumbnail Studio",
+          "subtitle": "High CTR YouTube Designs",
+          "featuredCards": [
+            {
+              "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV70jFtjqUKel_tvC0iY9PWMqCofn1O5JbaA&s"
+            },
+            {
+              "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbYUzaqaxdeQw2DZNGwS3Wj_wJrLpw35pOsw&s"
+            }
+          ],
+          "infoBox": {
+            "icon": "https://cdn-icons-png.flaticon.com/512/1384/1384060.png",
+            "text": "High CTR viral thumbnails that increase views, clicks and engagement for YouTube channels."
+          },
+          "bgColor": "#F0F0F0"
+        },
+        "banner": {
+          "bg": "#ffdddd",
+          "title": "Want viral views?",
+          "titleColor": "#000000",
+          "text": "Boost your CTR with pro thumbnails",
+          "textColor": "#000000",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#ff0000",
+            "color": "white",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "color": "#ff0000",
+            "href": "/how-it-works"
+          }
+        },
+        "sections": [
+          {
+            "title": "YOUTUBE VIRAL THUMBNAILS",
+            "cards": [
+              {
+                "src": "https://cdn.kwork.com/files/portfolio/t3/52/f9517316d160cd4b0b440352551d05df7d61994b-1631719652.jpg"
+              },
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnNJUtlgu1t67bwNPVpoZy3rPzOUqZvlxspw&s"
+              }
+            ]
+          },
+          {
+            "title": "TECH & GAMING THUMBNAILS",
+            "cards": [
+              {
+                "src": "https://cdn.dribbble.com/userupload/25282265/file/original-40c0809e58b0632d6f71fc2eb69be1dc.jpg?resize=2048x1536&vertical=center"
+              },
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0SRecxBDTK0us2BMK2DSoY6bxoHq6WUGVQA&s"
+              },
+              {
+                "src": "https://images.unsplash.com/photo-1598550476439-6847785fcea6?q=80&w=1200&auto=format&fit=crop"
+              }
+            ]
+          },
+          {
+            "title": "BUSINESS & MOTIVATION",
+            "cards": [
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzLVsJLKxzO0mmLo2-4Ou-pWKENAsXbm24XQ&s"
+              },
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQmOsGKBz1hOu7TGNAW5W5rG5G7ReDFJVabQ&s"
+              },
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7n1vsec_YtoCv9FEIEL7nXihVYx2y0F_eTA&s"
+              }
+            ]
+          }
+        ],
+        "footer": {
+          "bg": "#f3f1ee",
+          "single": {
+            "title": "About Viral Thumbnails",
+            "titleColor": "#ff0000",
+            "text": "We design high CTR YouTube thumbnails that help creators grow fast, increase clicks, and go viral."
+          }
+        }
+      }
+    },
+    {
+      "slug": "digital-shaadi-invites",
+      "label": "Digital Shaadi Invites",
+      "category": "Creative Studio",
+      "data": {
+        "hero": {
+          "gradient": "linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%)",
+          "badge": {
+            "text": "💌 PREMIUM WEDDING INVITES",
+            "bg": "rgba(255, 255, 255, 0.6)",
+            "border": "rgba(194, 24, 91, 0.2)",
+            "color": "#c2185b"
+          },
+          "title": {
+            "main": "Elegant Digital",
+            "highlight": " Shaadi Invites",
+            "highlightColor": "#c2185b",
+            "textColor": "#880e4f"
+          },
+          "description": "Beautiful wedding invitation cards that blend tradition with modern elegance for your special day.",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#c2185b",
+            "color": "#ffffff",
+            "shadow": "rgba(194, 24, 91, 0.4)",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "bg": "rgba(255, 255, 255, 0.8)",
+            "href": "/how-it-works"
+          },
+          "stats": [],
+          "backgroundPattern": {
+            "type": "emoji-decorations",
+            "emoji1": {
+              "emoji": "💕",
+              "top": "5%",
+              "right": "5%",
+              "fontSize": "120px",
+              "opacity": "0.1"
+            },
+            "emoji2": {
+              "emoji": "✨",
+              "bottom": "10%",
+              "left": "5%",
+              "fontSize": "100px",
+              "opacity": "0.08"
+            }
+          }
+        },
+        "topSection": {
+          "title": "Digital Shaadi Invites",
+          "subtitle": "Elegant Wedding Invitation Designs",
+          "featuredCards": [
+            {
+              "src": "https://marketplace.canva.com/EAGzoMpZyzw/1/0/1135w/canva-purple-and-white-elegant-wedding-invitation-EVnMeOP3UmA.jpg"
+            },
+            {
+              "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSluHlULG_4RB4kV8zH-AM-xOEx6lWC9eoJbg&s"
+            }
+          ],
+          "infoBox": {
+            "icon": "https://cdn-icons-png.flaticon.com/512/2965/2965567.png",
+            "text": "Beautiful digital wedding invitations designed for modern couples with traditional & elegant styles."
+          },
+          "bgColor": "#F0F0F0"
+        },
+        "banner": {
+          "bg": "#ffe6f0",
+          "title": "Make your wedding special",
+          "titleColor": "#000000",
+          "text": "Premium digital shaadi invitation cards",
+          "textColor": "#000000",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#c2185b",
+            "color": "white",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "color": "#c2185b",
+            "href": "/how-it-works"
+          }
+        },
+        "sections": [
+          {
+            "title": "ROYAL WEDDING INVITES",
+            "cards": [
+              {
+                "src": "https://marketplace.canva.com/EAGpLOzqSjo/1/0/1600w/canva-white-gold-simple-flower-wedding-invitation-card-_rs_JwKT7dk.jpg"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAGuHPyaFE0/1/0/1135w/canva-white-and-blue-elegant-floral-wedding-invitation-ZwXjX5Fr9eA.jpg"
+              }
+            ]
+          },
+          {
+            "title": "MINIMAL DIGITAL CARDS",
+            "cards": [
+              {
+                "src": "https://marketplace.canva.com/EAFfRj86deg/1/0/1135w/canva-cream-minimalist-floral-watercolor-wedding-invitation-2Wo7X0rV3Ps.jpg"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAFtV-YLgss/2/0/1600w/canva-green-brown-simple-thank-you-card-rhMtPy-91qM.jpg"
+              },
+              {
+                "src": "https://trendyfoxstudio.com/cdn/shop/products/modern-minimal-business-card-with-qr-code-canva-template-cinna-894437.webp?v=1692853938"
+              }
+            ]
+          },
+          {
+            "title": "TRADITIONAL SHAADI DESIGNS",
+            "cards": [
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj5loIKY-SP0Tz384h4Udxk-VNOOvPDC4Y_A&s"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAE7xE8UrOc/1/0/1600w/canva-brown-blue-rustic-realistic-flower-ornament-illustrated-wedding-banner-qIk8XCQFVqQ.jpg"
+              },
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIX1ebLnimhOX1Htk4eI5pt0RVV582bAs1hA&s"
+              }
+            ]
+          },
+          {
+            "title": "MODERN WEDDING INVITES",
+            "cards": [
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVp8uAzb1CZWO1bhJ2nEUdGwvB1guDkGwlQg&s"
+              },
+              {
+                "src": "https://drevioweb.nyc3.cdn.digitaloceanspaces.com/uploads/2025/10/stylish-modern-bohemian-wedding-invitation-template-free-canva-350x250.jpg"
+              },
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvqliiqd_3iUcgK9TpBTRYSfO5XgXHohTD3A&s"
+              }
+            ]
+          },
+          {
+            "title": "SAVE THE DATE CARDS",
+            "cards": [
+              {
+                "src": "https://marketplace.canva.com/EAE3P-OJAZM/1/0/1600w/canva-elegant-save-the-date-invitation-postcard-ILkGiwwwK2s.jpg"
+              }
+            ]
+          }
+        ],
+        "footer": {
+          "bg": "#f3f1ee",
+          "single": {
+            "title": "About Digital Shaadi Invites",
+            "titleColor": "#c2185b",
+            "text": "We design premium wedding invitation cards that combine tradition and modern elegance for your special day."
+          }
+        }
+      }
+    },
+    {
+      "slug": "social-media-banners",
+      "label": "Social Media Banners",
+      "category": "Creative Studio",
+      "data": {
+        "hero": {
+          "gradient": "linear-gradient(135deg, #1877f2 0%, #0d5bbf 100%)",
+          "badge": {
+            "text": "📱 MARKETING DESIGNS",
+            "bg": "rgba(255, 255, 255, 0.2)",
+            "border": "rgba(255, 255, 255, 0.3)",
+            "color": "#ffffff"
+          },
+          "title": {
+            "main": "Social Banners That",
+            "highlight": " Convert",
+            "highlightColor": "#e6f0ff",
+            "textColor": "#ffffff"
+          },
+          "description": "Scroll-stopping social media creatives designed to boost engagement, clicks, and conversions across all platforms.",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#ffffff",
+            "color": "#1877f2",
+            "shadow": "rgba(0, 0, 0, 0.2)",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "href": "/how-it-works"
+          },
+          "stats": [
+            {
+              "value": "300%",
+              "label": "Avg Engagement Boost",
+              "color": "#e6f0ff"
+            },
+            {
+              "value": "800+",
+              "label": "Banners Created",
+              "color": "#e6f0ff"
+            },
+            {
+              "value": "All Platforms",
+              "label": "Optimized Designs",
+              "color": "#e6f0ff"
+            }
+          ],
+          "backgroundPattern": {
+            "type": "dual-glow",
+            "glow1": "radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%)",
+            "glow1Pos": {
+              "top": "10%",
+              "right": "10%",
+              "width": "300px",
+              "height": "300px"
+            },
+            "glow2": "radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%)",
+            "glow2Pos": {
+              "bottom": "5%",
+              "left": "15%",
+              "width": "200px",
+              "height": "200px"
+            }
+          }
+        },
+        "topSection": {
+          "title": "Social Media Banners",
+          "subtitle": "High Converting Marketing Designs",
+          "featuredCards": [
+            {
+              "src": "https://marketplace.canva.com/EAHFHw5Bwqk/1/0/1600w/canva-neutral-minimalist-weekly-observer-youtube-banner-LmTR1bM67Nw.jpg"
+            },
+            {
+              "src": "https://img.freepik.com/free-psd/banner-template-fashion-sales_23-2148981801.jpg?semt=ais_hybrid&w=740&q=80"
+            }
+          ],
+          "infoBox": {
+            "icon": "https://cdn-icons-png.flaticon.com/512/1828/1828884.png",
+            "text": "Professional social media banners designed to increase clicks, engagement and conversions."
+          },
+          "bgColor": "#F0F0F0"
+        },
+        "banner": {
+          "bg": "#e8f0ff",
+          "title": "Boost your online presence",
+          "titleColor": "#000000",
+          "text": "Scroll-stopping social media creatives",
+          "textColor": "#000000",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#1877f2",
+            "color": "white",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "color": "#1877f2",
+            "href": "/how-it-works"
+          }
+        },
+        "sections": [
+          {
+            "title": "INSTAGRAM PROMO BANNERS",
+            "cards": [
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBVtaZ1z3eo7JEXxFh5-208KV52HrDeMHyAw&s"
+              },
+              {
+                "src": "https://i.fbcd.co/products/resized/resized-750-500/promo-banner-main-copy2-5f0cbac24913b582ee02dc251c68287662d6b1cbe40bd0099de1ca96e1f2d038.jpg"
+              }
+            ]
+          },
+          {
+            "title": "FACEBOOK AD BANNERS",
+            "cards": [
+              {
+                "src": "https://marketplace.canva.com/EAFrEWLI30k/1/0/1600w/canva-blue-and-red-simple-new-arrival-facebook-shops-ad-pz45JBy0i_Q.jpg"
+              },
+              {
+                "src": "https://i.ytimg.com/vi/irTvWz_vYu8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDG3KUNnWYVOWrULXxjFoOncu5RNA"
+              },
+              {
+                "src": "https://i.fbcd.co/products/resized/resized-750-500/gs040-aesthetic-clinic-preview-d4aae444e42eda5456fea1496fc24fdc78239e5ed60704ea97699e157aac6a6f.jpg"
+              }
+            ]
+          },
+          {
+            "title": "YOUTUBE THUMBNAIL BANNERS",
+            "cards": [
+              {
+                "src": "https://img.freepik.com/free-psd/podcast-template-design_23-2151539207.jpg"
+              },
+              {
+                "src": "https://elements-resized.envatousercontent.com/elements-cover-images/2f63d344-94c7-41fc-99a2-ee2e9d06d172?w=433&cf_fit=scale-down&q=85&format=auto&s=e3aaf0fb9c4fa092fdb369e64d30df40a9f629b437a4e2c396dd1ab0efbc7280"
+              }
+            ]
+          },
+          {
+            "title": "BUSINESS PROMO BANNERS",
+            "cards": [
+              {
+                "src": "https://marketplace.canva.com/EAG6UvVn80U/1/0/1600w/canva-yellow-orange-illustrative-flavor-fiesta-banner-DFYZOAt9edc.jpg"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAG2qSvSD4k/1/0/400w/canva-purple-and-white-modern-neon-cyber-monday-banner-Mp1VSJa1NjQ.jpg"
+              },
+              {
+                "src": "https://i.ytimg.com/vi/vRZ9LWjVtHw/maxresdefault.jpg"
+              }
+            ]
+          }
+        ],
+        "footer": {
+          "bg": "#f3f1ee",
+          "single": {
+            "title": "About Social Media Banners",
+            "titleColor": "#1877f2",
+            "text": "We create high-quality social media banners that help brands grow, attract audience and boost engagement across all platforms."
+          }
+        }
+      }
+    },
+    {
+      "slug": "personal-portfolios",
+      "label": "Personal Portfolios",
+      "category": "Web Apps",
+      "data": {
+        "hero": {
+          "gradient": "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)",
+          "badge": {
+            "text": "👨‍💻 PROFESSIONAL PORTFOLIOS",
+            "bg": "rgba(16, 185, 129, 0.1)",
+            "border": "rgba(16, 185, 129, 0.2)",
+            "color": "#10b981"
+          },
+          "title": {
+            "main": "Showcase Your",
+            "highlight": " Talent",
+            "highlightColor": "#10b981",
+            "textColor": "#0f172a"
+          },
+          "description": "Clean, modern portfolio websites that impress clients and highlight your skills, projects, and experience.",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#10b981",
+            "color": "#ffffff",
+            "shadow": "rgba(16, 185, 129, 0.3)",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "bg": "#ffffff",
+            "href": "/how-it-works"
+          },
+          "stats": [
+            {
+              "value": "300+",
+              "label": "Portfolios Built",
+              "color": "#10b981"
+            },
+            {
+              "value": "100%",
+              "label": "Responsive Design",
+              "color": "#10b981"
+            },
+            {
+              "value": "48hrs",
+              "label": "Quick Delivery",
+              "color": "#10b981"
+            }
+          ],
+          "backgroundPattern": {
+            "type": "decorative-lines",
+            "line1": {
+              "top": "15%",
+              "left": "10%",
+              "width": "2px",
+              "height": "100px"
+            },
+            "line2": {
+              "bottom": "20%",
+              "right": "15%",
+              "width": "2px",
+              "height": "80px"
+            }
+          }
+        },
+        "topSection": {
+          "title": "Personal Portfolios",
+          "subtitle": "Build Your Professional Identity Online",
+          "featuredCards": [
+            {
+              "src": "https://marketplace.canva.com/EAFbPawId5c/3/0/1600w/canva-cream-and-blue-pastel-abstract-creative-portfolio-presentation-lMoy0Rfdi80.jpg"
+            },
+            {
+              "src": "https://i.pinimg.com/736x/f6/54/3a/f6543ac8214bb357f4f9fcba20b578f9.jpg"
+            }
+          ],
+          "infoBox": {
+            "icon": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+            "text": "Modern personal portfolio designs for developers, designers, freelancers and creatives."
+          },
+          "bgColor": "#F0F0F0"
+        },
+        "banner": {
+          "bg": "#e6fff5",
+          "title": "Showcase your talent",
+          "titleColor": "#000000",
+          "text": "Impress clients with a powerful portfolio",
+          "textColor": "#000000",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#10b981",
+            "color": "white",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "color": "#10b981",
+            "href": "/how-it-works"
+          }
+        },
+        "sections": [
+          {
+            "title": "CREATIVE PORTFOLIOS",
+            "cards": [
+              {
+                "src": "https://marketplace.canva.com/EAGzN8IlBw8/1/0/1600w/canva-brown-red-scrapbook-portfolio-presentation-RyR7Ie9ZtdQ.jpg"
+              },
+              {
+                "src": "https://marketplace.canva.com/EAGYfzomCjs/2/0/1600w/canva-black-white-bold-creative-portfolio-presentation-w379q5DWbdY.jpg"
+              }
+            ]
+          },
+          {
+            "title": "DEVELOPER PORTFOLIOS",
+            "cards": [
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3-8rLCCFQGkAwvh-6U8bp6JC67OgbvdSaKg&s"
+              },
+              {
+                "src": "https://htmlburger.com/blog/wp-content/uploads/2024/02/developer-portfolios.jpg"
+              },
+              {
+                "src": "https://static-academy.siteground.com/wp-content/uploads/sites/2/2025/02/Web-developer-portfolio-page-Bipin-MV-1.jpg"
+              }
+            ]
+          },
+          {
+            "title": "DESIGNER PORTFOLIOS",
+            "cards": [
+              {
+                "src": "https://gridgum.com/images/themes/freelancer-bootstrap-4.jpg"
+              },
+              {
+                "src": "https://i.pinimg.com/736x/46/0f/5b/460f5b272c19e441dcc5ff89fff69533.jpg"
+              },
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj-uch8V_5bCJvMBmeDNVk3CeXVUvQ_TZkoA&s"
+              }
+            ]
+          },
+          {
+            "title": "FREELANCER PORTFOLIOS",
+            "cards": [
+              {
+                "src": "https://templately.com/_next/image?url=https%3A%2F%2Fitems.templately.com%2Fpack-3e6c91dbe9839633023640a037cfd128%2Ftechnophile-tech-freelancer-portfolio-template-for-gutenberg-banner-R5TkA8n.jpg&w=3840&q=75"
+              },
+              {
+                "src": "https://framerusercontent.com/images/Pq6TVHKs5NPsZ4nEIh8QjLVJh84.png?width=1100&height=652"
+              }
+            ]
+          }
+        ],
+        "footer": {
+          "bg": "#f3f1ee",
+          "single": {
+            "title": "About Personal Portfolios",
+            "titleColor": "#10b981",
+            "text": "We design modern portfolio websites that help you showcase your work, skills, and experience to clients and employers."
+          }
+        }
+      }
+    },
+    {
+      "slug": "landing-pages",
+      "label": "Landing Pages",
+      "category": "Web Apps",
+      "data": {
+        "hero": {
+          "gradient": "linear-gradient(135deg, #fff7ed 0%, #fed7aa 50%, #f97316 100%)",
+          "badge": {
+            "text": "🚀 HIGH-CONVERTING DESIGNS",
+            "bg": "rgba(255, 255, 255, 0.7)",
+            "border": "rgba(249, 115, 22, 0.3)",
+            "color": "#ea580c"
+          },
+          "title": {
+            "main": "Landing Pages That",
+            "highlight": " Convert",
+            "highlightColor": "#f97316",
+            "textColor": "#7c2d12"
+          },
+          "description": "Data-driven landing page designs optimized for conversions, lead generation, and business growth.",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#f97316",
+            "color": "#ffffff",
+            "shadow": "rgba(249, 115, 22, 0.4)",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "bg": "rgba(255, 255, 255, 0.8)",
+            "href": "/how-it-works"
+          },
+          "stats": [
+            {
+              "value": "250%",
+              "label": "Avg Conversion Lift",
+              "color": "#ea580c"
+            },
+            {
+              "value": "400+",
+              "label": "Pages Launched",
+              "color": "#ea580c"
+            },
+            {
+              "value": "A/B Tested",
+              "label": "Optimized Designs",
+              "color": "#ea580c"
+            }
+          ],
+          "backgroundPattern": {
+            "type": "emoji-decorations",
+            "emoji1": {
+              "emoji": "📈",
+              "top": "10%",
+              "right": "8%",
+              "fontSize": "100px",
+              "opacity": "0.1",
+              "transform": "rotate(-15deg)"
+            },
+            "emoji2": {
+              "emoji": "🎯",
+              "bottom": "15%",
+              "left": "8%",
+              "fontSize": "80px",
+              "opacity": "0.08"
+            }
+          }
+        },
+        "topSection": {
+          "title": "Landing Pages",
+          "subtitle": "High-Converting Website Designs for Businesses",
+          "featuredCards": [
+            {
+              "src": "https://images.reallygooddesigns.com/2023/01/landing-page-examples.jpg"
+            },
+            {
+              "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRasXPRJn5czJ4NWGXAOcsG_ptKQ0sTHP5EBqQCGOUT&s"
+            }
+          ],
+          "infoBox": {
+            "icon": "https://cdn-icons-png.flaticon.com/512/1006/1006771.png",
+            "text": "Modern landing page designs focused on conversion, sales, and lead generation."
+          },
+          "bgColor": "#F0F0F0"
+        },
+        "banner": {
+          "bg": "#fff3e6",
+          "title": "Boost your conversions",
+          "titleColor": "#000000",
+          "text": "High-performing landing page designs",
+          "textColor": "#000000",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#f97316",
+            "color": "white",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "color": "#f97316",
+            "href": "/how-it-works"
+          }
+        },
+        "sections": [
+          {
+            "title": "SAAS LANDING PAGES",
+            "cards": [
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSimlI48RBd2mDewNnXXa7LJp9z8Ygs6eF89A&s"
+              },
+              {
+                "src": "https://cdn.prod.website-files.com/659415b46df8ea43c3877776/65b271bdf6244bbc0dd6955f_officevibe-landing-page.jpeg"
+              }
+            ]
+          },
+          {
+            "title": "PRODUCT LANDING PAGES",
+            "cards": [
+              {
+                "src": "https://i.etsystatic.com/29487994/r/il/72a8ac/5955708327/il_570xN.5955708327_ky7d.jpg"
+              },
+              {
+                "src": "https://cdn.creativefabrica.com/2023/05/16/Canva-Digital-How-to-Products-Template-Graphics-69789894-1-1-580x359.png"
+              },
+              {
+                "src": "https://i.fbcd.co/products/resized/resized-750-500/20-03c3d3fa23eb8b2d139fbbbdc115b84cdb4bda5e0690f94e06a87b11c874408a.jpg"
+              }
+            ]
+          },
+          {
+            "title": "APP LANDING PAGES",
+            "cards": [
+              {
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGFfQvZHhxyiw3oIQ-jh-xPIK3mAZX32lnpg&s"
+              },
+              {
+                "src": "https://static.showit.co/800/HGDFkmj1Spet_FAbJWIMMQ/161191/5.png"
+              },
+              {
+                "src": "https://www.healthcoachfx.com/wp-content/uploads/2019/02/FCS-Mockup.png"
+              }
+            ]
+          },
+          {
+            "title": "BUSINESS LANDING PAGES",
+            "cards": [
+              {
+                "src": "https://cdn.dribbble.com/userupload/12642187/file/original-172002dd1b62a680829d4fb9f3f5a3cb.jpg?resize=752x&vertical=center"
+              },
+              {
+                "src": "https://img.freepik.com/free-psd/flat-design-business-concept-landing-page-template_23-2150055109.jpg?semt=ais_hybrid&w=740&q=80"
+              }
+            ]
+          }
+        ],
+        "footer": {
+          "bg": "#f3f1ee",
+          "single": {
+            "title": "About Landing Pages",
+            "titleColor": "#f97316",
+            "text": "We design high-converting landing pages that help businesses generate leads, sales, and grow faster online."
+          }
+        }
+      }
+    },
+    {
+      "slug": "next-gen-web-apps",
+      "label": "Next-Gen Web Apps",
+      "category": "Web Apps",
+      "data": {
+        "hero": {
+          "gradient": "linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%)",
+          "badge": {
+            "text": "⚡ AI-POWERED DEVELOPMENT",
+            "bg": "rgba(96, 165, 250, 0.2)",
+            "border": "rgba(96, 165, 250, 0.3)",
+            "color": "#60a5fa"
+          },
+          "title": {
+            "main": "Build Next-Gen",
+            "highlight": " Web Apps",
+            "highlightColor": "#60a5fa",
+            "textColor": "#ffffff"
+          },
+          "description": "Scalable, fast, and intelligent web applications powered by modern architecture and AI integration.",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#2563eb",
+            "color": "#ffffff",
+            "shadow": "rgba(37, 99, 235, 0.5)",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "href": "/how-it-works"
+          },
+          "stats": [
+            {
+              "value": "50+",
+              "label": "Apps Deployed",
+              "color": "#60a5fa"
+            },
+            {
+              "value": "99.9%",
+              "label": "Uptime Guaranteed",
+              "color": "#60a5fa"
+            },
+            {
+              "value": "10x",
+              "label": "Faster Development",
+              "color": "#60a5fa"
+            }
+          ],
+          "backgroundPattern": {
+            "type": "tech-grid",
+            "grid": "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)",
+            "gridSize": "40px 40px",
+            "glow": "radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%)",
+            "glowPos": {
+              "top": "20%",
+              "right": "5%",
+              "width": "400px",
+              "height": "400px"
+            }
+          }
+        },
+        "topSection": {
+          "title": "Next-Gen Web Apps",
+          "subtitle": "Powerful, Fast & Scalable Modern Web Applications",
+          "featuredCards": [
+            {
+              "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr4BvviVELM-5WJyX9OidZNcSBhYaTMUQ8nw&s"
+            },
+            {
+              "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS38y2QgeTZYFd-6xS9MVsbulUuYtHtNGXftA&s"
+            }
+          ],
+          "infoBox": {
+            "icon": "https://cdn-icons-png.flaticon.com/512/2721/2721287.png",
+            "text": "We build scalable next-gen web applications using modern UI, AI tools, and cloud architecture."
+          },
+          "bgColor": "#F0F0F0"
+        },
+        "banner": {
+          "bg": "#e6f0ff",
+          "title": "Build Future Ready Apps",
+          "titleColor": "#000000",
+          "text": "Fast, scalable and AI-powered web solutions",
+          "textColor": "#000000",
+          "primaryBtn": {
+            "text": "Order Now",
+            "bg": "#2563eb",
+            "color": "white",
+            "href": "/contact"
+          },
+          "secondaryBtn": {
+            "text": "Join & Earn",
+            "color": "#2563eb",
+            "href": "/how-it-works"
+          }
+        },
+        "sections": [
+          {
+            "title": "AI POWERED WEB APPS",
+            "cards": [
+              {
+                "src": "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop"
+              },
+              {
+                "src": "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200&auto=format&fit=crop"
+              }
+            ]
+          },
+          {
+            "title": "SAAS DASHBOARD APPS",
+            "cards": [
+              {
+                "src": "https://static.tildacdn.com/tild3637-3438-4538-a663-356239393261/Frame_53.png"
+              },
+              {
+                "src": "https://mir-s3-cdn-cf.behance.net/project_modules/fs/9e3ed7112916627.602a4406349a9.png"
+              },
+              {
+                "src": "https://mir-s3-cdn-cf.behance.net/projects/404/0cd625183344305.Y3JvcCwzMDY4LDI0MDAsNjgsMA.png"
+              }
+            ]
+          },
+          {
+            "title": "ECOMMERCE WEB APPS",
+            "cards": [
+              {
+                "src": "https://www.smarther.co/wp-content/uploads/2020/06/ecom-app-website.jpg"
+              },
+              {
+                "src": "https://cdn.dribbble.com/userupload/9000434/file/original-903fac30a0a944a36dcfaeb29e373619.png?format=webp&resize=400x300&vertical=center"
+              },
+              {
+                "src": "https://www.globalsofttech.in/assets/img/portfolio/p-9.webp"
+              }
+            ]
+          },
+          {
+            "title": "FINTECH APPLICATIONS",
+            "cards": [
+              {
+                "src": "https://qarea.com/wp-content/uploads/2023/11/1-A-Comprehensive-Guide-to-Fintech-App-Development.png"
+              },
+              {
+                "src": "https://www.claysys.com/app/uploads/2022/03/Building_FinTech_Apps.png"
+              }
+            ]
+          }
+        ],
+        "footer": {
+          "bg": "#f3f1ee",
+          "single": {
+            "title": "About Next-Gen Web Apps",
+            "titleColor": "#2563eb",
+            "text": "We create modern, scalable and high-performance web applications designed for businesses that want to grow in the digital era."
+          }
+        }
+      }
+    }
+  ],
+  "pricing": {
+    "hero": {
+      "heading": "YOUR WEBSITE STARTS HERE.",
+      "description": "Choose the right website package for your business."
+    },
+    "plans": [
+      {
+        "id": "starter-website",
+        "title": "Starter Website",
+        "description": "Ideal for personal brands, portfolios, and small businesses starting online.",
+        "price": "₹15,000",
+        "color": "bg-orange-500",
+        "features": [
+          "Up to 5-7 Pages",
+          "Responsive Design",
+          "Basic UI/UX Layout",
+          "Contact Form",
+          "Basic SEO Setup",
+          "Delivery: 7-10 working Days"
+        ]
+      },
+      {
+        "id": "business-website",
+        "title": "Business Website",
+        "description": "Perfect for growing businesses that need a professional and complete online presence.",
+        "price": "₹25,000",
+        "color": "bg-green-500",
+        "features": [
+          "Up to 7-12 Pages",
+          "Custom UI/UX Design",
+          "Fully Responsive Design",
+          "CMS Integration",
+          "On-page SEO Optimization",
+          "Contact & Inquiry Forms",
+          "Delivery: 14-18 Working Days"
+        ]
+      },
+      {
+        "id": "custom-website",
+        "title": "Custom Website",
+        "description": "For businesses that need a website built around their specific requirements.",
+        "price": "Depends on Complexity",
+        "color": "bg-orange-600",
+        "features": [
+          "Pages According to Need / Admin Dashboard",
+          "Custom Premium Design",
+          "Advanced UI/UX & Animations",
+          "E-commerce or Booking Integration",
+          "Speed & Performance Optimization",
+          "SEO & Analytics Setup",
+          "Priority Support",
+          "Delivery: According to Project"
+        ]
+      },
+      {
+        "id": "plan-1791389521656-3",
+        "title": "pricing",
+        "description": "ham app ke hai kon or kuch chutiya ",
+        "price": "kalu",
+        "color": "bg-blue-500",
+        "features": [
+          "jjfkfkfkfkf",
+          "mkmkmk",
+          "lmlojoijiji",
+          "lpkpkpk"
+        ]
+      }
+    ]
+  },
+  "howItWorks": {
+    "heroTitle": "How It Works",
+    "heroDescription": "Join our partner network and earn up to 65% commission on every project. Simple, transparent, and profitable.",
+    "heroImage": "https://engineersealstamps.com/cdn/shop/products/in-use-great-job-stamp-4773-photo-1_a600c697-e7ec-4ee7-89e3-f7288a7894e4.jpg?v=1683890415&width=1500",
+    "tiers": [
+      {
+        "name": "Referral Partner",
+        "percentage": "20%",
+        "description": "Simply refer clients to us",
+        "features": [
+          "Share client leads",
+          "No technical work required",
+          "Passive income stream",
+          "Unlimited referrals"
+        ],
+        "color": "bg-blue-500"
+      },
+      {
+        "name": "Closing Expert",
+        "percentage": "25%",
+        "description": "Help negotiate and close deals",
+        "features": [
+          "Manage client communication",
+          "Negotiate contracts",
+          "Higher earning potential",
+          "Direct client interaction"
+        ],
+        "color": "bg-purple-500"
+      },
+      {
+        "name": "Full Handling",
+        "percentage": "30%",
+        "description": "End-to-end project management",
+        "features": [
+          "Complete project ownership",
+          "Maximum earnings",
+          "Priority project allocation",
+          "Dedicated support"
+        ],
+        "color": "bg-emerald-500"
+      }
+    ],
+    "workflowSteps": [
+      {
+        "number": "01",
+        "title": "Connect",
+        "description": "Share client leads or help close deals"
+      },
+      {
+        "number": "02",
+        "title": "We Build",
+        "description": "Our team delivers exceptional results"
+      },
+      {
+        "number": "03",
+        "title": "Get Paid",
+        "description": "Receive your earnings within 7 days"
+      }
+    ],
+    "yourRole": [
+      "Identify and connect with potential clients",
+      "Share project requirements with our team",
+      "Facilitate initial discussions (optional)",
+      "Maintain client relationships",
+      "Track project progress and earnings"
+    ],
+    "ourRole": [
+      "Handle all technical development",
+      "Manage project timelines and delivery",
+      "Provide regular progress updates",
+      "Ensure quality assurance and testing",
+      "Process your earnings promptly"
+    ],
+    "whyChooseUs": [
+      {
+        "icon": "FiDollarSign",
+        "title": "High Commissions",
+        "description": "Earn up to 65% on every project you bring"
+      },
+      {
+        "icon": "FiShield",
+        "title": "Secure Payments",
+        "description": "Transparent and timely payouts guaranteed"
+      },
+      {
+        "icon": "FiTarget",
+        "title": "Quality Delivery",
+        "description": "We ensure exceptional results for your clients"
+      },
+      {
+        "icon": "FiUsers",
+        "title": "Dedicated Support",
+        "description": "24/7 assistance for partners and clients"
+      },
+      {
+        "icon": "FiTrendingUp",
+        "title": "Growth Potential",
+        "description": "Scale your earnings with more projects"
+      },
+      {
+        "icon": "FiZap",
+        "title": "Fast Turnaround",
+        "description": "Quick project completion and delivery"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How do I become a partner?",
+        "answer": "Simply click \"Get Started\" and fill out the partner application form. Our team will review your profile and get back to you within 24 hours."
+      },
+      {
+        "question": "When do I get paid?",
+        "answer": "Payments are processed within 7 days of project completion and client payment."
+      },
+      {
+        "question": "Do I need technical skills?",
+        "answer": "Not necessarily! As a referral partner, you just need to connect us with potential clients."
+      },
+      {
+        "question": "Is there a minimum project value?",
+        "answer": "We work with projects starting from ₹10,000."
+      },
+      {
+        "question": "Can I work on multiple projects?",
+        "answer": "Absolutely! There is no limit to how many clients you can refer."
+      }
+    ],
+    "calculator": {
+      "heading": "Calculate Your Potential",
+      "description": "See how much you can earn based on project value and your role",
+      "defaultProjectValue": 50000,
+      "defaultRole": "Referral",
+      "defaultPercentage": 30,
+      "defaultEarnings": 15000,
+      "buttonText": "Try Interactive Calculator",
+      "buttonLink": "/calculator"
+    },
+    "ctaTitle": "Ready to Start Earning?",
+    "ctaDescription": "Join hundreds of partners who are already earning with us. Start your journey today.",
+    "ctaWhatsApp": "https://wa.me/919760926681?text=Hello%2C%20I%20want%20to%20start%20a%20project.",
+    "ctaPrimaryText": "Contact on WhatsApp",
+    "ctaSecondaryText": "Get Started Now",
+    "ctaSecondaryLink": "/contact",
+    "ctaBackgroundImage": ""
+  },
+  "calculator": {
+    "heroSection": {
+      "badgeText": "Partner Revenue v2.0",
+      "heading": "Predict your",
+      "highlightText": "success",
+      "description": ""
+    },
+    "projectValue": {
+      "minValue": 1,
+      "maxValue": 2500000,
+      "defaultValue": 0,
+      "currency": "₹",
+      "capLabel": "No cap • Any amount"
+    },
+    "calculatorLogic": {
+      "maxEarning": 9999999,
+      "rounding": 0,
+      "displayFormat": "en-IN"
+    },
+    "resultCard": {
+      "heading": "Tier Earnings",
+      "label": "Your Share",
+      "emptyStateMessage": "Enter amount to see 20% / 25% / 30% breakdown",
+      "currency": "₹",
+      "resultFormatting": "en-IN"
+    },
+    "ctaCard": {
+      "heading": "Ready to convert?",
+      "description": "Join our elite network of partners and get access to high-ticket projects.",
+      "primaryButton": "WhatsApp",
+      "secondaryButton": "Join Now",
+      "whatsappLink": "https://wa.me/919760926681?text=Hello%2C%20I%20want%20to%20start%20a%20project.",
+      "joinButtonLink": "/contact",
+      "backgroundImage": ""
+    },
+    "globalSettings": {
+      "currencySymbol": "₹",
+      "buttonLabels": {
+        "calculate": "Calculate My Cut",
+        "processing": "Processing..."
+      },
+      "animationToggle": true,
+      "calculationDelay": 600
+    },
+    "tiers": [
+      {
+        "title": "Partner at 20%",
+        "percentage": 20,
+        "description": "20% → Project amount ka 20%",
+        "icon": "FiShare2",
+        "accentColor": "#32483e",
+        "displayOrder": 0,
+        "isEnabled": true
+      },
+      {
+        "title": "Partner at 25%",
+        "percentage": 25,
+        "description": "25% → Project amount ka 25% — balanced starting point",
+        "icon": "FiTarget",
+        "accentColor": "#32483e",
+        "displayOrder": 1,
+        "isEnabled": true
+      },
+      {
+        "title": "Partner at 30%",
+        "percentage": 30,
+        "description": "30% → Project amount ka 30% — qualified leads + follow-up + client relationship",
+        "icon": "FiAward",
+        "accentColor": "#32483e",
+        "displayOrder": 2,
+        "isEnabled": true
+      }
+    ]
+  },
+  "testimonials": {
+    "hero": {
+      "heading": "WHAT OUR CLIENTS SAY",
+      "description": "See what our clients have to say about their website projects and experiences working with us."
+    },
+    "items": [
+      {
+        "id": "testimonial-1",
+        "name": "Aarav Sharma",
+        "designation": "Founder",
+        "company": "TechStart",
+        "rating": 5,
+        "content": "Kaiyo delivered an exceptional website that perfectly captures our brand. Highly recommend!",
+        "createdAt": "2026-10-06T00:00:00.000Z"
+      },
+      {
+        "id": "testimonial-2",
+        "name": "Priya Patel",
+        "designation": "CEO",
+        "company": "DesignHub",
+        "rating": 5,
+        "content": "Amazing team, fast delivery, and great support. Our conversions increased by 40%.",
+        "createdAt": "2026-10-06T00:00:00.000Z"
+      }
+    ]
+  },
+  "contact": {
+    "heading": "LET'S BUILD YOUR WEBSITE",
+    "description": "Tell us about your business or idea. We'll turn it into a clean, modern website.",
+    "contactInfoHeading": "GET IN TOUCH",
+    "contactInfoDescription": "Fill out the form and tell us what you need. We'll get back to you soon.",
+    "phone": "9760926681",
+    "whatsapp": "9760926681",
+    "faqs": [
+      {
+        "question": "What services does Kaiyo offer?",
+        "answer": "We offer a wide range of digital services including web design, development, branding, social media graphics, and digital invitations. Each solution is tailored to your specific needs."
+      },
+      {
+        "question": "How long does a typical project take?",
+        "answer": "Project timelines vary based on complexity. A standard website takes 7-10 days, while more complex custom solutions may take 14-18 days or longer depending on requirements."
+      },
+      {
+        "question": "What is the pricing structure?",
+        "answer": "Our pricing starts at $15,000 for starter websites and goes up based on complexity. We offer custom quotes for enterprise solutions and unique project requirements."
+      },
+      {
+        "question": "Do you offer post-launch support?",
+        "answer": "Yes, we provide ongoing support and maintenance packages to ensure your digital presence remains up-to-date and performs optimally."
+      },
+      {
+        "question": "How do I get started?",
+        "answer": "Simply fill out the contact form or reach out via WhatsApp. We will schedule a consultation to understand your vision and provide a tailored proposal."
+      }
+    ],
+    "submissions": []
+  },
+  "media": {
+    "images": [
+      {
+        "path": "/images/coffee.webp",
+        "name": "coffee.webp"
+      },
+      {
+        "path": "/images/download.png",
+        "name": "download.png"
+      },
+      {
+        "path": "/images/Kaiyologo.png",
+        "name": "Kaiyologo.png"
+      },
+      {
+        "path": "/images/kk.png",
+        "name": "kk.png"
+      },
+      {
+        "path": "/images/support-qr.png",
+        "name": "support-qr.png"
+      }
+    ],
+    "videos": [
+      {
+        "path": "/video/Vide.mp4",
+        "name": "Vide.mp4"
+      }
+    ]
+  },
+  "updatedAt": "2026-10-09T06:55:47.321Z"
+}

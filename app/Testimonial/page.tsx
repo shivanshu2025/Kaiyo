@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Star, MessageSquareQuote, ChevronLeft, ChevronRight, Send } from 'lucide-react';
 import Link from 'next/link';
+import { useCmsData } from '@/lib/use-cms';
 
 type TestimonialResponse = {
   _id: string;
@@ -37,6 +38,26 @@ const staticTestimonials: TestimonialResponse[] = [
   },
 ];
 
+const staticHero = {
+  heading: 'WHAT OUR CLIENTS SAY',
+  description:
+    'See what our clients have to say about their website projects and experiences working with us.',
+};
+
+function toDisplayTestimonials(items: any[] | undefined): TestimonialResponse[] {
+  if (!items || items.length === 0) return staticTestimonials;
+  return items.map((item, index) => ({
+    _id: item.id ?? String(index),
+    name: item.name ?? '',
+    avatar: item.avatar || item.image || undefined,
+    designation: item.designation || undefined,
+    company: item.company || undefined,
+    rating: Number(item.rating) || 0,
+    message: item.content ?? '',
+    createdAt: item.createdAt ?? new Date().toISOString(),
+  }));
+}
+
 function TestimonialSkeleton() {
   return (
     <div className="relative">
@@ -57,7 +78,11 @@ function TestimonialSkeleton() {
 }
 
 export default function TestimonialsPage() {
-  const [testimonials] = useState<TestimonialResponse[]>(staticTestimonials);
+  const { value: testimonials } = useCmsData<TestimonialResponse[]>(
+    (cms) => toDisplayTestimonials(cms.testimonials?.items),
+    staticTestimonials
+  );
+  const { value: hero } = useCmsData((cms) => cms.testimonials?.hero ?? staticHero, staticHero);
   const [page, setPage] = useState(1);
   const totalPages = 1;
   const hasMore = false;
@@ -69,11 +94,11 @@ export default function TestimonialsPage() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
           <div>
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight text-gray-900">
-WHAT OUR CLIENTS SAY
+<h1 className="text-5xl md:text-6xl font-bold leading-tight text-gray-900">
+              {hero?.heading || staticHero.heading}
             </h1>
             <p className="mt-8 text-lg text-gray-600 max-w-xl leading-relaxed">
-See what our clients have to say about their website projects and experiences working with us.
+              {hero?.description || staticHero.description}
             </p>
             <Link
               href="/Testimonial/submit"
@@ -175,7 +200,7 @@ See what our clients have to say about their website projects and experiences wo
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-4 mt-12">
                 <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  onClick={() => setPage((p: number) => Math.max(1, p - 1))}
                   disabled={page === 1}
                   className="flex items-center gap-1 bg-white px-4 py-2 rounded-full shadow-sm text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
                 >
@@ -186,7 +211,7 @@ See what our clients have to say about their website projects and experiences wo
                   Page {page} of {totalPages}
                 </span>
                 <button
-                  onClick={() => setPage((p) => (hasMore ? p + 1 : p))}
+                  onClick={() => setPage((p: number) => (hasMore ? p + 1 : p))}
                   disabled={!hasMore}
                   className="flex items-center gap-1 bg-white px-4 py-2 rounded-full shadow-sm text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
                 >

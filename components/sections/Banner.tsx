@@ -4,7 +4,7 @@ import { motion, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useRef, useState, type MouseEvent } from 'react';
 
-const items = [
+const defaultItems = [
   {
     title: 'DIGITAL, BUT DIFFERENT',
     desc: 'We create websites that give your business a strong identity online.',
@@ -23,11 +23,11 @@ const items = [
 ];
 
 type BannerData = {
-  title: string;
-  description: string;
-  image: string;
-  ctaText: string;
-  ctaLink: string;
+  heading?: string;
+  description?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  listItems?: Array<{ title: string; desc: string }>;
 };
 
 interface Props {
@@ -36,6 +36,14 @@ interface Props {
 
 export default function OpportunitySection({ dynamicContent }: Props) {
   const banner = dynamicContent;
+  const heading = banner?.heading?.trim() || 'THE TIME IS NOW';
+  const buttonText = banner?.buttonText?.trim() || 'THE PATH IS';
+  const buttonLinkWord = banner?.buttonLink?.replace('/', '') || 'FORWARD';
+  const listItems = banner?.listItems;
+  const items =
+    listItems && listItems.length > 0
+      ? listItems.map((item) => ({ title: item.title, desc: item.desc, active: false }))
+      : defaultItems;
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [activeIndex, setActiveIndex] = useState(1);
@@ -136,9 +144,9 @@ export default function OpportunitySection({ dynamicContent }: Props) {
 
           <motion.div style={{ x: textX, y: textY }} className="overflow-hidden">
             <h2 className="text-[clamp(40px,10vw,140px)] sm:text-[clamp(48px,11vw,140px)] font-black uppercase leading-[0.8] tracking-tighter md:text-[clamp(48px,8vw,140px)] lg:text-[clamp(48px,10vw,140px)]">
-              {banner?.title || 'THE TIME IS NOW'}
+              {heading}
               <br />
-              <span className="text-stone-500">{banner?.ctaText || 'THE PATH IS'}</span> {banner?.ctaLink?.replace('/', '') || 'FORWARD'}
+              <span className="text-stone-500">{buttonText}</span> {buttonLinkWord}
             </h2>
           </motion.div>
 

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import SolutionsDropdown from './SolutionsDropdown';
+import { useSiteSettings } from '@/lib/use-cms';
 
 interface NavLink {
   name: string;
@@ -39,6 +40,8 @@ export default function Navbar({
 }: NavbarProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { value: siteSettings } = useSiteSettings();
+  const logoSrc = siteSettings?.logo?.trim() || '/images/Kaiyologo.png';
 
   useEffect(() => {
     setMenuOpen(false);
@@ -63,7 +66,7 @@ export default function Navbar({
                 className="relative z-10 flex items-center gap-2"
               >
                 <Image
-                  src="/images/Kaiyologo.png"
+                  src={logoSrc}
                   alt="WEB STUDIO"
                   width={48}
                   height={48}

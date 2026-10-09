@@ -1,1 +1,1 @@
-export { default } from '../portfolios/page';
+export { default, dynamic } from '../portfolios/page';
