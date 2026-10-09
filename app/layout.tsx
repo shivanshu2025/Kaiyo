@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Caveat } from 'next/font/google';
+import localFont from 'next/font/local';
 import FooterWrapper from '@/components/sections/FooterWrapper';
 import NavbarWrapper from '@/components/sections/NavbarWrapper';
 import SupportWidget from '@/components/sections/SupportWidget/SupportWidget';
@@ -44,16 +44,18 @@ export const metadata: Metadata = {
   },
 };
 
-const inter = Inter({
-  subsets: ['latin'],
+const inter = localFont({
+  src: [{ path: '../public/fonts/inter-latin-var.woff2', weight: '100 900', style: 'normal' }],
   display: 'swap',
-  adjustFontFallback: true,
+  fallback: ['system-ui', 'Arial', 'sans-serif'],
+  adjustFontFallback: 'Arial',
+  variable: '--font-inter',
 });
 
-const caveat = Caveat({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
+const caveat = localFont({
+  src: [{ path: '../public/fonts/caveat-latin-var.woff2', weight: '400 700', style: 'normal' }],
   display: 'swap',
+  fallback: ['cursive'],
   variable: '--font-caveat',
 });
 
@@ -64,22 +66,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased flex flex-col',
-          inter.className,
+          inter.variable,
           caveat.variable
         )}
       >

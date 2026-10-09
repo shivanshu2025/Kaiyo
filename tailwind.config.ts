@@ -19,6 +19,7 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
+        sans: ['var(--font-inter)', 'system-ui', 'Arial', 'sans-serif'],
         caveat: ['var(--font-caveat)', 'cursive'],
       },
       colors: {
