@@ -151,8 +151,8 @@ export default function PortfolioPage({ dynamicCollections }: Props) {
               whileHover={{ scale: 1.02, rotate: -1 }}
               className="relative flex w-full max-w-[420px] sm:max-w-[440px] md:max-w-none aspect-square flex-col justify-between overflow-hidden rounded-[2rem] bg-[#004643] p-6 sm:p-8 md:p-10 lg:p-12 shadow-[0_50px_100px_-20px_rgba(0,70,67,0.3)] sm:rounded-[2.5rem] lg:rounded-[3.5rem]"
             >
-<h3 className="relative z-20 font-black uppercase leading-[0.85] tracking-tighter text-[#E9E9E7] text-[clamp(1.75rem,8vw,2.25rem)] sm:text-[2.1rem] md:text-[2.5rem] lg:text-5xl xl:text-6xl">
-DESIGN. BUILD. DELIVER.
+ <h3 className="relative z-20 font-black uppercase leading-[0.85] tracking-tighter text-[#E9E9E7] text-[clamp(1.75rem,8vw,2.25rem)] sm:text-[2.1rem] md:text-[2.5rem] lg:text-5xl xl:text-6xl">
+ DESIGN. BUILD. DELIVER.
                   <br />
                   WE BUILD YOUR WEBSITE.
                </h3>
