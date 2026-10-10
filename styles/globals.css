@@ -185,6 +185,76 @@ body::-webkit-scrollbar {
   }
 }
 
+/* ============================================================
+   Admin dashboard theme tokens
+   Scoped: only elements inside `.kaiyo-admin` are affected.
+   The public site never receives `.kaiyo-admin` or `.dark`,
+   so its rendering is unchanged.
+   ============================================================ */
+
+/* Light values = stock Tailwind stone/white, so default output is identical. */
+:root {
+  --k-stone-50: 250 250 249;
+  --k-stone-100: 245 245 244;
+  --k-stone-200: 231 229 228;
+  --k-stone-300: 214 211 209;
+  --k-stone-400: 168 162 158;
+  --k-stone-500: 120 113 108;
+  --k-stone-600: 87 83 78;
+  --k-stone-700: 68 64 60;
+  --k-stone-800: 41 37 36;
+  --k-stone-900: 28 25 23;
+  --k-white: 255 255 255;
+}
+
+/* Admin-only brand tokens (sidebar surface, buttons, tooltips). */
+.kaiyo-admin {
+  --admin-surface: #f5f2ed;
+  --admin-surface-hover: #f5f2ed;
+  --admin-canvas: #e9e9e7;
+  --admin-brand: #32483e;
+  --admin-brand-hover: #2a3d34;
+  --admin-ink: #252630;
+  --admin-accent: #99c3af;
+  --admin-danger: #dc2626;
+  --admin-swatch: #facc15;
+}
+
+/* Night mode.
+   Driven by the `kayo-dark` class on <html>, which the pre-paint bootstrap
+   script sets — so the theme is correct before React hydrates (no flicker).
+
+   Scale remapped onto a blue-grey ramp:
+     page #111827 · cards/sidebar #1F2937 · borders #374151/#4B5563
+     headings #F9FAFB · body #D1D5DB · secondary #9CA3AF
+   Light mode below keeps the stock stone values, so it is unchanged. */
+.kayo-dark .kaiyo-admin,
+.kaiyo-admin.dark {
+  color-scheme: dark;
+
+  --k-stone-50: 17 24 39;
+  --k-stone-100: 17 24 39;
+  --k-stone-200: 55 65 81;
+  --k-stone-300: 75 85 99;
+  --k-stone-400: 156 163 175;
+  --k-stone-500: 156 163 175;
+  --k-stone-600: 209 213 219;
+  --k-stone-700: 209 213 219;
+  --k-stone-800: 209 213 219;
+  --k-stone-900: 249 250 251;
+  --k-white: 31 41 55;
+
+  --admin-surface: #1f2937;
+  --admin-surface-hover: #374151;
+  --admin-canvas: #111827;
+  --admin-brand: #4a7c67;
+  --admin-brand-hover: #5b8f78;
+  --admin-ink: #374151;
+  --admin-accent: #99c3af;
+  --admin-danger: #f87171;
+  --admin-swatch: #facc15;
+}
+
 /* 🎞 Animation */
 @keyframes marquee-scroll {
   0% {

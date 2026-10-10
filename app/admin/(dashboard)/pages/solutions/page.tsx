@@ -109,7 +109,7 @@ export default function AdminSolutionsPage() {
                           onClick={() => setSelectedSlug(solution.slug)}
                           className={`w-full rounded-lg px-3 py-2 text-left text-sm transition ${
                             active
-                              ? 'bg-[#32483e] font-semibold text-white'
+                              ? 'bg-[var(--admin-brand)] font-semibold text-white'
                               : 'text-stone-700 hover:bg-stone-100'
                           }`}
                         >

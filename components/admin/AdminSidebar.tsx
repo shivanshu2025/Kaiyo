@@ -92,19 +92,20 @@ export default function AdminSidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                title={item.label}
                 aria-label={item.label}
                 onClick={() => setOpen(false)}
                 className={`group relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors duration-200 ${
                   active
-                    ? 'bg-[#252630] text-[#99c3af]'
-                    : 'text-stone-600 hover:bg-[#F5F2ED] hover:text-stone-900'
+                    ? 'bg-[var(--admin-ink)] text-[var(--admin-accent)]'
+                    : 'text-stone-600 hover:bg-[var(--admin-surface)] hover:text-stone-900'
                 }`}
               >
                 <Icon size={19} strokeWidth={1.8} />
 
-                {/* Tooltip */}
-                <span className="pointer-events-none invisible absolute left-full top-1/2 z-[9999] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-[#252630] px-3 py-2 text-xs font-medium text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-visible:visible group-focus-visible:opacity-100">
+                {/* Custom tooltip is the single source of the visible label.
+                    A native `title` tooltip here would render the same word a
+                    second time a moment after hover. */}
+                <span className="pointer-events-none invisible absolute left-full top-1/2 z-[9999] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-[var(--admin-ink)] px-3 py-2 text-xs font-medium text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-visible:visible group-focus-visible:opacity-100">
                   {item.label}
                 </span>
               </Link>
@@ -117,14 +118,13 @@ export default function AdminSidebar() {
       <div className="mt-auto flex shrink-0 flex-col items-center gap-2 rounded-full bg-white p-1.5">
         <Link
           href="/"
-          title="View website"
           aria-label="View website"
           onClick={() => setOpen(false)}
-          className="group relative flex h-10 w-10 items-center justify-center rounded-full text-stone-600 transition hover:bg-[#F5F2ED] hover:text-stone-900"
+          className="group relative flex h-10 w-10 items-center justify-center rounded-full text-stone-600 transition hover:bg-[var(--admin-surface)] hover:text-stone-900"
         >
           <ExternalLink size={18} strokeWidth={1.8} />
 
-          <span className="pointer-events-none invisible absolute left-full top-1/2 z-[9999] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-[#252630] px-3 py-2 text-xs text-white opacity-0 shadow-lg transition-opacity group-hover:visible group-hover:opacity-100">
+          <span className="pointer-events-none invisible absolute left-full top-1/2 z-[9999] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-[var(--admin-ink)] px-3 py-2 text-xs text-white opacity-0 shadow-lg transition-opacity group-hover:visible group-hover:opacity-100">
             View website
           </span>
         </Link>
@@ -132,13 +132,12 @@ export default function AdminSidebar() {
         <button
           type="button"
           onClick={handleLogout}
-          title="Log out"
           aria-label="Log out"
-          className="group relative flex h-10 w-10 items-center justify-center rounded-full text-stone-600 transition hover:bg-[#F5F2ED] hover:text-red-600"
+          className="group relative flex h-10 w-10 items-center justify-center rounded-full text-stone-600 transition hover:bg-[var(--admin-surface)] hover:text-red-600"
         >
           <LogOut size={18} strokeWidth={1.8} />
 
-          <span className="pointer-events-none invisible absolute left-full top-1/2 z-[9999] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-[#252630] px-3 py-2 text-xs text-white opacity-0 shadow-lg transition-opacity group-hover:visible group-hover:opacity-100">
+          <span className="pointer-events-none invisible absolute left-full top-1/2 z-[9999] ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-[var(--admin-ink)] px-3 py-2 text-xs text-white opacity-0 shadow-lg transition-opacity group-hover:visible group-hover:opacity-100">
             Log out
           </span>
         </button>
@@ -149,7 +148,7 @@ export default function AdminSidebar() {
   return (
     <>
       {/* Mobile bar */}
-      <div className="sticky top-0 z-50 flex items-center justify-between border-b border-stone-200 bg-[#F5F2ED] px-4 py-3 lg:hidden">
+      <div className="sticky top-0 z-50 flex items-center justify-between border-b border-stone-200 bg-[var(--admin-surface)] px-4 py-3 lg:hidden">
         <Link
           href="/admin"
           className="text-sm font-black uppercase tracking-widest text-stone-900"
@@ -169,7 +168,7 @@ export default function AdminSidebar() {
 
       {/* Mobile navigation */}
       {open && (
-        <div className="fixed inset-x-0 bottom-0 top-14 z-40 overflow-y-auto bg-[#F5F2ED] lg:hidden">
+        <div className="fixed inset-x-0 bottom-0 top-14 z-40 overflow-y-auto bg-[var(--admin-surface)] lg:hidden">
           <div className="min-h-full">
             {navContent}
           </div>
@@ -177,7 +176,7 @@ export default function AdminSidebar() {
       )}
 
       {/* Desktop sidebar */}
-      <aside className="sticky top-0 z-50 hidden h-screen w-[98px] shrink-0 overflow-visible border-r border-stone-200 bg-[#F5F2ED] lg:block">
+      <aside className="sticky top-0 z-50 hidden h-screen w-[98px] shrink-0 overflow-visible border-r border-stone-200 bg-[var(--admin-surface)] lg:block">
         {navContent}
       </aside>
     </>

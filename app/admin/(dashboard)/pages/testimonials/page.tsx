@@ -194,7 +194,7 @@ export default function AdminTestimonialsPage() {
                     <Star
                       size={20}
                       className={star <= item.rating ? 'text-yellow-400' : 'text-stone-300'}
-                      fill={star <= item.rating ? '#FACC15' : 'transparent'}
+                      fill={star <= item.rating ? 'var(--admin-swatch)' : 'transparent'}
                     />
                   </button>
                 ))}

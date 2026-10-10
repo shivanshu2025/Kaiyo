@@ -139,7 +139,7 @@ export default function AdminOverviewPage() {
             <Link
               key={stat.label}
               href={stat.href}
-              className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition hover:border-[#32483e]"
+              className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition hover:border-[var(--admin-brand)]"
             >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-medium uppercase tracking-wide text-stone-500">
@@ -157,7 +157,7 @@ export default function AdminOverviewPage() {
       <div className="grid gap-3 sm:grid-cols-2">
         <Link
           href="/admin/pages/contact"
-          className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition hover:border-[#32483e]"
+          className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition hover:border-[var(--admin-brand)]"
         >
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium uppercase tracking-wide text-stone-500">
@@ -171,7 +171,7 @@ export default function AdminOverviewPage() {
 
         <Link
           href="/admin/settings"
-          className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition hover:border-[#32483e]"
+          className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition hover:border-[var(--admin-brand)]"
         >
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium uppercase tracking-wide text-stone-500">

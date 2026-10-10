@@ -50,7 +50,7 @@ export function Field({
 }
 
 export const inputClass =
-  'w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none transition focus:border-[#32483e] focus:ring-1 focus:ring-[#32483e] disabled:bg-stone-100';
+  'w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none transition focus:border-[var(--admin-brand)] focus:ring-1 focus:ring-[var(--admin-brand)] disabled:bg-stone-100';
 
 export const textareaClass = `${inputClass} min-h-[90px] resize-y leading-relaxed`;
 
@@ -66,7 +66,7 @@ export function SaveBar({ saving, onSave, dirty, label = 'Save changes' }: {
         type="button"
         onClick={onSave}
         disabled={saving || dirty === false}
-        className="rounded-lg bg-[#32483e] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2a3d34] disabled:cursor-not-allowed disabled:opacity-60"
+        className="rounded-lg bg-[var(--admin-brand)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--admin-brand-hover)] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {saving ? 'Saving…' : label}
       </button>
@@ -134,7 +134,7 @@ export function Button({
 }) {
   const variants: Record<string, string> = {
     default: 'border border-stone-300 bg-white text-stone-700 hover:bg-stone-50',
-    primary: 'border border-transparent bg-[#32483e] text-white hover:bg-[#2a3d34]',
+    primary: 'border border-transparent bg-[var(--admin-brand)] text-white hover:bg-[var(--admin-brand-hover)]',
     danger: 'border border-red-200 bg-white text-red-600 hover:bg-red-50',
     ghost: 'border border-transparent bg-transparent text-stone-600 hover:bg-stone-100',
   };

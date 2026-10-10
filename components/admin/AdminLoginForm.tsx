@@ -43,7 +43,7 @@ export default function AdminLoginForm({ from }: { from?: string }) {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#E9E9E7] px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-[var(--admin-canvas)] px-4 py-12">
       <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-md sm:p-8">
         <div className="mb-6 text-center">
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-stone-400">Kaiyō</p>
@@ -59,7 +59,7 @@ export default function AdminLoginForm({ from }: { from?: string }) {
               onChange={(event) => setUsername(event.target.value)}
               autoComplete="username"
               required
-              className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none focus:border-[#32483e]"
+              className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none focus:border-[var(--admin-brand)]"
             />
           </label>
 
@@ -71,12 +71,12 @@ export default function AdminLoginForm({ from }: { from?: string }) {
               onChange={(event) => setPassword(event.target.value)}
               autoComplete="current-password"
               required
-              className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none focus:border-[#32483e]"
+              className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm outline-none focus:border-[var(--admin-brand)]"
             />
           </label>
 
           {error && (
-            <p className="flex items-center gap-1.5 text-xs font-semibold text-[#DC2626]">
+            <p className="flex items-center gap-1.5 text-xs font-semibold text-[var(--admin-danger)]">
               <AlertCircle size={14} />
               {error}
             </p>
@@ -85,7 +85,7 @@ export default function AdminLoginForm({ from }: { from?: string }) {
           <button
             type="submit"
             disabled={submitting}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#32483e] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#2a3d34] disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--admin-brand)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--admin-brand-hover)] disabled:opacity-60"
           >
             {submitting && <Loader2 size={16} className="animate-spin" />}
             {submitting ? 'Signing in…' : 'Sign in'}

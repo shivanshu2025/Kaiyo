@@ -65,7 +65,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    // suppressHydrationWarning: the admin theme bootstrap script sets a class on
+    // <html> before React hydrates, which React would otherwise report as a
+    // mismatch. It has no effect on the public site's markup.
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased flex flex-col',
