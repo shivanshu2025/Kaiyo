@@ -37,6 +37,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# admin security store - holds the PIN hash, lockout counters and session
+# fingerprints, so it must never be committed
+/data/admin-security.json
+
 # netlify
 .netlify/
 

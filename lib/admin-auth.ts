@@ -18,8 +18,8 @@ function sign(payload: string) {
   return crypto.createHmac('sha256', secret()).update(payload).digest('hex');
 }
 
-export function createAdminToken(username: string) {
-  const exp = Date.now() + TOKEN_TTL_MS;
+export function createAdminToken(username: string, ttlMs: number = TOKEN_TTL_MS) {
+  const exp = Date.now() + ttlMs;
   const payload = `${username}.${exp}`;
   return `${payload}.${sign(payload)}`;
 }

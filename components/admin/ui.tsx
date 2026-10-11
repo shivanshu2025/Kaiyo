@@ -61,7 +61,10 @@ export function SaveBar({ saving, onSave, dirty, label = 'Save changes' }: {
   label?: string;
 }) {
   return (
-    <div className="sticky bottom-0 -mx-4 mt-4 flex items-center gap-3 border-t border-stone-200 bg-white/95 px-4 py-3 backdrop-blur sm:-mx-5 sm:px-5">
+    /* Negative margins mirror the page gutters at every breakpoint (main uses
+       px-4 / sm:px-5 / lg:px-8) so the bar always spans the full content
+       width instead of drifting inwards on wide screens. */
+    <div className="sticky bottom-0 z-10 -mx-4 mt-4 flex items-center gap-3 border-t border-stone-200 bg-white/95 px-4 py-3 backdrop-blur sm:-mx-5 sm:px-5 lg:-mx-8 lg:px-8">
       <button
         type="button"
         onClick={onSave}

@@ -69,11 +69,11 @@ export default function ProjectShowcase({
               <dt className="m-0">Service</dt>
               <dd className="m-0 justify-self-end">Website Design &amp; Development</dd>
             </div>
-<div className="grid min-h-[36px] grid-cols-[1fr_1fr] items-center border-b border-solid border-[rgba(245,244,242,0.15)]">
+            <div className="grid min-h-[36px] grid-cols-[1fr_1fr] items-center border-b border-solid border-[rgba(245,244,242,0.15)]">
               <dt className="m-0">What We Create</dt>
               <dd className="m-0 justify-self-end">Modern Business Websites</dd>
             </div>
-<div className="grid min-h-[36px] grid-cols-[1fr_1fr] items-center border-b border-solid border-[rgba(245,244,242,0.15)]">
+            <div className="grid min-h-[36px] grid-cols-[1fr_1fr] items-center border-b border-solid border-[rgba(245,244,242,0.15)]">
               <dt className="m-0">Availability</dt>
               <dd className="m-0 justify-self-end">Open for Projects</dd>
             </div>
@@ -97,42 +97,41 @@ export default function ProjectShowcase({
         {/* GOAL + SOLUTION - stacked */}
         <div className="grid grid-cols-1 gap-3">
           <article className="min-w-0 overflow-hidden rounded-[14px] bg-[#f5f4f2] px-[16px] pb-[14px] pt-[14px] text-[#171717] sm:px-[18px]">
-<span className="mb-[9px] block font-mono text-[11px] font-bold uppercase leading-[1]">
-               [{goal?.title || 'GOAL'}]
-             </span>
-             <p className="m-0 font-mono text-[11px] font-bold uppercase leading-[1.35]">
-               {goal?.description}
-             </p>
+            <span className="mb-[9px] block font-mono text-[11px] font-bold uppercase leading-[1]">
+              [{goal?.title || 'GOAL'}]
+            </span>
+            <p className="m-0 font-mono text-[11px] font-bold uppercase leading-[1.35]">
+              {goal?.description}
+            </p>
           </article>
 
           <article className="min-w-0 overflow-hidden rounded-[14px] bg-[#f5f4f2] px-[16px] pb-[14px] pt-[14px] text-[#171717] sm:px-[18px]">
-<span className="mb-[9px] block font-mono text-[11px] font-bold uppercase leading-[1]">
-               [{solution?.title || 'SOLUTION'}]
-             </span>
-             <p className="m-0 font-mono text-[11px] font-bold uppercase leading-[1.35]">
-               {solution?.description}
-             </p>
+            <span className="mb-[9px] block font-mono text-[11px] font-bold uppercase leading-[1]">
+              [{solution?.title || 'SOLUTION'}]
+            </span>
+            <p className="m-0 font-mono text-[11px] font-bold uppercase leading-[1.35]">
+              {solution?.description}
+            </p>
           </article>
         </div>
 
         {/* TITLE with controlled bottom breathing room - section pb provides 40-48px */}
-        <div className="relative mt-2 overflow-visible pt-2">
-<h2
-             id="project-title"
-             className="m-0 flex max-w-[92vw] origin-top-left flex-col items-start gap-[8px] font-display font-black uppercase leading-[0.79] tracking-[0.035em] text-[#f7f6f4] [transform:scaleX(0.72)] text-[clamp(2.85rem,18vw,5rem)] sm:gap-[10px] sm:text-[clamp(3rem,17vw,6rem)]"
-             aria-label={heading}
-           >
-             {headingWords.map((word, index) => (
-               <span
-                 key={word + index}
-                 className={`block whitespace-nowrap ${
-                   index > 0 && index < headingWords.length - 1 ? 'ml-[10%]' : ''
-                 }`}
-               >
-                 {word}
-               </span>
-             ))}
-           </h2>
+        <div className="relative mt-4 overflow-visible pt-2">
+          <h2
+            id="project-title"
+            className="m-0 flex max-w-[92vw] origin-top-left flex-col items-start gap-[8px] font-display font-black uppercase leading-[0.79] tracking-[0.035em] text-[#f7f6f4] [transform:scaleX(0.72)] text-[clamp(2.85rem,18vw,5rem)] sm:gap-[10px] sm:text-[clamp(3rem,17vw,6rem)]"
+            aria-label={heading}
+          >
+            {headingWords.map((word, index) => (
+              <span
+                key={word + index}
+                className={`block whitespace-nowrap ${index > 0 && index < headingWords.length - 1 ? 'ml-[10%]' : ''
+                  }`}
+              >
+                {word}
+              </span>
+            ))}
+          </h2>
 
           {/* Decorative X - anchored to title wrapper so they move with content and never create page gap */}
           <span
@@ -162,25 +161,25 @@ export default function ProjectShowcase({
         </div>
 
         {/* PROJECT INFO */}
-<dl className="absolute left-[5.6%] top-[10.3%] z-[2] m-0 hidden w-[min(38%,390px)] font-mono text-[clamp(10px,1.15vw,15px)] font-bold uppercase leading-[1.1] text-[rgba(245,244,242,0.95)] lg:grid">
-            <div className="grid min-h-[34px] grid-cols-[1fr_1fr] items-center border-b border-solid border-b-[rgba(245,244,242,0.15)]">
-              <dt className="m-0">Service</dt>
-              <dd className="m-0 justify-self-end">Website Design &amp; Development</dd>
-            </div>
-            <div className="grid min-h-[34px] grid-cols-[1fr_1fr] items-center border-b border-solid border-b-[rgba(245,244,242,0.15)]">
-              <dt className="m-0">What We Create</dt>
-              <dd className="m-0 justify-self-end">Modern Business Websites</dd>
-            </div>
-            <div className="grid min-h-[34px] grid-cols-[1fr_1fr] items-center border-b border-solid border-b-[rgba(245,244,242,0.15)]">
-              <dt className="m-0">Availability</dt>
-              <dd className="m-0 justify-self-end">Open for Projects</dd>
-            </div>
-          </dl>
+        <dl className="absolute left-[5.6%] top-[10.3%] z-[2] m-0 hidden w-[min(38%,390px)] font-mono text-[clamp(10px,1.15vw,15px)] font-bold uppercase leading-[1.1] text-[rgba(245,244,242,0.95)] lg:grid">
+          <div className="grid min-h-[34px] grid-cols-[1fr_1fr] items-center border-b border-solid border-b-[rgba(245,244,242,0.15)]">
+            <dt className="m-0">Service</dt>
+            <dd className="m-0 justify-self-end">Website Design &amp; Development</dd>
+          </div>
+          <div className="grid min-h-[34px] grid-cols-[1fr_1fr] items-center border-b border-solid border-b-[rgba(245,244,242,0.15)]">
+            <dt className="m-0">What We Create</dt>
+            <dd className="m-0 justify-self-end">Modern Business Websites</dd>
+          </div>
+          <div className="grid min-h-[34px] grid-cols-[1fr_1fr] items-center border-b border-solid border-b-[rgba(245,244,242,0.15)]">
+            <dt className="m-0">Availability</dt>
+            <dd className="m-0 justify-self-end">Open for Projects</dd>
+          </div>
+        </dl>
 
         {/* DESCRIPTION */}
-<p className="absolute right-[5.7%] top-[10.3%] z-[2] m-0 hidden w-[min(30%,310px)] font-mono text-[clamp(10px,1.15vw,15px)] font-bold uppercase leading-[1.15] text-[rgba(245,244,242,0.98)] lg:block">
-            {description}
-          </p>
+        <p className="absolute right-[5.7%] top-[10.3%] z-[2] m-0 hidden w-[min(30%,310px)] font-mono text-[clamp(10px,1.15vw,15px)] font-bold uppercase leading-[1.15] text-[rgba(245,244,242,0.98)] lg:block">
+          {description}
+        </p>
 
         {/* ABSTRACT SHAPE */}
         <div
@@ -198,35 +197,34 @@ export default function ProjectShowcase({
             <span className="mb-[9px] block font-mono text-[clamp(9px,0.95vw,12px)] font-bold uppercase leading-[1]">
               [{goal?.title || 'GOAL'}]
             </span>
-<p className="m-0 font-mono text-[clamp(10px,1.05vw,14px)] font-bold uppercase leading-[1.18]">
-               {goal?.description}
-             </p>
+            <p className="m-0 font-mono text-[clamp(10px,1.05vw,14px)] font-bold uppercase leading-[1.18]">
+              {goal?.description}
+            </p>
           </article>
           <article className="min-w-0 overflow-hidden rounded-[14px] bg-[#f5f4f2] px-[18px] pb-[13px] pt-[16px] text-[#171717]">
             <span className="mb-[9px] block font-mono text-[clamp(9px,0.95vw,12px)] font-bold uppercase leading-[1]">
               [{solution?.title || 'SOLUTION'}]
             </span>
-<p className="m-0 font-mono text-[clamp(10px,1.05vw,14px)] font-bold uppercase leading-[1.18]">
-               {solution?.description}
-             </p>
+            <p className="m-0 font-mono text-[clamp(10px,1.05vw,14px)] font-bold uppercase leading-[1.18]">
+              {solution?.description}
+            </p>
           </article>
         </div>
 
         {/* MAIN TITLE - desktop absolute with breathing room */}
-<h2
-           aria-hidden="true"
-           className="absolute bottom-[6%] left-[11.5%] z-[3] m-0 hidden w-max origin-bottom-left flex-col items-start gap-[15px] font-display font-black uppercase leading-[0.79] tracking-[0.035em] text-[#f7f6f4] [transform:scaleX(0.74)] text-[clamp(5rem,12.8vw,9.7rem)] lg:flex"
-         >
- {headingWords.map((word, index) => (
-           <span
-             key={word + index}
-             className={`block whitespace-nowrap ${
-               index > 0 && index < headingWords.length - 1 ? 'ml-[13%]' : ''
-             }`}
-           >
-             {word}
-           </span>
-         ))}
+        <h2
+          aria-hidden="true"
+          className="absolute bottom-[4%] left-[11.5%] z-[3] m-0 hidden w-max origin-bottom-left flex-col items-start gap-[15px] font-display font-black uppercase leading-[0.79] tracking-[0.035em] text-[#f7f6f4] [transform:scaleX(0.74)] text-[clamp(5rem,12.8vw,9.7rem)] lg:flex"
+        >
+          {headingWords.map((word, index) => (
+            <span
+              key={word + index}
+              className={`block whitespace-nowrap ${index > 0 && index < headingWords.length - 1 ? 'ml-[13%]' : ''
+                }`}
+            >
+              {word}
+            </span>
+          ))}
         </h2>
 
         {/* DECORATIVE X - desktop positions preserved */}
