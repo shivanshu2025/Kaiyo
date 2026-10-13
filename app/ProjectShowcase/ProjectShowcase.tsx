@@ -44,7 +44,6 @@ export default function ProjectShowcase({
         loop
         muted
         playsInline
-        poster="/images/projects-logo-poster.jpg"
         aria-hidden="true"
       >
         {projects

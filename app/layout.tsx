@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Toaster } from 'sonner';
 import FooterWrapper from '@/components/sections/FooterWrapper';
 import NavbarWrapper from '@/components/sections/NavbarWrapper';
 import SupportWidget from '@/components/sections/SupportWidget/SupportWidget';
@@ -82,6 +83,19 @@ export default function RootLayout({
           {children}
         </div>
         <FooterWrapper />
+        {/*
+          Sonner renders nothing until `toast()` is called, so mounting it here is
+          visually a no-op - it adds no markup, no spacing and no styling to the
+          public site.
+
+          It has to live in the ROOT layout rather than inside individual pages.
+          `toast()` is a no-op unless a `<Toaster />` is currently mounted, so
+          every confirmation and error message on a public page - the solution
+          inquiry form, the calculator, testimonial submission - was silently
+          dropped. The admin panel already mounted its own `<Toaster />` in
+          `app/admin/layout.tsx`; this is the public-side equivalent.
+        */}
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );

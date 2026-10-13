@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants, type Transition } from "framer-motion";
+import { openInquiryForm } from "./SolutionInquiryForm";
 
 interface HeroSectionProps {
   badge?: {
@@ -129,8 +130,15 @@ export default function HeroSection({
                 />
               </motion.h1>
 
-              <motion.a
-                href="/contact"
+              {/*
+                Existing inquiry trigger. It opens the shared `SolutionInquiryForm`
+                popup that this page already mounts, instead of navigating away, so
+                the visitor can inquire without leaving the page.
+              */}
+              <motion.button
+                type="button"
+                onClick={() => openInquiryForm()}
+                aria-haspopup="dialog"
                 custom={3}
                 initial="hidden"
                 animate="visible"
@@ -141,7 +149,7 @@ export default function HeroSection({
               >
                 Order Now
                 <span>→</span>
-              </motion.a>
+              </motion.button>
 
             </div>
 

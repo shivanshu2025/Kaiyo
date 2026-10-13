@@ -38,7 +38,8 @@ export default function OpportunitySection({ dynamicContent }: Props) {
   const banner = dynamicContent;
   const heading = banner?.heading?.trim() || 'THE TIME IS NOW';
   const buttonText = banner?.buttonText?.trim() || 'THE PATH IS';
-  const buttonLinkWord = banner?.buttonLink?.replace('/', '') || 'FORWARD';
+  const buttonLink = banner?.buttonLink?.trim() || '';
+  const buttonLinkWord = (buttonLink.replace(/\/$/, '').split('/').pop() || 'FORWARD').toUpperCase();
   const listItems = banner?.listItems;
   const items =
     listItems && listItems.length > 0
@@ -146,7 +147,17 @@ export default function OpportunitySection({ dynamicContent }: Props) {
             <h2 className="text-[clamp(40px,10vw,140px)] sm:text-[clamp(48px,11vw,140px)] font-black uppercase leading-[0.8] tracking-tighter md:text-[clamp(48px,8vw,140px)] lg:text-[clamp(48px,10vw,140px)]">
               {heading}
               <br />
-              <span className="text-stone-500">{buttonText}</span> {buttonLinkWord}
+              {/* `buttonLink` is an admin-editable field (defaults to `/contact`) that
+                  was previously flattened into plain text, making the whole link
+                  inert. The final word is now the anchor. Styling is unchanged. */}
+              <span className="text-stone-500">{buttonText}</span>{' '}
+              {buttonLink ? (
+                <a href={buttonLink} className="transition-colors hover:text-stone-500">
+                  {buttonLinkWord}
+                </a>
+              ) : (
+                buttonLinkWord
+              )}
             </h2>
           </motion.div>
 

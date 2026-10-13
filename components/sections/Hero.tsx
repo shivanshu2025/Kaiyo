@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type HeroData = {
   title: string;
@@ -59,9 +60,24 @@ export default function FashionHero({ dynamicContent }: Props) {
               sizes="(min-width: 640px) 176px, 144px"
               className="object-cover grayscale transition-all duration-500 hover:grayscale-0"
             />
-            <div className="absolute bottom-4 -left-2 max-w-[calc(100%+1rem)] bg-[#2D3627] px-3 py-1 text-[9px] font-bold uppercase text-white -rotate-12 sm:bottom-6 sm:-left-4 sm:px-4 sm:text-[10px]">
-              {hero?.ctaText || 'I create websites and sell them.\u201d'}
-            </div>
+{/*
+              `ctaLink` is a CMS field the admin edits (defaults to `/contact`) but it
+              was never rendered, so the whole field was inert. The badge is now the
+              link target. The markup, classes and appearance are unchanged - it is
+              the same element, just wrapped, so no visual regression is introduced.
+            */}
+            {hero?.ctaLink?.trim() ? (
+              <Link
+                href={hero.ctaLink.trim()}
+                className="absolute bottom-4 -left-2 max-w-[calc(100%+1rem)] bg-[#2D3627] px-3 py-1 text-[9px] font-bold uppercase text-white -rotate-12 sm:bottom-6 sm:-left-4 sm:px-4 sm:text-[10px]"
+              >
+                {hero?.ctaText || 'I create websites and sell them.”'}
+              </Link>
+            ) : (
+              <div className="absolute bottom-4 -left-2 max-w-[calc(100%+1rem)] bg-[#2D3627] px-3 py-1 text-[9px] font-bold uppercase text-white -rotate-12 sm:bottom-6 sm:-left-4 sm:px-4 sm:text-[10px]">
+                {hero?.ctaText || 'I create websites and sell them.”'}
+              </div>
+            )}
           </div>
         </div>
 

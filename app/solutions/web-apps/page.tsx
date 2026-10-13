@@ -1,8 +1,11 @@
-import { webAppsData } from '@/components/solutions/data/webApps';
-import SolutionPage from '@/components/solutions/SolutionPage';
+import { permanentRedirect } from 'next/navigation';
 
-export const dynamic = 'force-dynamic';
-
-export default function NextGenWebAppsPage() {
-  return <SolutionPage slug="next-gen-web-apps" fallback={webAppsData} />;
+/**
+ * Legacy alias route - the canonical URL for this service is
+ * `/solutions/next-gen-web-apps`. See the note in
+ * `app/solutions/portfolios/page.tsx` for why these alias routes redirect rather than
+ * re-export the canonical page.
+ */
+export default function WebAppsAlias() {
+  permanentRedirect('/solutions/next-gen-web-apps');
 }

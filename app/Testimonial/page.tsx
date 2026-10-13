@@ -17,35 +17,18 @@ type TestimonialResponse = {
   createdAt: string;
 };
 
-const staticTestimonials: TestimonialResponse[] = [
-  {
-    _id: '1',
-    name: 'Aarav Sharma',
-    designation: 'Founder',
-    company: 'TechStart',
-    rating: 5,
-    message: 'Kaiyo delivered an exceptional website that perfectly captures our brand. Highly recommend!',
-    createdAt: new Date().toISOString(),
-  },
-  {
-    _id: '2',
-    name: 'Priya Patel',
-    designation: 'CEO',
-    company: 'DesignHub',
-    rating: 5,
-    message: 'Amazing team, fast delivery, and great support. Our conversions increased by 40%.',
-    createdAt: new Date().toISOString(),
-  },
-];
-
-const staticHero = {
-  heading: 'WHAT OUR CLIENTS SAY',
-  description:
-    'See what our clients have to say about their website projects and experiences working with us.',
-};
-
+/**
+ * No hardcoded testimonials.
+ *
+ * This list previously fell back to two invented entries ("Aarav Sharma / TechStart",
+ * "Priya Patel / DesignHub") that were rendered on the page as if they were real
+ * client quotes. The public `/api/cms` projection already returns only testimonials
+ * whose status is `published` (see `readPublicCmsData` in `backend/lib/cms-store.ts`),
+ * so the correct fallback is the empty list - which renders the existing
+ * "No testimonials yet" state rather than inventing social proof.
+ */
 function toDisplayTestimonials(items: any[] | undefined): TestimonialResponse[] {
-  if (!items || items.length === 0) return staticTestimonials;
+  if (!items || items.length === 0) return [];
   return items.map((item, index) => ({
     _id: item.id ?? String(index),
     name: item.name ?? '',
@@ -57,6 +40,12 @@ function toDisplayTestimonials(items: any[] | undefined): TestimonialResponse[] 
     createdAt: item.createdAt ?? new Date().toISOString(),
   }));
 }
+
+const staticHero = {
+  heading: 'WHAT OUR CLIENTS SAY',
+  description:
+    'See what our clients have to say about their website projects and experiences working with us.',
+};
 
 function TestimonialSkeleton() {
   return (
@@ -80,7 +69,7 @@ function TestimonialSkeleton() {
 export default function TestimonialsPage() {
   const { value: testimonials } = useCmsData<TestimonialResponse[]>(
     (cms) => toDisplayTestimonials(cms.testimonials?.items),
-    staticTestimonials
+    []
   );
   const { value: hero } = useCmsData((cms) => cms.testimonials?.hero ?? staticHero, staticHero);
   const [page, setPage] = useState(1);

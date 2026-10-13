@@ -1,10 +1,11 @@
-import { digitalInvitesData } from '@/components/solutions/data/digitalInvites';
-import SolutionPage from '@/components/solutions/SolutionPage';
+import { permanentRedirect } from 'next/navigation';
 
-export const dynamic = 'force-dynamic';
-
-export default function DigitalInvitesPage() {
-  return (
-    <SolutionPage slug="digital-shaadi-invites" fallback={digitalInvitesData} cardBgColor="#F0F0F0" />
-  );
+/**
+ * Legacy alias route - the canonical URL for this service is
+ * `/solutions/digital-shaadi-invites`. See the note in
+ * `app/solutions/portfolios/page.tsx` for why these alias routes redirect rather than
+ * re-export the canonical page.
+ */
+export default function DigitalInvitesAlias() {
+  permanentRedirect('/solutions/digital-shaadi-invites');
 }

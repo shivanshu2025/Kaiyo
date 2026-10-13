@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
+import { adminHeaders } from '@/lib/admin-client';
+import { toast } from 'sonner';
 import {
   LayoutDashboard,
   Settings,
@@ -13,6 +15,7 @@ import {
   Calculator,
   MessageSquareQuote,
   Mail,
+  Inbox,
   Image as ImageIcon,
   LogOut,
   Menu,
@@ -38,6 +41,7 @@ export const adminNav = [
       { href: '/admin/pages/calculator', label: 'Calculator', icon: Calculator },
       { href: '/admin/pages/testimonials', label: 'Testimonials', icon: MessageSquareQuote },
       { href: '/admin/pages/contact', label: 'Contact', icon: Mail },
+      { href: '/admin/pages/leads', label: 'Inquiries', icon: Inbox },
       { href: '/admin/media', label: 'Media', icon: ImageIcon },
     ],
   },
@@ -114,7 +118,28 @@ export default function AdminSidebar() {
   const [tipAnchor, setTipAnchor] = useState<HTMLElement | null>(null);
 
   const handleLogout = async () => {
-    await fetch('/api/admin/logout', { method: 'POST' }).catch(() => null);
+    // The CSRF header lets the server revoke the session record, not just clear
+    // the cookie - so a copied token stops working immediately.
+    //
+    // A failure must not be silent. Redirecting anyway while the session is still
+    // live server-side looks like a successful sign-out, and the browser's back
+    // button then walks straight back into the dashboard. The navigation still
+    // happens - the admin asked to leave - but the reason is reported.
+    let revoked = true;
+    try {
+      const response = await fetch('/api/admin/logout', {
+        method: 'POST',
+        headers: adminHeaders(false),
+      });
+      revoked = response.ok;
+    } catch {
+      revoked = false;
+    }
+
+    if (!revoked) {
+      toast.error('Could not sign out on the server. Please try again.');
+    }
+
     router.push('/admin/login');
     router.refresh();
   };

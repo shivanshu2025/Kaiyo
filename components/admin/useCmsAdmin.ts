@@ -2,13 +2,19 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { adminFetch, ApiError } from '@/lib/admin-client';
 import type { CmsData } from '@/lib/cms-types';
 
 type SaveResult = { ok: true; data: CmsData } | { ok: false; error: string };
 
 /**
- * Loads the CMS document for admin editing and persists changes through the
- * existing `PUT /api/cms` endpoint (cookie-authenticated admin token).
+ * Loads the CMS document for admin editing and persists changes through
+ * `PUT /api/cms`.
+ *
+ * The endpoint requires an `admin`-role session and a CSRF header; `adminFetch`
+ * supplies the token from the CSRF cookie and redirects to the login page if the
+ * session has expired, so a signed-out admin sees the login screen rather than an
+ * unexplained "failed to save".
  */
 export function useCmsAdmin() {
   const [data, setData] = useState<CmsData | null>(null);
@@ -20,19 +26,18 @@ export function useCmsAdmin() {
     setLoading(true);
     setLoadError(null);
     try {
-      const response = await fetch('/api/cms', { cache: 'no-store' });
-      const payload = await response.json().catch(() => null);
-
-      if (!response.ok || !payload?.success || !payload.data) {
-        setLoadError(payload?.error || 'Failed to load content');
-        setData(null);
-        return;
-      }
-
-      setData(payload.data as CmsData);
-    } catch {
-      setLoadError('Failed to load content');
+      // `x-kaiyo-admin` asks for the dashboard view (submissions + unpublished
+      // testimonials). The server still verifies the session and the role before
+      // returning it.
+      const response = await adminFetch<CmsData>('/api/cms', {
+        headers: { 'x-kaiyo-admin': '1' },
+      });
+      setData(response.data);
+    } catch (error) {
       setData(null);
+      setLoadError(
+        error instanceof ApiError ? error.message : 'Failed to load content',
+      );
     } finally {
       setLoading(false);
     }
@@ -45,25 +50,19 @@ export function useCmsAdmin() {
   const save = useCallback(async (patch: Partial<CmsData>): Promise<SaveResult> => {
     setSaving(true);
     try {
-      const response = await fetch('/api/cms', {
+      const response = await adminFetch<CmsData>('/api/cms', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(patch),
+        json: patch,
       });
-      const payload = await response.json().catch(() => null);
 
-      if (!response.ok || !payload?.success || !payload.data) {
-        const message = payload?.error || 'Failed to save changes';
-        toast.error(message);
-        return { ok: false, error: message };
-      }
-
-      setData(payload.data as CmsData);
-      toast.success('Changes saved');
-      return { ok: true, data: payload.data as CmsData };
-    } catch {
-      toast.error('Failed to save changes');
-      return { ok: false, error: 'Failed to save changes' };
+      setData(response.data);
+      toast.success(response.message || 'Changes saved');
+      return { ok: true, data: response.data };
+    } catch (error) {
+      const message =
+        error instanceof ApiError ? error.message : 'Failed to save changes';
+      toast.error(message);
+      return { ok: false, error: message };
     } finally {
       setSaving(false);
     }

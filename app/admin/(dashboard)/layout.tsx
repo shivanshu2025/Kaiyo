@@ -1,7 +1,5 @@
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { verifyAdminToken } from '@/lib/admin-auth';
-import { isSessionActive, readAdminSecurity } from '@/lib/admin-security';
+import { requireAdminPage } from '@/backend/lib/admin-auth';
+import { getSecuritySettings } from '@/backend/lib/security-settings';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminIdleGuard from '@/components/admin/AdminIdleGuard';
 import { AdminThemeToggle } from '@/components/admin/ThemeToggle';
@@ -9,27 +7,24 @@ import { AdminThemeToggle } from '@/components/admin/ThemeToggle';
 export const dynamic = 'force-dynamic';
 
 /**
- * Authoritative admin gate: the signed token cookie is verified with the same
- * HMAC scheme used to issue it, and the token must also belong to a session that
- * has not been revoked from Admin Settings. Anything invalid/expired/revoked is sent
- * to the login page, so no admin route (and no write endpoint) is reachable
- * unauthenticated.
+ * Authoritative admin gate.
+ *
+ * `requireAdminPage` resolves the session against the `AdminSession` collection -
+ * the token must be unexpired, unrevoked, within its inactivity window, and
+ * belong to an active account holding the `admin` role. Anything else redirects
+ * to the existing login page, so no dashboard route renders for an
+ * unauthenticated or non-admin caller.
  */
 export default async function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
-  const token = cookies().get('kaiyo-admin-token')?.value;
-
-  if (!verifyAdminToken(token) || !(await isSessionActive(token))) {
-    redirect('/admin/login');
-  }
-
-  const { autoLogoutMinutes } = await readAdminSecurity();
+  const auth = await requireAdminPage();
+  const settings = await getSecuritySettings(auth.admin.id);
 
   return (
     /* The row wrapper grows with the page, so tall pages scroll the document
        while the sidebar stays pinned. `min-w-0` lets the main column shrink
        below its content width instead of pushing the sidebar off-screen. */
     <div className="flex min-h-screen min-w-0 flex-col lg:flex-row">
-      <AdminIdleGuard minutes={autoLogoutMinutes} />
+      <AdminIdleGuard minutes={settings.autoLogoutMinutes} />
       <AdminSidebar />
       <main className="flex min-w-0 flex-1 flex-col px-4 py-6 sm:px-5 lg:px-8 lg:py-8">
         {/* Shared toolbar: renders on every dashboard route, so the toggle and
@@ -45,3 +40,6 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
     </div>
   );
 }
+
+/** Node runtime: session resolution reads the database. */
+export const runtime = 'nodejs';

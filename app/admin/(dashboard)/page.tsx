@@ -1,5 +1,6 @@
 'use client';
 
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import type { LucideIcon } from 'lucide-react';
 import {
@@ -13,29 +14,72 @@ import {
   Mail,
   Settings,
 } from 'lucide-react';
-import { useCmsAdmin } from '@/components/admin/useCmsAdmin';
+import { adminFetch, ApiError } from '@/lib/admin-client';
 import { ErrorBlock, LoadingBlock } from '@/components/admin/ui';
 
 type Stat = { label: string; value: number; icon: LucideIcon; href: string; hint: string };
 
-function countSolutionCards(solutions: any[] | undefined) {
-  if (!Array.isArray(solutions)) return 0;
-  return solutions.reduce((total, solution) => {
-    const sections = solution?.data?.sections;
-    if (!Array.isArray(sections)) return total;
-    return (
-      total +
-      sections.reduce(
-        (sectionTotal, section) =>
-          sectionTotal + (Array.isArray(section?.cards) ? section.cards.length : 0),
-        0
-      )
-    );
-  }, 0);
-}
+type OverviewPayload = {
+  counts: {
+    solutions: number;
+    solutionCategories: number;
+    solutionCategoryLabels: string[];
+    solutionCards: number;
+    pricingPlans: number;
+    testimonials: number;
+    publishedTestimonials: number;
+    partnerTiers: number;
+    calculatorTiers: number;
+    submissions: number;
+    mediaImages: number;
+    mediaVideos: number;
+    totalPages: number;
+    managedPages: string[];
+  };
+  siteSettings: {
+    logo: string;
+    whatsappNumber: string;
+    phoneNumber: string;
+    socialLinks: number;
+  };
+  lastSavedAt: string;
+};
 
+/**
+ * Overview.
+ *
+ * Every number here comes from `GET /api/admin/overview`, which aggregates the
+ * database directly. The screen used to derive them from the composed CMS payload
+ * instead: that meant loading the whole content document - plus up to
+ * `MAX_COMPOSED_CHILDREN` contact submissions, which are personal data - on every
+ * load, purely to draw seven numbers. The endpoint existed and nothing called it.
+ *
+ * The layout, the tiles and every label are unchanged.
+ */
 export default function AdminOverviewPage() {
-  const { data, loading, loadError, reload } = useCmsAdmin();
+  const [data, setData] = useState<OverviewPayload | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    setLoadError('');
+    try {
+      const response = await adminFetch<OverviewPayload>('/api/admin/overview');
+      setData(response.data);
+    } catch (error) {
+      setData(null);
+      setLoadError(
+        error instanceof ApiError ? error.message : 'Unable to load the dashboard summary.'
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void load();
+  }, [load]);
 
   if (loading) {
     return (
@@ -50,85 +94,70 @@ export default function AdminOverviewPage() {
   }
 
   if (loadError || !data) {
-    return <ErrorBlock message={loadError || 'Content unavailable'} onRetry={reload} />;
+    return <ErrorBlock message={loadError || 'Content unavailable'} onRetry={load} />;
   }
 
-  const solutions = data.solutions ?? [];
-  const categoryCount = new Set(
-    solutions.map((solution) => solution.category).filter(Boolean)
-  ).size;
-
-  const managedPages = [
-    { key: 'home', label: 'Home' },
-    { key: 'solutions', label: 'Solutions' },
-    { key: 'pricing', label: 'Pricing' },
-    { key: 'howItWorks', label: 'How It Works' },
-    { key: 'calculator', label: 'Calculator' },
-    { key: 'testimonials', label: 'Testimonials' },
-    { key: 'contact', label: 'Contact' },
-  ].filter((page) => Boolean((data as Record<string, unknown>)[page.key]));
+  const counts = data.counts;
 
   const stats: Stat[] = [
     {
       label: 'Total Pages',
-      value: managedPages.length,
+      value: counts.totalPages,
       icon: FileText,
       href: '/admin',
       hint: 'Page sections with editable content',
     },
     {
       label: 'Solution Categories',
-      value: categoryCount,
+      value: counts.solutionCategories,
       icon: LayoutGrid,
       href: '/admin/pages/solutions',
-      hint: solutions.map((s) => s.category).filter(Boolean).join(', ') || 'No categories',
+      hint: counts.solutionCategoryLabels.join(', ') || 'No categories',
     },
     {
       label: 'Solution Cards',
-      value: countSolutionCards(solutions),
+      value: counts.solutionCards,
       icon: Layers,
       href: '/admin/pages/solutions',
       hint: 'Cards across every solution row',
     },
     {
       label: 'Pricing Plans',
-      value: data.pricing?.plans?.length ?? 0,
+      value: counts.pricingPlans,
       icon: IndianRupee,
       href: '/admin/pages/pricing',
       hint: 'Plans shown on the pricing page',
     },
     {
       label: 'Testimonials',
-      value: data.testimonials?.items?.length ?? 0,
+      value: counts.publishedTestimonials,
       icon: MessageSquareQuote,
       href: '/admin/pages/testimonials',
       hint: 'Published client testimonials',
     },
     {
       label: 'Partner Tiers',
-      value: data.howItWorks?.tiers?.length ?? 0,
+      value: counts.partnerTiers,
       icon: Handshake,
       href: '/admin/pages/how-it-works',
       hint: 'Commission tiers on How It Works',
     },
     {
       label: 'Calculator Tiers',
-      value: data.calculator?.tiers?.length ?? 0,
+      value: counts.calculatorTiers,
       icon: Calculator,
       href: '/admin/pages/calculator',
       hint: 'Roles used by the revenue calculator',
     },
   ];
 
-  const submissions = data.contact?.submissions ?? [];
-
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-xl font-bold text-stone-900">Overview</h1>
-        <p className="mt-1 text-sm text-stone-500">
+        <p className="text-sm text-stone-500">
           Live counts read directly from the content store. Last saved{' '}
-          {new Date(data.updatedAt).toLocaleString('en-IN')}.
+          {new Date(data.lastSavedAt).toLocaleString('en-IN')}.
         </p>
       </div>
 
@@ -165,7 +194,7 @@ export default function AdminOverviewPage() {
             </span>
             <Mail size={16} className="text-stone-400" />
           </div>
-          <p className="mt-2 text-3xl font-black text-stone-900">{submissions.length}</p>
+          <p className="mt-2 text-3xl font-black text-stone-900">{counts.submissions}</p>
           <p className="mt-1 text-xs text-stone-400">Messages received from the contact form</p>
         </Link>
 
@@ -179,10 +208,12 @@ export default function AdminOverviewPage() {
             </span>
             <Settings size={16} className="text-stone-400" />
           </div>
-          <p className="mt-2 truncate text-base font-bold text-stone-900">{data.siteSettings?.logo}</p>
+          <p className="mt-2 truncate text-base font-bold text-stone-900">
+            {data.siteSettings.logo}
+          </p>
           <p className="mt-1 text-xs text-stone-400">
-            {data.siteSettings?.socialLinks?.length ?? 0} social links · WhatsApp{' '}
-            {data.siteSettings?.whatsappNumber || '—'}
+            {data.siteSettings.socialLinks} social links · WhatsApp{' '}
+            {data.siteSettings.whatsappNumber || '—'}
           </p>
         </Link>
       </div>

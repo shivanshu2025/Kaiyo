@@ -2,11 +2,16 @@
 
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { adminHeaders } from '@/lib/admin-client';
 
 /**
  * Client-side half of the "Auto Logout" security setting: signs the admin out after the
- * configured period of inactivity. The server-side token expiry (issued at login using
- * the same value) is the authoritative limit — this just ends the session promptly.
+ * configured period of inactivity.
+ *
+ * This is a convenience, not the security boundary - the authoritative inactivity
+ * limit is enforced server-side on every request by `resolveAuth` in
+ * `lib/admin-auth.ts`, using the same value. This component only makes the sign-out
+ * happen promptly instead of on the next click.
  */
 export default function AdminIdleGuard({ minutes }: { minutes: number }) {
   const router = useRouter();
@@ -22,7 +27,11 @@ export default function AdminIdleGuard({ minutes }: { minutes: number }) {
     const signOut = async () => {
       if (signingOut) return;
       signingOut = true;
-      await fetch('/api/admin/logout', { method: 'POST' }).catch(() => null);
+      // Sends the CSRF header so the server-side session is actually revoked,
+      // rather than only clearing the cookie in this tab.
+      await fetch('/api/admin/logout', { method: 'POST', headers: adminHeaders(false) }).catch(
+        () => null,
+      );
       router.replace('/admin/login?reason=idle');
       router.refresh();
     };

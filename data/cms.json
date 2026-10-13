@@ -1528,26 +1528,7 @@
       "heading": "WHAT OUR CLIENTS SAY",
       "description": "See what our clients have to say about their website projects and experiences working with us."
     },
-    "items": [
-      {
-        "id": "testimonial-1",
-        "name": "Aarav Sharma",
-        "designation": "Founder",
-        "company": "TechStart",
-        "rating": 5,
-        "content": "Kaiyo delivered an exceptional website that perfectly captures our brand. Highly recommend!",
-        "createdAt": "2026-10-06T00:00:00.000Z"
-      },
-      {
-        "id": "testimonial-2",
-        "name": "Priya Patel",
-        "designation": "CEO",
-        "company": "DesignHub",
-        "rating": 5,
-        "content": "Amazing team, fast delivery, and great support. Our conversions increased by 40%.",
-        "createdAt": "2026-10-06T00:00:00.000Z"
-      }
-    ]
+    "items": []
   },
   "contact": {
     "heading": "LET'S BUILD YOUR WEBSITE",

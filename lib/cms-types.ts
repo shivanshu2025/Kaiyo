@@ -34,8 +34,13 @@ export type Testimonial = {
   designation?: string;
   company?: string;
   rating: number;
+  /** Only `published` testimonials are returned by the public API. */
+  status?: 'published' | 'pending';
+  displayOrder?: number;
   createdAt: string;
 };
+
+export type ContactSubmissionStatus = 'new' | 'read' | 'archived';
 
 export type ContactSubmission = {
   id: string;
@@ -44,6 +49,8 @@ export type ContactSubmission = {
   interest?: string;
   phone?: string;
   message: string;
+  status?: ContactSubmissionStatus;
+  markedSpam?: boolean;
   createdAt: string;
 };
 

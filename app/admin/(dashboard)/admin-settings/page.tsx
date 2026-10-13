@@ -4,7 +4,17 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, ShieldCheck, Timer, KeyRound, MonitorSmartphone } from 'lucide-react';
 import { Button, Card, ErrorBlock, Field, LoadingBlock, inputClass } from '@/components/admin/ui';
-import type { AdminSession } from '@/lib/admin-security';
+import { adminFetch, ApiError } from '@/lib/admin-client';
+
+type AdminSession = {
+  id: string;
+  userAgent: string;
+  ip: string | null;
+  createdAt: string;
+  lastActivityAt: string;
+  expiresAt: string;
+  current: boolean;
+};
 
 type SecurityData = {
   maxFailedAttempts: number;
@@ -12,8 +22,8 @@ type SecurityData = {
   autoLogoutMinutes: number;
   failedAttempts: number;
   lockedUntil: string | null;
-  pinUpdatedAt: string | null;
-  pinChanged: boolean;
+  passwordUpdatedAt: string | null;
+  lastLoginAt: string | null;
   currentSessionId: string | null;
   sessions: AdminSession[];
 };
@@ -63,6 +73,23 @@ function PinInput({
   );
 }
 
+/**
+ * Inline validation message, rendered directly beneath the input it belongs to.
+ *
+ * `adminFetch` already extracts the server's `{ field: message }` map into
+ * `ApiError.fields`; nothing displayed it, so every validation failure collapsed
+ * into the single banner line ("Some fields are invalid"). The styling mirrors the
+ * `Field` hint it sits under, so it slots in without changing the layout.
+ */
+function FieldError({ message }: { message?: string }) {
+  if (!message) return null;
+  return (
+    <span role="alert" className="mt-1 block text-[11px] font-medium text-red-600">
+      {message}
+    </span>
+  );
+}
+
 function formatDate(value: string | null) {
   if (!value) return '—';
   const date = new Date(value);
@@ -103,6 +130,7 @@ export default function AdminSettingsPage() {
   const [currentPin, setCurrentPin] = useState('');
   const [newPin, setNewPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
+  const [pinFieldErrors, setPinFieldErrors] = useState<Record<string, string>>({});
   const [pinStatus, setPinStatus] = useState<Status>(null);
   const [savingPin, setSavingPin] = useState(false);
 
@@ -114,20 +142,17 @@ export default function AdminSettingsPage() {
   const load = useCallback(async () => {
     setLoadError('');
     try {
-      const response = await fetch('/api/admin/security', { cache: 'no-store' });
-      const payload = await response.json().catch(() => null);
-      if (!response.ok || !payload?.success) {
-        setLoadError(payload?.error || 'Unable to load security settings.');
-        return;
-      }
-      setData(payload.data);
+      const response = await adminFetch<SecurityData>('/api/admin/security');
+      setData(response.data);
       setLimits({
-        maxFailedAttempts: payload.data.maxFailedAttempts,
-        lockoutMinutes: payload.data.lockoutMinutes,
-        autoLogoutMinutes: payload.data.autoLogoutMinutes,
+        maxFailedAttempts: response.data.maxFailedAttempts,
+        lockoutMinutes: response.data.lockoutMinutes,
+        autoLogoutMinutes: response.data.autoLogoutMinutes,
       });
-    } catch {
-      setLoadError('Unable to load security settings.');
+    } catch (error) {
+      setLoadError(
+        error instanceof ApiError ? error.message : 'Unable to load security settings.',
+      );
     } finally {
       setLoading(false);
     }
@@ -137,31 +162,45 @@ export default function AdminSettingsPage() {
     load();
   }, [load]);
 
+  /** Typing in a field clears its own message, so the form does not nag while fixing it. */
+  const editPin = (setter: (value: string) => void, field: string) => (value: string) => {
+    setter(value);
+    setPinFieldErrors((current) => {
+      if (!current[field]) return current;
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
+  };
+
   async function savePin() {
     if (savingPin) return;
     setSavingPin(true);
     setPinStatus(null);
+    setPinFieldErrors({});
 
     try {
-      const response = await fetch('/api/admin/pin', {
+      const response = await adminFetch('/api/admin/pin', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ currentPin, newPin, confirmPin }),
+        json: { currentPin, newPin, confirmPin },
       });
-      const payload = await response.json().catch(() => null);
 
-      if (!response.ok || !payload?.success) {
-        setPinStatus({ kind: 'error', message: payload?.error || 'Unable to update the PIN.' });
-        return;
-      }
-
-      setPinStatus({ kind: 'success', message: payload.message || 'PIN updated.' });
+      setPinStatus({
+        kind: 'success',
+        message: response.message || 'PIN updated.',
+      });
       setCurrentPin('');
       setNewPin('');
       setConfirmPin('');
       await load();
-    } catch {
-      setPinStatus({ kind: 'error', message: 'Unable to update the PIN. Please try again.' });
+    } catch (error) {
+      // The server returns one message per offending field; keep them all so each
+      // is shown beside the input it refers to instead of only in the banner.
+      setPinFieldErrors(error instanceof ApiError && error.fields ? error.fields : {});
+      setPinStatus({
+        kind: 'error',
+        message: error instanceof ApiError ? error.message : 'Unable to update the PIN.',
+      });
     } finally {
       setSavingPin(false);
     }
@@ -173,22 +212,21 @@ export default function AdminSettingsPage() {
     setSecurityStatus(null);
 
     try {
-      const response = await fetch('/api/admin/security', {
+      const response = await adminFetch('/api/admin/security', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(limits),
+        json: limits,
       });
-      const payload = await response.json().catch(() => null);
 
-      if (!response.ok || !payload?.success) {
-        setSecurityStatus({ kind: 'error', message: payload?.error || 'Unable to save settings.' });
-        return;
-      }
-
-      setSecurityStatus({ kind: 'success', message: payload.message || 'Security settings saved.' });
+      setSecurityStatus({
+        kind: 'success',
+        message: response.message || 'Security settings saved.',
+      });
       await load();
-    } catch {
-      setSecurityStatus({ kind: 'error', message: 'Unable to save settings. Please try again.' });
+    } catch (error) {
+      setSecurityStatus({
+        kind: 'error',
+        message: error instanceof ApiError ? error.message : 'Unable to save settings.',
+      });
     } finally {
       setSavingSecurity(false);
     }
@@ -200,29 +238,25 @@ export default function AdminSettingsPage() {
     setSecurityStatus(null);
 
     try {
-      const response = await fetch('/api/admin/sessions', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      const payload = await response.json().catch(() => null);
-
-      if (!response.ok || !payload?.success) {
-        setSecurityStatus({ kind: 'error', message: payload?.error || 'Unable to revoke session.' });
-        return;
-      }
+      const response = await adminFetch('/api/admin/sessions', { method: 'DELETE', json: body });
 
       // The current session was revoked: its cookie is already cleared server-side.
       if (body.id && body.id === data?.currentSessionId) {
-        router.replace('/admin/login');
+        router.replace('/admin/login?reason=session');
         router.refresh();
         return;
       }
 
-      setSecurityStatus({ kind: 'success', message: payload.message || 'Session revoked.' });
+      setSecurityStatus({
+        kind: 'success',
+        message: response.message || 'Session revoked.',
+      });
       await load();
-    } catch {
-      setSecurityStatus({ kind: 'error', message: 'Unable to revoke session.' });
+    } catch (error) {
+      setSecurityStatus({
+        kind: 'error',
+        message: error instanceof ApiError ? error.message : 'Unable to revoke session.',
+      });
     } finally {
       setRevoking(null);
     }
@@ -248,38 +282,44 @@ export default function AdminSettingsPage() {
       <Card
         title="Change Admin PIN"
         description={
-          data.pinUpdatedAt
-            ? `Last updated ${formatDate(data.pinUpdatedAt)}.`
-            : 'Using the PIN configured through the ADMIN_PASSWORD environment variable.'
+          data.passwordUpdatedAt
+            ? `Last updated ${formatDate(data.passwordUpdatedAt)}.`
+            : 'The password is stored in the database as a salted hash.'
         }
       >
         <div className="space-y-4">
           <Field label="Current PIN" hint="Confirm your existing PIN to authorise the change.">
             <PinInput
               value={currentPin}
-              onChange={setCurrentPin}
+              onChange={editPin(setCurrentPin, 'currentPin')}
               autoComplete="current-password"
               label="Current PIN"
             />
+            <FieldError message={pinFieldErrors.currentPin} />
           </Field>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="New PIN" hint="Minimum 4 characters.">
+            <Field
+              label="New PIN"
+              hint="At least 10 characters, with an uppercase letter, a lowercase letter and a number."
+            >
               <PinInput
                 value={newPin}
-                onChange={setNewPin}
+                onChange={editPin(setNewPin, 'newPin')}
                 autoComplete="new-password"
                 label="New PIN"
               />
+              <FieldError message={pinFieldErrors.newPin} />
             </Field>
 
             <Field label="Confirm New PIN" hint="Must match the new PIN.">
               <PinInput
                 value={confirmPin}
-                onChange={setConfirmPin}
+                onChange={editPin(setConfirmPin, 'confirmPin')}
                 autoComplete="new-password"
                 label="Confirm New PIN"
               />
+              <FieldError message={pinFieldErrors.confirmPin} />
             </Field>
           </div>
 
@@ -293,9 +333,9 @@ export default function AdminSettingsPage() {
               <KeyRound size={16} />
               {savingPin ? 'Saving…' : 'Save Changes'}
             </button>
-            {data.pinChanged && (
+            {data.passwordUpdatedAt && (
               <span className="text-xs text-stone-500">
-                PIN is stored securely as a salted hash — it is never sent to the browser.
+                The PIN is stored securely as a salted hash — it is never sent to the browser.
               </span>
             )}
           </div>
@@ -345,7 +385,7 @@ export default function AdminSettingsPage() {
             <Field label="Auto Logout (minutes)" hint="Idle sessions are ended automatically.">
               <input
                 type="number"
-                min={1}
+                min={5}
                 max={720}
                 value={limits.autoLogoutMinutes}
                 onChange={(event) =>

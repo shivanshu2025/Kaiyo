@@ -17,7 +17,7 @@ export default function ConfirmDialog({
   description?: string;
   confirmLabel?: string;
   onCancel: () => void;
-  onConfirm: () => void;
+  onConfirm: () => void | Promise<void>;
   children?: ReactNode;
 }) {
   const [busy, setBusy] = useState(false);
@@ -57,7 +57,10 @@ export default function ConfirmDialog({
             onClick={async () => {
               setBusy(true);
               try {
-                onConfirm();
+                // Awaited: an async `onConfirm` is a network call, and without the
+                // await the button re-enabled itself immediately - so a second
+                // click could fire the same delete twice.
+                await onConfirm();
               } finally {
                 setBusy(false);
               }

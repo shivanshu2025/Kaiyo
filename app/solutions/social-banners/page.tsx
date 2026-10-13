@@ -1,8 +1,11 @@
-import { socialBannersData } from '@/components/solutions/data/socialBanners';
-import SolutionPage from '@/components/solutions/SolutionPage';
+import { permanentRedirect } from 'next/navigation';
 
-export const dynamic = 'force-dynamic';
-
-export default function SocialMediaBanners() {
-  return <SolutionPage slug="social-media-banners" fallback={socialBannersData} />;
+/**
+ * Legacy alias route - the canonical URL for this service is
+ * `/solutions/social-media-banners`. See the note in
+ * `app/solutions/portfolios/page.tsx` for why these alias routes redirect rather than
+ * re-export the canonical page.
+ */
+export default function SocialBannersAlias() {
+  permanentRedirect('/solutions/social-media-banners');
 }

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Send, Star, X } from 'lucide-react';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 
 const CHARACTER_LIMIT = 1000;
 
@@ -34,21 +34,46 @@ export default function SubmitTestimonialPage() {
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) {
       toast.error('Image must be under 5MB');
+      e.target.value = '';
       return;
     }
+
     setUploadingImage(true);
-    const reader = new FileReader();
-    reader.onload = () => {
-      const url = reader.result as string;
-      setImagePreview(url);
-      setForm((p) => ({ ...p, avatar: url }));
-      setUploadingImage(false);
-    };
-    reader.onerror = () => {
+
+    // Show an instant local preview, then replace it with the stored URL once the
+    // server confirms the upload.
+    const localPreview = URL.createObjectURL(file);
+    setImagePreview(localPreview);
+
+    try {
+      const body = new FormData();
+      body.append('file', file);
+
+      const response = await fetch('/api/testimonials/avatar', {
+        method: 'POST',
+        body,
+      });
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok || !payload?.success || !payload.data?.url) {
+        URL.revokeObjectURL(localPreview);
+        setImagePreview(null);
+        toast.error(payload?.error || 'Failed to upload image');
+        return;
+      }
+
+      // `avatar` must be a real http(s) or site-relative URL - the API rejects
+      // base64 `data:` payloads, so the stored URL is what gets submitted.
+      setImagePreview(payload.data.url);
+      setForm((p) => ({ ...p, avatar: payload.data.url }));
+    } catch {
+      URL.revokeObjectURL(localPreview);
+      setImagePreview(null);
       toast.error('Failed to upload image');
+    } finally {
       setUploadingImage(false);
-    };
-    reader.readAsDataURL(file);
+      e.target.value = '';
+    }
   };
 
   const removeImage = () => {
@@ -122,8 +147,11 @@ export default function SubmitTestimonialPage() {
   }
 
   return (
+    // No <Toaster /> here on purpose: it is mounted once in the root layout
+    // (`app/layout.tsx`). When this page mounted its own, it sat inside the
+    // pre-submit branch below and was unmounted by the `submitted` early return,
+    // so a failed retry ("Submit Another" -> error) had no toast host at all.
     <div className="min-h-screen bg-[#E9E9E7]">
-      <Toaster />
       <div className="max-w-3xl mx-auto px-6 lg:px-12 py-16">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900">SHARE YOUR <span className="text-[#2f4f3f]">FEEDBACK</span></h1>

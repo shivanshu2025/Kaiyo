@@ -34,6 +34,24 @@ export default function AdminCalculatorPage() {
 
   const setTiers = (tiers: CalculatorTier[]) => setCalculator({ tiers });
 
+  /**
+   * Moves a tier and renumbers `displayOrder` to match the new position.
+   *
+   * The reordering used to move the array only. That is invisible on the public
+   * page, because both the tiers endpoint and the calculator itself sort by
+   * `displayOrder` (`backend/lib/calculator.ts`), so ↑/↓ changed the screen and
+   * nothing else - the saved order was discarded on the next read.
+   */
+  const moveTier = (index: number, delta: number) => {
+    const to = index + delta;
+    if (to < 0 || to >= calculator.tiers.length) return;
+
+    const next = [...calculator.tiers];
+    const [moved] = next.splice(index, 1);
+    next.splice(to, 0, moved);
+    setTiers(next.map((tier, position) => ({ ...tier, displayOrder: position })));
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -191,24 +209,14 @@ export default function AdminCalculatorPage() {
                   </Field>
                   <div className="flex items-end gap-2">
                     <Button
-                      onClick={() => {
-                        const next = [...calculator.tiers];
-                        const [item] = next.splice(index, 1);
-                        next.splice(index - 1, 0, item);
-                        setTiers(next);
-                      }}
+                      onClick={() => moveTier(index, -1)}
                       disabled={index === 0}
                       title="Move up"
                     >
                       ↑
                     </Button>
                     <Button
-                      onClick={() => {
-                        const next = [...calculator.tiers];
-                        const [item] = next.splice(index, 1);
-                        next.splice(index + 1, 0, item);
-                        setTiers(next);
-                      }}
+                      onClick={() => moveTier(index, 1)}
                       disabled={index === calculator.tiers.length - 1}
                       title="Move down"
                     >

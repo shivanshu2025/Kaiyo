@@ -11,7 +11,12 @@ node_modules/
 
 # next.js
 /.next/
+# `.next` while `backend/scripts/test-backend.js` parks the production build so
+# its `next dev` media suite cannot overwrite it. Restored automatically; this
+# entry only stops a failed restore from being committed.
+/.next.production-build/
 /out/
+
 
 # production
 /build
@@ -37,9 +42,13 @@ yarn-error.log*
 # vercel
 .vercel
 
-# admin security store - holds the PIN hash, lockout counters and session
-# fingerprints, so it must never be committed
-/data/admin-security.json
+# development media uploads (local storage driver only; production uses blob/s3)
+.uploads/
+
+# NOTE: data/cms.json is the legacy pre-MongoDB content snapshot. It is kept in
+# git as the source for scripts/migrate-cms-json.js and is NOT read at runtime.
+# data/admin-security.json (the old file-based PIN/session store) is obsolete and
+# intentionally still ignored - it must never be committed.
 
 # netlify
 .netlify/
@@ -50,8 +59,9 @@ next-env.d.ts
 tsconfig.tsbuildinfo
 
 # --- obsolete / must NOT be committed ---
-# old backend
-backend/
+# NOTE: `backend/` is NOT ignored. Since the Express.js server was removed, that
+# folder now holds the live server-side code (models, server-only lib modules and
+# the operational scripts) and must be committed. See docs/BACKEND.md.
 Kaiyo-main/
 
 # admin / auth legacy (obsolete)
@@ -68,8 +78,9 @@ Kaiyo-main/
 /src/api/
 /src/auth/
 /src/user/
-# NOTE: /lib/ is NOT ignored - it holds the real CMS data layer
-# (cms-store.ts, cms-types.ts, admin-auth.ts, use-cms.ts, site-settings.ts).
+# NOTE: /lib/ is NOT ignored - it holds the browser-side half of the CMS data layer
+# (cms-types.ts, use-cms.ts, contact-info.ts, admin-client.ts). The server-only
+# half (cms-store.ts, admin-auth.ts, db.ts, guards.ts, ...) now lives in backend/lib/.
 
 # obsolete entry script
 /start.js
@@ -84,5 +95,17 @@ Kaiyo-main/
 *.swp
 *.swo
 
-.vercel
+# Catch-all for any other env file that may appear later.
+# `!.env.example` is repeated HERE as well as above because gitignore resolves
+# conflicts with LAST MATCH WINS: the previous bare `.env*` at the end of this file
+# silently overrode the negation and would have caused a re-added .env.example to
+# be ignored. Keep this negation as the final line.
 .env*
+!.env.example
+
+# Development upload directory (local media storage driver).
+.uploads/
+
+
+
+/data/admin-security.json

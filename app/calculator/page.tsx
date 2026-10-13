@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fi';
 import { getWhatsAppUrl } from '@/lib/contact-info';
 import { useCmsData } from '@/lib/use-cms';
+import { toast } from 'sonner';
 import type { CalculatorContent } from '@/lib/cms-types';
 
 type TierData = { title: string; percentage: number; description: string; icon: string; accentColor: string; displayOrder: number; isEnabled: boolean };
@@ -121,12 +122,39 @@ export default function CalculatorPage() {
   const [selectedRole, setSelectedRole] = useState<Role>('');
   const [calculatedEarnings, setCalculatedEarnings] = useState<number | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  // Server-authoritative quote returned by POST /api/calculator/quote. Displayed in
+  // preference to the live preview once the visitor asks for it.
+  const [serverQuote, setServerQuote] = useState<{ partnerShare: number; yourShare: number } | null>(null);
+  // Enabled tiers from GET /api/calculator/tiers (the same persisted tiers the quote
+  // endpoint resolves its percentage from). Falls back to the CMS copy.
+  const [liveTiers, setLiveTiers] = useState<TierData[] | null>(null);
+  const [liveProjectValue, setLiveProjectValue] = useState<CalculatorData['projectValue'] | null>(null);
   const isLoading = cmsLoading;
   const controls = useAnimation();
 
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const response = await fetch('/api/calculator/tiers', { cache: 'no-store' });
+        const payload = await response.json().catch(() => null);
+        if (cancelled || !response.ok || !payload?.success || !payload.data) return;
+        if (Array.isArray(payload.data.tiers) && payload.data.tiers.length > 0) {
+          setLiveTiers(payload.data.tiers as TierData[]);
+        }
+        if (payload.data.projectValue) {
+          setLiveProjectValue(payload.data.projectValue as CalculatorData['projectValue']);
+        }
+      } catch {
+        // The CMS fallback below already renders, so a failure here is not fatal.
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
   const roleOptions: RoleOption[] = useMemo(() => {
-    const tiers: TierData[] = config.tiers || [];
-    const enabled = tiers.filter(t => t.isEnabled).sort((a, b) => a.displayOrder - b.displayOrder);
+    const tiers: TierData[] = liveTiers ?? config.tiers ?? [];
+    const enabled = tiers.filter(t => t.isEnabled !== false).sort((a, b) => a.displayOrder - b.displayOrder);
     if (enabled.length === 0) return [];
     return enabled.map(t => ({
       id: t.title,
@@ -135,7 +163,7 @@ export default function CalculatorPage() {
       icon: iconMap[t.icon] || <FiShare2 size={24} />,
       description: t.description,
     }));
-  }, [config.tiers]);
+  }, [liveTiers, config.tiers]);
 
   const currentRole = useMemo(() => 
     roleOptions.find(r => r.id === selectedRole) || roleOptions[0],
@@ -152,7 +180,7 @@ export default function CalculatorPage() {
   const ctaCard = config.ctaCard || defaultConfig.ctaCard!;
   const globalSettings = config.globalSettings || defaultConfig.globalSettings!;
   const heroSection = config.heroSection || defaultConfig.heroSection!;
-  const projectValue = config.projectValue || defaultConfig.projectValue!;
+  const projectValue = liveProjectValue || config.projectValue || defaultConfig.projectValue!;
 
   // Instant, dynamically derived project amount — supports any valid positive amount.
   const parsedAmount = useMemo(() => {
@@ -170,25 +198,66 @@ export default function CalculatorPage() {
     return { pct, partnerShare, yourShare, label: currentRole.label };
   }, [parsedAmount, currentRole]);
 
+  // Once the visitor has asked for a quote, the server's numbers win over the live
+  // preview so what is displayed is exactly what the API computed.
+  const displayResult = useMemo(() => {
+    if (serverQuote) return { pct: selectedResult?.pct ?? 0, ...serverQuote, label: selectedResult?.label ?? '' };
+    return selectedResult;
+  }, [serverQuote, selectedResult]);
+
   const handleCalculate = async () => {
     const numAmount = parseFloat(amount);
     if (isNaN(numAmount) || !isFinite(numAmount) || numAmount <= 0) return;
+    if (!currentRole) return;
 
     setIsCalculating(true);
     setCalculatedEarnings(null);
 
-    await new Promise(resolve => setTimeout(resolve, globalSettings.calculationDelay ?? 600));
-
-    const earnings = (numAmount * (currentRole?.percentage ?? 0)) / 100;
-    const rounded = Math.round(earnings * Math.pow(10, calcLogic.rounding ?? 0)) / Math.pow(10, calcLogic.rounding ?? 0);
-    setCalculatedEarnings(rounded);
-    setIsCalculating(false);
-
-    if (globalSettings.animationToggle ?? true) {
-      controls.start({
-        scale: [1, 1.02, 1],
-        transition: { duration: 0.3 }
+    // The quote is computed server-side by POST /api/calculator/quote, which derives
+    // the commission percentage from the persisted tiers instead of trusting the
+    // client. The delay kept for the "Processing..." state comes from the CMS
+    // `globalSettings.calculationDelay` so the animation timing stays unchanged.
+    try {
+      const response = await fetch('/api/calculator/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ projectValue: numAmount, role: currentRole.id }),
       });
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok || !payload?.success) {
+        toast.error(payload?.error || 'We could not calculate that right now. Please try again.');
+        return;
+      }
+
+      // `calculateQuote` returns `earnings` (the commission) and the clamped
+      // `projectValue`. The partner share is the commission; the visitor's share is
+      // the remainder, derived from the same server-returned numbers.
+      const quote = payload.data as {
+        earnings?: number;
+        percentage?: number;
+        projectValue?: number;
+      };
+      const earnings = Number(quote?.earnings ?? 0);
+      const projectValue = Number(quote?.projectValue ?? numAmount);
+      setCalculatedEarnings(Number.isFinite(earnings) ? earnings : null);
+      setServerQuote({
+        partnerShare: Number.isFinite(earnings) ? earnings : 0,
+        yourShare: Number.isFinite(projectValue) && Number.isFinite(earnings)
+          ? projectValue - earnings
+          : 0,
+      });
+
+      if (globalSettings.animationToggle ?? true) {
+        controls.start({
+          scale: [1, 1.02, 1],
+          transition: { duration: 0.3 }
+        });
+      }
+    } catch {
+      toast.error('We could not reach the calculator service. Please try again.');
+    } finally {
+      setIsCalculating(false);
     }
   };
 
@@ -196,6 +265,7 @@ export default function CalculatorPage() {
     const value = e.target.value.replace(/[^0-9.]/g, '');
     setAmount(value);
     if (calculatedEarnings) setCalculatedEarnings(null);
+    setServerQuote(null);
     if (globalSettings.animationToggle ?? true) {
       controls.start({
         scale: [1, 1.01, 1],
@@ -334,16 +404,16 @@ export default function CalculatorPage() {
 
                 <div className="min-h-[120px] sm:min-h-[140px] flex flex-col justify-center">
                   <AnimatePresence mode="wait">
-                    {selectedResult !== null ? (
+                    {displayResult !== null ? (
                       <motion.div key="result" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
                         <div className="text-lg sm:text-xl font-bold text-[#32483e]">
-                          {selectedResult.label}
+                          {displayResult.label}
                         </div>
                         <div className="text-2xl sm:text-3xl font-bold text-[#32483e] break-words">
-                          Partner: {formatINR(selectedResult.partnerShare, resultCard.resultFormatting || 'en-IN')}
+                          Partner: {formatINR(displayResult.partnerShare, resultCard.resultFormatting || 'en-IN')}
                         </div>
                         <div className="text-2xl sm:text-3xl font-bold text-[#32483e] break-words">
-                          You: {formatINR(selectedResult.yourShare, resultCard.resultFormatting || 'en-IN')}
+                          You: {formatINR(displayResult.yourShare, resultCard.resultFormatting || 'en-IN')}
                         </div>
                       </motion.div>
                     ) : (

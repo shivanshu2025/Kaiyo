@@ -1,5 +1,7 @@
 'use client';
 
+import { openInquiryForm } from './SolutionInquiryForm';
+
 interface BannerStripProps {
   bg: string;
   title: string;
@@ -55,6 +57,13 @@ export default function BannerStrip({
           style={{
             backgroundColor: primaryBtn.bg,
             color: primaryBtn.color,
+          }}
+          aria-haspopup="dialog"
+          onClick={(event) => {
+            // Existing inquiry trigger: opens the shared inquiry popup this page
+            // already mounts. The link, text and styling are unchanged otherwise.
+            event.preventDefault();
+            openInquiryForm();
           }}
           onMouseEnter={(e) => {
             if (primaryBtn.hoverBg) {

@@ -1,194 +1,168 @@
 # Kaiyō Digital Studio
 
-Full-stack digital agency website with a CMS admin panel. Built with Next.js 13.5 (App Router), Express.js, MongoDB, and Tailwind CSS.
+Digital studio marketing website with a MongoDB-backed CMS admin panel.
+
+This is a **single Next.js application**. There is no separate backend server —
+the API is made of Next.js Route Handlers. See [`docs/BACKEND.md`](docs/BACKEND.md)
+for the full backend reference and [`BRAIN.md`](BRAIN.md) for architecture.
 
 ---
 
-## Table of Contents
+## Requirements
 
-- [Project Structure](#project-structure)
-- [Local Development](#local-development)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Deployment](#deployment)
-- [GitHub Secrets](#github-secrets)
-- [Troubleshooting](#troubleshooting)
+- Node.js 18+
+- MongoDB (local `mongodb://127.0.0.1:27017/kaiyo`, or a MongoDB Atlas cluster)
+
+---
+
+## Setup
+
+```bash
+npm install
+
+cp .env.example .env.local
+# Set MONGODB_URI, CSRF_SECRET and SESSION_SECRET (see below)
+```
+
+Generate the two secrets:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
+```
+
+Create the first administrator — there is no default account, and every admin
+route returns `401` until one exists:
+
+```bash
+npm run create-admin
+```
+
+Then start the dev server:
+
+```bash
+npm run dev     # http://localhost:3000
+```
+
+---
+
+## Environment Variables
+
+`.env.example` is the authoritative, fully commented list. `.env.local` is
+git-ignored.
+
+**Only `NEXT_PUBLIC_SITE_URL` reaches the browser.** Everything else is read
+server-side and must never carry the `NEXT_PUBLIC_` prefix — database
+credentials, admin passwords and CSRF/session secrets would be shipped to every
+visitor in the JS bundle.
+
+| Variable | Required | Used by |
+|----------|----------|---------|
+| `NEXT_PUBLIC_SITE_URL` | Yes | Browser — SEO metadata, and the server-side CSRF `Origin` check |
+| `MONGODB_URI` | Yes (prod) | Server — `backend/lib/db.ts` |
+| `SESSION_SECRET` | Yes (prod) | Server — session HMAC |
+| `CSRF_SECRET` | Yes (prod) | Server — CSRF token binding |
+| `MEDIA_STORAGE_DRIVER` | Yes | Server — `local` \| `vercel-blob` \| `s3` |
+| `BLOB_READ_WRITE_TOKEN` | If `vercel-blob` | Server |
+| `S3_UPLOAD_BASE` / `S3_PUBLIC_BASE` / `S3_DELETE_BASE` | If `s3` | Server |
+| `ADMIN_EMAIL` / `ADMIN_PIN` / `ADMIN_NAME` | No | `npm run create-admin` only — never read by the app |
+| `MONGODB_URI_TEST` / `TEST_PORT` / `TEST_VERBOSE` | No | `npm test` only |
+
+In development, `MONGODB_URI` falls back to `mongodb://127.0.0.1:27017/kaiyo` and
+secrets may be omitted. **In production all three are required** and the app
+fails loudly on boot rather than falling back to a guessable default.
+
+---
+
+## Scripts
+
+| Command | Does |
+|---------|------|
+| `npm run dev` | Dev server on port 3000 |
+| `npm run build` | Production build |
+| `npm start` | Production server |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run create-admin` | Create the first administrator |
+| `npm run migrate:cms` | One-off import of `data/cms.json` into MongoDB |
+| `npm run db:indexes` | Create production indexes (additive). `-- --check` to inspect first |
+| `npm test` | Build, then run the backend suite |
+
+All scripts run from the project root. `backend/` is **not** a separate npm
+package — there is no `cd backend && npm install`.
 
 ---
 
 ## Project Structure
 
 ```
-kaiyo-main/
-├── app/                    # Next.js App Router pages
-├── components/             # Shared UI components
-│   ├── sections/           # Page sections (Navbar, Footer, Hero, etc.)
-│   ├── solutions/          # Solution page components
-│   ├── ui/                 # Reusable UI primitives
-│   └── admin/              # Admin-only components
-├── src/
-│   ├── api/                # Axios API service layer
-│   ├── store/              # Redux store (auth + userAuth)
-│   ├── auth/               # Admin auth (slice, service, pages, components)
-│   ├── user/               # User auth (slice, service, pages, components)
-│   └── config/             # Frontend env config
-├── lib/                    # Utility functions, validations
-├── styles/                 # Global CSS (Tailwind)
-
-
----
-
-## Local Development
-
-### Prerequisites
-
-- Node.js 18+
-- MongoDB instance (local or Atlas)
-- npm
-
-### Setup
-
-```bash
-# 1. Clone the repository
-git clone <repo-url>
-cd kaiyo-main
-
-# 2. Install frontend dependencies
-npm install
-
-# 3. Install backend dependencies
-cd backend
-npm install
-cd ..
-
-# 4. Configure environment variables
-cp .env.example .env.local
-# Edit .env.local with your API URL
-
-cp backend/.env.example backend/.env
-# Edit backend/.env with your MongoDB URI and JWT secret
-
-# 5. Start the backend
-cd backend
-npm run dev
-# Backend running at http://localhost:5000
-
-# 6. Start the frontend (in a separate terminal)
-npm run dev
-# Frontend running at http://localhost:3000
-
-# 7. (Optional) Seed the database
-cd backend
-npm run seed
+├── app/            # Pages + Route Handlers (framework-mandated paths)
+│   └── api/        # All /api/* endpoints
+├── components/     # React components (sections/, solutions/, admin/)
+├── lib/            # Browser-safe code: types, hooks, admin fetch wrapper
+├── backend/        # Server-side code
+│   ├── lib/        # DB, auth, guards, validation, storage, CMS store
+│   ├── models/     # Mongoose models
+│   └── scripts/    # create-admin, migrate, test suite
+├── middleware.ts   # Edge redirect for /admin/*
+└── public/         # Static assets
 ```
 
-### Available Scripts
+### Why is part of the backend still under `app/`?
 
-```bash
-# Frontend
-npm run dev       # Start dev server (port 3000)
-npm run build     # Production build
-npm run start     # Start production server
-npm run lint      # ESLint check
-npm run typecheck # TypeScript check
+Next.js resolves HTTP endpoints from `app/**/route.ts` by directory convention,
+and only loads the edge middleware from the project root. Those files cannot be
+moved without breaking routing — a misplaced Route Handler still type-checks
+(`@/` is just a path alias) but 404s at runtime.
 
-# Backend
-cd backend
-npm run dev       # Nodemon hot-reload
-npm run build     # TypeScript compilation
-npm run start     # Production start
-npm run test      # Run tests
-npm run seed      # Seed database
-npm run seed:admin # Seed admin only
-```
-
----
-
-## CI/CD Pipeline
-
-### CI Pipeline (`.github/workflows/ci.yml`)
-
-Triggers on every push to `main`/`develop` and on pull requests to `main`.
-
-| Job | What it does | Fails on |
-|-----|-------------|----------|
-| **frontend** | `npm ci` → `lint` → `typecheck` → `build` | Any step fails |
-| **backend**  | `npm ci` → `tsc` → `test` → `build` | Any step fails |
-| **security** | `npm audit` on frontend + backend | Warnings only (non-blocking) |
-
-Key features:
-- **Dependency caching** — `cache: npm` in `setup-node` caches `node_modules` between runs
-- **Parallel execution** — frontend, backend, and security jobs run concurrently
-- **Fail-fast** — any non-audit failure stops the workflow immediately
-
----
-
-## GitHub Secrets
-
-The following secrets must be configured in your GitHub repository:
-
-**Settings → Secrets and variables → Actions → New repository secret**
-
-For custom deployment (optional — not configured by default):
-| Secret | Description |
-|--------|-------------|
-| `DEPLOY_SSH_KEY` | SSH private key for deploying to a VPS |
-| `DEPLOY_HOST` | Hostname/IP of the deployment server |
-| `DEPLOY_USER` | SSH username |
-| `NETLIFY_AUTH_TOKEN` | Netlify personal access token (for frontend deploy) |
-| `NETLIFY_SITE_ID` | Netlify site ID (for frontend deploy) |
+Everything that is *not* path-mandated has been consolidated under `backend/`.
+See §5 of [`BRAIN.md`](BRAIN.md) for the rule and the reasoning.
 
 ---
 
 ## Deployment
 
-### Netlify (Frontend)
+### Vercel
 
-The `netlify.toml` file is already configured for automatic Netlify deployments:
+1. Import the repository.
+2. Add the environment variables above to **all** environments.
+3. Provision MongoDB and allow-list the deployment's egress addresses.
+4. Set `MEDIA_STORAGE_DRIVER` to `vercel-blob` or `s3`. Leaving it as `local`
+   makes uploads return `503` by design — a serverless filesystem is rebuilt on
+   every deploy.
+5. Create the administrator from a local checkout, not from CI.
 
-```toml
-[build]
-  command = "npx next build"
-  publish = ".next"
+### Netlify
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-```
+`netlify.toml` uses `@netlify/plugin-nextjs`. The same environment variables and
+database requirements apply; use the `s3` or `vercel-blob` driver.
 
-Connect your Netlify site to the GitHub repository for automatic deployments on every push.
+### Backups
 
-### Manual Deployment
-
-```bash
-# Backend
-cd backend
-npm run build
-npm start
-
-# Frontend
-npm run build
-npm start
-```
+Enable snapshots on your MongoDB provider. The CMS document plus `testimonials`,
+`contactsubmissions` and `mediaassets` are the only irreplaceable data —
+`adminsessions` and `ratelimits` are disposable. Rolling back the application is
+just a redeploy; there are no breaking schema migrations.
 
 ---
 
 ## Troubleshooting
 
-### CI Pipeline Failures
+| Symptom | Likely cause | Fix |
+|---------|--------------|-----|
+| Admin login always `401` | No administrator exists yet | `npm run create-admin` |
+| Every API call `404`s | A Route Handler was moved out of `app/` | Move it back under `app/api/` |
+| Uploads fail with `503` | `MEDIA_STORAGE_DRIVER=local` in production | Switch to `vercel-blob` or `s3` |
+| `SESSION_SECRET must be at least 32 characters` | Secret too short in production | Regenerate it |
+| MongoDB connection error | Bad connection string | Check `MONGODB_URI` |
+| TypeScript error after moving a file | Stale `@/lib/...` import | Server code imports from `@/backend/lib/...` |
+| Build succeeds but a page 500s | Env var present at build but missing at runtime | Check deployment environment settings |
 
-| Symptom | Likely Cause | Fix |
-|---------|-------------|-----|
-| `npm ci` fails | `package-lock.json` out of sync with `package.json` | Run `npm install` locally and commit the updated lockfile |
-| Lint fails | ESLint rule violations | Run `npm run lint` locally and fix issues |
-| TypeScript error | Type mismatch or missing type | Run `npm run typecheck` locally and fix |
-| Build fails | Code that doesn't compile | Check build logs for specific error |
-| Tests fail | Backend test assertions | Run `cd backend && npm test` locally |
+---
 
-### Local Development
+## Security Notes
 
-| Symptom | Likely Cause | Fix |
-|---------|-------------|-----|
-| API calls fail | Backend not running | Start backend: `cd backend && npm run dev` |
-| CORS errors | Backend origin mismatch | Check `CORS_ORIGIN` in `backend/.env` |
-| Auth not working | Missing or expired token | Clear cookies and localStorage, re-login |
-| MongoDB connection error | Invalid connection string | Verify `MONGO_URI` in `backend/.env` |
-| Build errors after pull | Dependencies changed | Run `npm install` and `cd backend && npm install` |
+* `middleware.ts` checks only for the *presence* of a session cookie — it cannot
+  verify an HMAC at the edge. Real enforcement is in `backend/lib/guards.ts`.
+* Contact submissions are personal data and are never exposed publicly.
+* Errors never include stack traces, connection strings, or password hashes.
+* Never commit `.env.local`; it is git-ignored.

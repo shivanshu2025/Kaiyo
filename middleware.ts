@@ -1,33 +1,31 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
-const COOKIE_NAME = 'kaiyo-admin-token';
-
 /**
- * Cheap structural check used at the edge for redirect UX only.
- * The authoritative, HMAC-verified check runs in the protected admin layout
- * (`app/admin/(dashboard)/layout.tsx`) using the same cookie, so a forged or
- * malformed token can never reach an admin page.
+ * Edge redirect for admin routes.
+ *
+ * This is a *UX* convenience only. A cookie can be read but not verified here,
+ * because HMAC/database checks need the Node runtime and the database. The
+ * authoritative check runs in `app/admin/(dashboard)/layout.tsx` and, for every
+ * API route, in `backend/lib/guards.ts`. Therefore:
+ *
+ *  - a request with no cookie is redirected here for a better experience, and
+ *  - a request with a forged cookie passes this layer and is then rejected by the
+ *    layout or the route guard with a 401/403.
+ *
+ * No protected data is ever served on the strength of this check alone.
  */
-function hasStructurallyValidToken(token?: string) {
-  if (!token) return false;
-  const parts = token.split('.');
-  if (parts.length !== 3) return false;
-  const exp = Number(parts[1]);
-  return Number.isFinite(exp) && exp > Date.now();
-}
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get(COOKIE_NAME)?.value;
+  const hasSessionCookie = Boolean(request.cookies.get('kaiyo-admin-token')?.value);
 
   if (pathname === '/admin/login') {
-    if (hasStructurallyValidToken(token)) {
+    if (hasSessionCookie) {
       return NextResponse.redirect(new URL('/admin', request.url));
     }
     return NextResponse.next();
   }
 
-  if (!hasStructurallyValidToken(token)) {
+  if (!hasSessionCookie) {
     const loginUrl = new URL('/admin/login', request.url);
     if (pathname !== '/admin') {
       loginUrl.searchParams.set('from', pathname);

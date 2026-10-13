@@ -24,6 +24,7 @@ function BrandMark() {
   );
 }
 
+/** The circular badge shown at the top of the panel. */
 function EntryIcon() {
   return (
     <svg
@@ -83,8 +84,8 @@ function Spinner() {
 
 export default function AdminLoginForm({ from, notice }: { from?: string; notice?: string }) {
   const router = useRouter();
-  const [password, setPassword] = useState('');
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [pin, setPin] = useState('');
+  const [pinVisible, setPinVisible] = useState(false);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -101,7 +102,10 @@ export default function AdminLoginForm({ from, notice }: { from?: string; notice
       const response = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+        // Sign-in is PIN-only: no username, no password. The PIN is verified
+        // server-side against the bcrypt hash in MongoDB and is never stored in
+        // the browser. This component holds no credential of its own.
+        body: JSON.stringify({ pin }),
       });
       const payload = await response.json().catch(() => null);
 
@@ -171,28 +175,46 @@ aria-labelledby="kaiyo-auth-title"
             <LockIcon />
             <input
               className={INPUT_CLASS}
-              type={passwordVisible ? 'text' : 'password'}
-              name="password"
-              placeholder="PIN"
-              autoComplete="current-password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              type={pinVisible ? 'text' : 'password'}
+              name="pin"
+              placeholder="Enter admin PIN"
+              autoComplete="one-time-code"
+              // The PIN is alphanumeric: `POST /api/admin/pin` requires at least 10
+              // characters with an uppercase letter, a lowercase letter and a number,
+              // and `pinLoginSchema` accepts whatever is stored. Three attributes here
+              // used to contradict that policy and made a compliant PIN impossible to
+              // enter:
+              //   inputMode="numeric" put a digits-only keypad on mobile keyboards,
+              //   pattern="[0-9]*" failed native form validation on any letter,
+              //   maxLength={12} truncated longer PINs as they were typed.
+              // The numeric-only `replace(/[^0-9]/g, '')` in onChange stripped letters
+              // as they were entered, which is what the report describes.
+              //
+              // Guessing is still bounded server-side: the per-source rate limit, the
+              // source lockout, and bcrypt cost 12 on every comparison. The length cap
+              // below mirrors `PASSWORD_MAX_LENGTH` so the server's 72-byte rule is not
+              // hit by accident; the server remains authoritative.
+              inputMode="text"
+              maxLength={72}
+              value={pin}
+              onChange={(event) => setPin(event.target.value)}
               required
-              aria-label="Password"
+              autoFocus
+              aria-label="Administrator PIN"
             />
             <button
               type="button"
               className={`grid h-[34px] w-[30px] shrink-0 place-items-center border-0 bg-transparent p-0 text-[#77818d] ${CONTROL_FOCUS_CLASS}`}
-              onClick={() => setPasswordVisible((visible) => !visible)}
-              aria-label={passwordVisible ? 'Hide password' : 'Show password'}
-              aria-pressed={passwordVisible}
+              onClick={() => setPinVisible((visible) => !visible)}
+              aria-label={pinVisible ? 'Hide PIN' : 'Show PIN'}
+              aria-pressed={pinVisible}
             >
-              <EyeIcon visible={passwordVisible} />
+              <EyeIcon visible={pinVisible} />
             </button>
             <button
               className={`grid h-[34px] w-[30px] shrink-0 place-items-center border-0 bg-transparent p-0 text-[#77818d] disabled:cursor-not-allowed disabled:opacity-60 ${CONTROL_FOCUS_CLASS}`}
               type="submit"
-              disabled={submitting}
+              disabled={submitting || pin.length === 0}
               aria-label="Sign in"
             >
               {submitting ? <Spinner /> : <ArrowIcon />}
