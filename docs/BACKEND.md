@@ -158,6 +158,53 @@ other session, and rotates the caller's own.
 To recover from a forgotten PIN, re-run `npm run create-admin -- --force` against
 that account's email.
 
+#### The script must point at the database Vercel reads
+
+`create-admin.js` writes to whatever database `MONGODB_URI` names. It loads
+`.env.local` then `.env` **before** reading that variable, and refuses to connect
+when the value is not a real connection string — a placeholder such as
+`<db_username>` or `YOUR_PRODUCTION_MONGODB_URI` is rejected with an explanatory
+error rather than reaching the driver and failing as an opaque `MongoParseError`.
+
+Run it from the `frontend` directory and confirm the target before trusting it:
+
+```
+Connecting to mongodb+srv://***@<cluster>/kaiyo (database "kaiyo") ...
+```
+
+If that database name is not the one production uses, the account was created in
+the wrong place and production has no admin at all. Set the same connection string
+in Vercel (`Settings → Environment Variables → MONGODB_URI`) that the local
+`.env.local` holds for production setup; never commit it.
+
+#### "Sign-in fails in production" — diagnose the status code first
+
+A wrong PIN is a **401** whose body carries `Incorrect PIN`. Check the status code
+before touching credentials:
+
+```bash
+curl -i https://<your-domain>/api/admin/login            # 401 when simply signed out
+curl -i -X POST https://<your-domain>/api/admin/login \
+  -H 'Content-Type: application/json' -d '{"pin":"000000"}'
+```
+
+* **401** — the PIN really is wrong; the database is reachable.
+* **500** with `Something went wrong. Please try again.` — the route threw before
+  comparing anything, so the PIN is irrelevant. The cause is the deployment's
+  database connection: `MONGODB_URI` missing or a placeholder in Vercel, or Atlas
+  *Network Access* not allowing the platform's egress. The public site keeps
+  returning 200 in this state because only DB-backed routes fail.
+* **429** — the per-source rate limit; wait for the window to pass.
+
+To confirm an account exists without exposing anything:
+
+```bash
+mongosh "$MONGODB_URI" --quiet --eval \
+  'db.admins.find({},{projection:{email:1,role:1,active:1,lastLoginAt:1}}).toArray()'
+```
+
+This prints no PIN and no hash.
+
 ### Sessions
 
 * Login mints a 256-bit token (`crypto.randomBytes(32)`); only `sha256(token)` is
@@ -369,6 +416,15 @@ whatever else is listening. Use `TEST_PORT` to choose another.
 4. Use `vercel-blob`; `local` returns `503` by design.
 5. Run `npm run db:indexes` once.
 6. Create the administrator from a local checkout, not from CI.
+7. **Redeploy after changing any environment variable.** Vercel injects variables
+   into the build *and* the runtime from the deployment's own snapshot: editing a
+   variable neither restarts nor affects already-running instances, and a variable
+   first added to *Production* is invisible to a Preview deployment. Use
+   **Deployments → ⋯ → Redeploy** (not just a refresh) after every change.
+8. Verify with `curl -i -X POST https://<domain>/api/admin/login -H
+   'Content-Type: application/json' -d '{"pin":"000000"}'`. A `500` means the
+   deployment still cannot reach the database; `401` means it can and only the PIN
+   is wrong.
 
 ### Netlify
 

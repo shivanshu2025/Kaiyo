@@ -110,7 +110,17 @@ export default function AdminLoginForm({ from, notice }: { from?: string; notice
       const payload = await response.json().catch(() => null);
 
       if (!response.ok || !payload?.success) {
-        setError(payload?.error || 'Invalid admin credentials');
+        // A 5xx (or a non-JSON body, e.g. a platform error page) means the
+        // server never evaluated the PIN - the database was unreachable or the
+        // deployment is misconfigured. Reporting that as "Invalid admin
+        // credentials" sends the operator hunting for a wrong PIN when nothing
+        // was ever compared, so the two are distinguished here.
+        const serverFailure = response.status >= 500 || !payload;
+        setError(
+          serverFailure
+            ? 'Sign-in is temporarily unavailable. Please try again in a moment.'
+            : payload?.error || 'Invalid admin credentials',
+        );
         return;
       }
 

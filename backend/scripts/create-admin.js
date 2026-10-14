@@ -9,10 +9,18 @@
  * The admin sign-in is PIN-only, so this script sets the account's PIN.
  *
  *   Usage:
+ *     npm run create-admin                       # reads .env.local, hidden prompt for the PIN
  *     ADMIN_EMAIL=you@example.com ADMIN_PIN='123456' node backend/scripts/create-admin.js
- *     node backend/scripts/create-admin.js            # secure interactive prompt instead
+ *
+ * The account is written ONLY to the database `MONGODB_URI` points at, so it must
+ * be the same connection string Vercel is configured with. Run it from the
+ * `frontend` directory (where `.env.local` lives) and check the
+ * `Connecting to ... (database "<name>")` line before trusting the result.
  *
  * Safety properties:
+ *  - `MONGODB_URI` is loaded from `.env.local`/`.env` BEFORE it is read, and a
+ *    placeholder or non-URI value is rejected with an explanatory error instead of
+ *    being handed to the driver (which would fail with a bare `MongoParseError`);
  *  - the PIN is read from the ADMIN_PIN environment variable or a hidden
  *    interactive prompt and is NEVER accepted as a command-line argument, so it
  *    cannot end up in shell history, in `ps` output, or in the process table;
@@ -38,10 +46,6 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 /* ------------------------------ dependencies ----------------------------- */
 
 async function loadDependencies() {
-  // dotenv is not a project dependency; load .env.local manually so the script
-  // behaves the same as `next dev` without adding a package.
-  await loadEnvFiles();
-
   let mongoose;
   let bcrypt;
   try {
@@ -60,6 +64,8 @@ async function loadDependencies() {
 
 async function loadEnvFiles() {
   const fs = require('fs');
+  // `npm run create-admin` runs from the `frontend` directory, which is where
+  // Next.js also looks, so this resolves `.env.local` identically to `next dev`.
   const dir = process.cwd();
 
   for (const file of ['.env.local', '.env']) {
@@ -159,23 +165,120 @@ function normaliseEmail(raw) {
   return String(raw || '').trim().toLowerCase();
 }
 
+/* ----------------------------- connection URI ---------------------------- */
+
+/**
+ * The name MongoDB will actually use, or `null` when the URI carries none.
+ *
+ * Safe to print: it is a database name, never the cluster's credentials. Seeing
+ * it is the fastest way to confirm the script is pointed at the production
+ * database and not a local one - the two being confused is what makes an admin
+ * appear to be "missing" in production after a successful local run.
+ */
+function databaseNameFor(uri) {
+  const withoutScheme = uri.replace(/^mongodb(\+srv)?:\/\//, '');
+  const afterHost = withoutScheme.slice(withoutScheme.indexOf('/') + 1);
+  const name = afterHost.split('?')[0];
+  return name || null;
+}
+
+/**
+ * Rejects a connection string that cannot work, WITHOUT echoing it.
+ *
+ * Mirrors `assertValidMongoUri` in `backend/lib/env.ts`, which the running
+ * application uses but which cannot be imported here (it is TypeScript and plain
+ * `node` cannot load it). The extra placeholder check is deliberate: copying a
+ * template value out of `.env.example` produces something that starts with
+ * `mongodb://` and parses as far as the prefix, but then fails deep inside the
+ * driver with an opaque `MongoParseError` that says nothing about the real
+ * problem.
+ *
+ * Never interpolate the value into any of these messages - connection strings
+ * carry the database username and password.
+ */
+function assertUsableMongoUri(uri) {
+  if (!/^mongodb(\+srv)?:\/\//.test(uri)) {
+    throw new Error(
+      'MONGODB_URI is not a MongoDB connection string: it must start with ' +
+        '"mongodb://" or "mongodb+srv://". The value is never shown because it ' +
+        'contains credentials. Copy the real SRV string from MongoDB Atlas > Connect.',
+    );
+  }
+  if (/\s/.test(uri)) {
+    throw new Error(
+      'MONGODB_URI contains whitespace. Check for a stray space or line break ' +
+        'introduced when pasting the value from the Atlas UI. The value is never ' +
+        'shown because it contains credentials.',
+    );
+  }
+
+  // Placeholder detection. These are the literal tokens `.env.example` ships in,
+  // plus the common hand-typed variants. Only a generic message is returned, so
+  // nothing from the value leaks.
+  const placeholders = [
+    /<[^>]*>/, //            <db_username>, <db_password>, <database_name>
+    /YOUR_[A-Z0-9_]+/i, //          YOUR_PRODUCTION_MONGODB_URI
+    /YOUR-[A-Z0-9-]+/i,
+    /\bREPLACE\b/i,
+    /\bCHANGE_?ME\b/i,
+    /\bCHANGEME\b/i,
+    /\bEXAMPLE\b/i,
+    /\bPLACEHOLDER\b/i,
+    /\bTODO\b/i,
+    /\bXXXX/i,
+    /\.\.\./,
+  ];
+  if (placeholders.some((pattern) => pattern.test(uri))) {
+    throw new Error(
+      'MONGODB_URI still contains a placeholder value (e.g. <db_username>, ' +
+        'YOUR_PRODUCTION_MONGODB_URI). Replace it with the real connection string ' +
+        'before running this script - set it in .env.local, or in Vercel under ' +
+        'Settings > Environment Variables. The value is never shown because it ' +
+        'contains credentials.',
+    );
+  }
+}
+
 /* -------------------------------- main ---------------------------------- */
 
 async function main() {
   const force = process.argv.includes('--force');
 
+  // MUST run before MONGODB_URI is read.
+  //
+  // This used to happen inside `loadDependencies()`, which is called further down -
+  // so `process.env.MONGODB_URI` was already undefined at the point it was read,
+  // and a `.env.local` holding the real Atlas connection string was never seen.
+  // The script then either aborted, or - if a stale value existed in the shell /
+  // OS environment - connected to THAT database instead. Either way the account
+  // was never written to the database production actually reads, which is why
+  // `npm run create-admin` appeared to run while Vercel still had no admin.
+  await loadEnvFiles();
+
   const uri = process.env.MONGODB_URI && process.env.MONGODB_URI.trim();
   if (!uri) {
     console.error(
       'MONGODB_URI is not set.\n' +
-        '  Add it to .env.local (see .env.example) or export it before running this script.',
+        '  Add it to .env.local (see .env.example) or export it before running this script.\n' +
+        '  It must be the SAME connection string Vercel uses, e.g.\n' +
+        '    mongodb+srv://<user>:<password>@<cluster>/<database>?retryWrites=true&w=majority\n' +
+        '  The account created by this script only exists in the database this URI points at.',
     );
     process.exitCode = 1;
     return;
   }
 
+  try {
+    assertUsableMongoUri(uri);
+  } catch (error) {
+    console.error(error.message);
+    process.exitCode = 1;
+    return;
+  }
+
   // Redact any credentials embedded in the URI before it could reach a log.
-  const safeUri = uri.replace(/\/\/([^:]+):([^@]+)@/, '//$1:***@');
+  const safeUri = uri.replace(/\/\/[^@/]*@/, '//***@');
+  const databaseName = databaseNameFor(uri);
 
   let email = normaliseEmail(process.env.ADMIN_EMAIL);
   let pin = process.env.ADMIN_PIN;
@@ -233,7 +336,7 @@ async function main() {
     { timestamps: true },
   );
 
-  console.log(`Connecting to ${safeUri} ...`);
+  console.log(`Connecting to ${safeUri}${databaseName ? ` (database "${databaseName}")` : ''} ...`);
 
   let connected = false;
   try {
@@ -308,6 +411,12 @@ async function main() {
     console.error(`Failed${code}: ${(error && error.name) || 'Unknown error'}`);
     if (error && error.name === 'MongooseServerSelectionError') {
       console.error('The database was not reachable. Check MONGODB_URI and the network allowlist.');
+    }
+    if (error && error.name === 'MongoParseError') {
+      console.error(
+        'The connection string could not be parsed. This normally means a template or ' +
+          'placeholder value was pasted instead of the real one from MongoDB Atlas > Connect.',
+      );
     }
     process.exitCode = 1;
   } finally {
